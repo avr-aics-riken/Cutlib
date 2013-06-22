@@ -1,6 +1,10 @@
-Cutlib 2.0.0
-============
-                                      2010年11月 (株)情報数理研究所
+-----
+Cutlib 2.0.1
+
+Kenji Ono 	keno@riken.jp
+VCAD Research Program, RIKEN
+May 2011
+-----
 
 インストール方法
 ----------------
@@ -11,21 +15,29 @@ src/Makefileのコメントを参照ください．
 ファイル・ディレクトリ構成
 --------------------------
 
-README.txt     このファイル
-
 ChangeLog      改訂履歴
 
-manual.pdf     ユーザ利用マニュアル
+COPYING        コピーライト
 
-refman.pdf     リファレンスマニュアル(Doxygen出力)
-
-src/           ソースコード
+doc/           ドキュメント
+    cutlib_ug.pdf  ユーザ利用マニュアル
+    refman.pdf     リファレンスマニュアル(Doxygen出力)
+    
+doxygen/
+       Doxyfile   doxygen生成コンフィギュレーション
+       html/         Doxygen出力
 
 include/       ヘッダファイル
 
+lib/           コンパイル済みのアーカイブ格納ディレクトリ
+
+README.txt     このファイル
+
+src/           ソースコード
+
 test/          テストプログラム
 
-doc/           ドキュメントTeXソース
 
-doxygen/html/  Doxygen出力
+
+
 
