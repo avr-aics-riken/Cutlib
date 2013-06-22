@@ -52,7 +52,6 @@ AR = ar cr
 RANLIB = ranlib
 
 POLYLIB_DIR = ../../Polylib_2_0_2
-#POLYLIB_DIR = ../../Polylib_2_0_3
 POLYLIB_FLAGS = -I$(POLYLIB_DIR)/include -I/usr/include/libxml2
 
 # with Octree lib ############################################################
@@ -66,8 +65,7 @@ OCTREE_FLAGS =
 
 #DEFINES = -DCUTLIB_TIMING
 #DEFINES = -DCUTLIB_DEBUG
-#DEFINES = -DIGNORE_NORMAL_DIRECTION
-DEFINES = -DIGNORE_STL_NORMAL
+DEFINES = 
 
 #CFLAGS = -g -Wall -I../include $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
 CFLAGS = -O3 -Wall -I../include  $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)

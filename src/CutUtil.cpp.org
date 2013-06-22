@@ -26,43 +26,18 @@ inline float cross2d(const Vec2f& v1, const Vec2f& v2)
  */
 bool existIntersection(float n, const Vec2f& v0, const Vec2f& v1, const Vec2f& v2, const Vec2f& p)
 {
-//#ifdef IGNORE_NORMAL_DIRECTION
-#if (defined IGNORE_NORMAL_DIRECTION && !defined IGNORE_STL_NORMAL)
-  if (cross2d(v1-v0,p-v0) > 0.0) {
-    if (cross2d(v2-v1,p-v1) < 0.0 ||
-        cross2d(v0-v2,p-v2) < 0.0) return false;
-  }
-  else {
-    if (cross2d(v2-v1,p-v1) > 0.0 ||
-        cross2d(v0-v2,p-v2) > 0.0) return false;
-  }
-#else
   if (n > 0.0) {
-     if (cross2d(v1-v0,p-v0) < 0.0 ||
-         cross2d(v2-v1,p-v1) < 0.0 ||
-         cross2d(v0-v2,p-v2) < 0.0) return false;
+     if (cross2d(v1-v0,p-v0) < 0 ||
+         cross2d(v2-v1,p-v1) < 0 ||
+         cross2d(v0-v2,p-v2) < 0) return false;
   }
   else {
-     if (cross2d(v1-v0,p-v0) > 0.0 ||
-         cross2d(v2-v1,p-v1) > 0.0 ||
-         cross2d(v0-v2,p-v2) > 0.0) return false;
+     if (cross2d(v1-v0,p-v0) > 0 ||
+         cross2d(v2-v1,p-v1) > 0 ||
+         cross2d(v0-v2,p-v2) > 0) return false;
   }
-#endif
   return true;
 }
-
-#ifdef IGNORE_STL_NORMAL
-
-Vec3f n;
-
-Vec3f calcNormal(const Triangle* t)
-{
-  Vec3f* v = t->get_vertex();
-  Vec3f a = v[1] - v[0];
-  Vec3f b = v[2] - v[0];
-  return cross(a,b).normalize();
-}
-#endif
 
 } /* namespace ANONYMOUS */
 
@@ -76,9 +51,7 @@ Vec3f calcNormal(const Triangle* t)
  */
 bool intersectXY(const Triangle* t, float x, float y, float& z)
 {
-#ifndef IGNORE_STL_NORMAL
   Vec3f n = t->get_normal();
-#endif
   Vec3f* v = t->get_vertex();
   z = 1.0;
 
@@ -105,11 +78,7 @@ bool intersectXY(const Triangle* t, float x, float y, float& z)
  */
 bool intersectYZ(const Triangle* t, float y, float z, float& x)
 {
-#ifndef IGNORE_STL_NORMAL
   Vec3f n = t->get_normal();
-#else
-  n = calcNormal(t);
-#endif
   Vec3f* v = t->get_vertex();
   x = 1.0;
 
@@ -136,9 +105,7 @@ bool intersectYZ(const Triangle* t, float y, float z, float& x)
  */
 bool intersectZX(const Triangle* t, float z, float x, float& y)
 {
-#ifndef IGNORE_STL_NORMAL
   Vec3f n = t->get_normal();
-#endif
   Vec3f* v = t->get_vertex();
   y = 1.0;
 

@@ -3,8 +3,15 @@ Cutlib
 
 Kenji Ono 	keno@riken.jp
 VCAD Research Program, RIKEN
-May 2011
+April 2012
 -----
+
+2012-04-21
+  * Version 2.0.3
+  * コンパイルオプションに「-DIGNORE_NORMAL_DIRECTION」を指定すると，
+    ポリゴンの表裏が統一されていることを仮定せずに計算
+  * コンパイルオプションに「-DIGNORE_STL_NORMAL」を指定すると，
+    STLファイル中のポリゴン法線データを信用せず，毎回法線計算
 
 2011-05-12
   * Version 2.0.2 released.

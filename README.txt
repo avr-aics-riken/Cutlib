@@ -1,9 +1,9 @@
 -----
-Cutlib 2.0.2
+Cutlib 2.0.3
 
 Kenji Ono 	keno@riken.jp
-VCAD Research Program, RIKEN
-May 2011
+Advanced Visualization Research Team, AICS, RIKEN
+April 2012
 -----
 
 インストール方法
