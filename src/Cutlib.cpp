@@ -23,22 +23,22 @@ namespace cutlib {
 namespace {
 
 /// 配列サイズ, 計算対象領域のチェック.
-CutlibReturn checkSize(const char* func_name,
+CutlibReturn checkSize(const char* funcName, const char* className,
                        const int ista[], const size_t nlen[],
-                       const CutPosArray* cutPos, const CutBidArray* cutBid)
+                       const CutInfoArray* cutInfoArray)
 {
-  if (ista[0] < cutPos->getStartX() ||
-      ista[1] < cutPos->getStartY() ||
-      ista[2] < cutPos->getStartZ()) {
-    std::cerr << "*** " << func_name << ": "
+  if (ista[0] < cutInfoArray->getStartX() ||
+      ista[1] < cutInfoArray->getStartY() ||
+      ista[2] < cutInfoArray->getStartZ()) {
+    std::cerr << "*** " << funcName << ": " << className << ": "
               << "out of the range: ista[]" << std::endl;
     return CL_SIZE_EXCEED;
   }
 
-  if (ista[0] + nlen[0] > cutPos->getStartX() + cutPos->getSizeX() ||
-      ista[1] + nlen[1] > cutPos->getStartY() + cutPos->getSizeY() ||
-      ista[2] + nlen[2] > cutPos->getStartZ() + cutPos->getSizeZ()) {
-    std::cerr << "*** " << func_name << ": "
+  if (ista[0] + nlen[0] > cutInfoArray->getStartX() + cutInfoArray->getSizeX() ||
+      ista[1] + nlen[1] > cutInfoArray->getStartY() + cutInfoArray->getSizeY() ||
+      ista[2] + nlen[2] > cutInfoArray->getStartZ() + cutInfoArray->getSizeZ()) {
+    std::cerr << "*** " << funcName << ": " << className << ": "
               << "out of the range: ista[]+nlen[]" << std::endl;
     return CL_SIZE_EXCEED;
   }
@@ -82,16 +82,24 @@ CutlibReturn checkTree(const char* func_name, SklTree* tree)
 ///  @param[in] pl Polylibクラスオブジェクト
 ///  @param[in,out] cutPos 交点座標配列ラッパ
 ///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
 ///
 CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
                          const GridAccessor* grid, const Polylib* pl,
-                         CutPosArray* cutPos, CutBidArray* cutBid)
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal)
 {
   { 
     // check input parameters
     CutlibReturn ret;
-    ret = checkSize("CalcCutInfo", ista, nlen, cutPos, cutBid);
+    ret = checkSize("CalcCutInfo", "cutPos", ista, nlen, cutPos);
     if (ret != CL_SUCCESS) return ret;
+    ret = checkSize("CalcCutInfo", "cutBid", ista, nlen, cutBid);
+    if (ret != CL_SUCCESS) return ret;
+    if (cutNormal) {
+      ret = checkSize("CalcCutInfo", "cutNormal", ista, nlen, cutNormal);
+      if (ret != CL_SUCCESS) return ret;
+    }
     ret = checkPolylib("CalcCutInfo", pl);
     if (ret != CL_SUCCESS) return ret;
   }
@@ -107,10 +115,27 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
   cutPos->clear();
   cutBid->clear();
 
+  CutPolygonList* cutPolygonList = 0;
+  int nThread;
+#ifdef _OPENMP
+  nThread = omp_get_max_threads();
+#else
+  nThread = 1;
+#endif
+  if (cutNormal) cutPolygonList = new CutPolygonList[nThread];
+
 #ifdef CUTLIB_TIMING
   Timer::Start(MAIN_LOOP);
 #endif
-#pragma omp parallel for schedule(dynamic), collapse(3)
+#pragma omp parallel
+  {
+  int iThread;
+#ifdef _OPENMP
+  iThread = omp_get_thread_num();
+#else
+  iThread = 0;
+#endif
+#pragma omp for schedule(dynamic), collapse(3)
   for (int k = ista[2]; k < ista[2]+nlen[2]; k++) {
     for (int j = ista[1]; j < ista[1]+nlen[1]; j++) {
       for (int i = ista[0]; i < ista[0]+nlen[0]; i++) {
@@ -132,23 +157,47 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
         cutPos->setPos(i, j, k, pos6_f);
         cutBid->setBid(i, j, k, bid6);
 
+        if (cutNormal) {
+          for (int d = 0; d < 6; d++) {
+            if (bid6[d] > 0) {
+              CutPolygon* p = new CutPolygon(cutNormal->getIndex(i, j, k), d, tri6[d]);
+              cutPolygonList[iThread].push_back(p);
+            }
+          }
+        }
+
 #ifdef CUTLIB_TIMING
         Timer::Stop(THREAD_TOTAL);
 #endif
       }
     }
   }
+  } // parallel reagion
 #ifdef CUTLIB_TIMING
   Timer::Stop(MAIN_LOOP);
 #endif
 
+  if (cutNormal) {
+#ifdef CUTLIB_TIMING
+    Timer::Start(PACK_NORMAL);
+#endif
+    cutNormal->setNormalInfo(cutPolygonList, nThread);
+#ifdef CUTLIB_TIMING
+    Timer::Stop(PACK_NORMAL);
+#endif
+  }
+
   delete cutSearch;
   delete bList;
+  delete[] cutPolygonList;
 
 #ifdef CUTLIB_TIMING
   Timer::Stop(TOTAL);
   Timer::Print(TOTAL, "Total");
   Timer::Print(MAIN_LOOP, "Main Loop");
+  if (cutNormal) {
+    Timer::Print(PACK_NORMAL, "Pack Normal");
+  }
   Timer::PrintFull(THREAD_TOTAL, "Theread Total");
   Timer::PrintFull(SEARCH_POLYGON, "Polylib::search_polygons");
 #endif

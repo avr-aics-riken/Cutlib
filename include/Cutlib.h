@@ -16,6 +16,7 @@ using namespace PolylibNS;
 #include "RepairPolygonData/RepairPolygonData.h"
 
 #include "CutInfo/CutInfoArray.h"
+#include "CutInfo/CutNormalArray.h"
 #include "GridAccessor/GridAccessor.h"
 
 #ifdef CUTLIB_OCTREE
@@ -47,10 +48,12 @@ enum CutlibReturn {
 ///  @param[in] pl Polylibクラスオブジェクト
 ///  @param[in,out] cutPos 交点座標配列ラッパ
 ///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
 ///
 CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
                          const GridAccessor* grid, const Polylib* pl,
-                         CutPosArray* cutPos, CutBidArray* cutBid);
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal = 0);
 
 
 /// 交点情報計算: 全領域.
@@ -59,10 +62,12 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 ///  @param[in] pl Polylibクラスオブジェクト
 ///  @param[in,out] cutPos 交点座標配列ラッパ
 ///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
 ///
 inline 
 CutlibReturn CalcCutInfo(const GridAccessor* grid, const Polylib* pl,
-                         CutPosArray* cutPos, CutBidArray* cutBid) {
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal = 0) {
   int ista[3] = { 
     cutPos->getStartX(),
     cutPos->getStartY(),
@@ -73,7 +78,7 @@ CutlibReturn CalcCutInfo(const GridAccessor* grid, const Polylib* pl,
     cutPos->getSizeY(),
     cutPos->getSizeZ()
   };
-  return CalcCutInfo(ista, nlen, grid, pl, cutPos, cutBid);
+  return CalcCutInfo(ista, nlen, grid, pl, cutPos, cutBid, cutNormal);
 }
 
 

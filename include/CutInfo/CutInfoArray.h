@@ -63,14 +63,11 @@ public:
   /// z方向の開始位置を得る.
   int getStartZ() const { return sz; }
 
-
-
-protected:
   /// 3次元インデックス(i,j,k)より1次元インデックスを計算
   ///
   ///  @param[in] i,j,k  3次元インデックス
   ///
-  size_t index(int i, int j, int k) const {
+  size_t getIndex(int i, int j, int k) const {
     return (i-sx) + (j-sy) * nx + (k-sz) * nx * ny;
   }
 };
@@ -334,7 +331,7 @@ public:
   ///
   void setPos(int i, int j, int k, int d, float pos)
   {
-    SetCutPos(data[index(i,j,k)], d, pos);
+    SetCutPos(data[getIndex(i,j,k)], d, pos);
   }
 
   /// 交点座標値を設定(6方向まとめて).
@@ -344,7 +341,7 @@ public:
   ///
   void setPos(int i, int j, int k, const float pos[])
   {
-    SetCutPos(data[index(i,j,k)], pos);
+    SetCutPos(data[getIndex(i,j,k)], pos);
   }
 
   /// 交点座標値(d方向)を得る.
@@ -355,7 +352,7 @@ public:
   ///
   float getPos(int i, int j, int k, int d) const
   {
-    return GetCutPos(data[index(i,j,k)], d);
+    return GetCutPos(data[getIndex(i,j,k)], d);
   }
 
   /// 交点座標値(d方向)を得る(1次元インデックスで指定).
@@ -376,7 +373,7 @@ public:
   ///
   void getPos(int i, int j, int k, float pos[]) const
   {
-    GetCutPos(data[index(i,j,k)], pos);
+    GetCutPos(data[getIndex(i,j,k)], pos);
   }
 
   /// 交点座標値(6方向まとめて)を得る(1次元インデックスで指定).
@@ -523,7 +520,7 @@ public:
   ///
   void setBid(int i, int j, int k, int d, BidType bid)
   {
-    SetCutBid(data[index(i,j,k)], d, bid);
+    SetCutBid(data[getIndex(i,j,k)], d, bid);
   }
 
   /// 境界IDを設定(6方向まとめて).
@@ -533,7 +530,7 @@ public:
   ///
   void setBid(int i, int j, int k, const BidType bid[])
   {
-    SetCutBid(data[index(i,j,k)], bid);
+    SetCutBid(data[getIndex(i,j,k)], bid);
   }
 
   /// 境界ID(d方向)を得る.
@@ -544,7 +541,7 @@ public:
   ///
   BidType getBid(int i, int j, int k, int d) const
   {
-    return GetCutBid(data[index(i,j,k)], d);
+    return GetCutBid(data[getIndex(i,j,k)], d);
   }
 
   /// 境界ID(d方向)を得る(1次元インデックスで指定).
@@ -565,7 +562,7 @@ public:
   ///
   void getBid(int i, int j, int k, BidType bid[]) const
   {
-    GetCutBid(data[index(i,j,k)], bid);
+    GetCutBid(data[getIndex(i,j,k)], bid);
   }
 
   /// 境界ID(6方向まとめて)を得る(1次元インデックスで指定).

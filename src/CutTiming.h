@@ -20,6 +20,7 @@ enum Section {
   SEARCH_POLYGON,
   MAIN_LOOP,
   THREAD_TOTAL,
+  PACK_NORMAL,
   TEST1,
   TEST2,
   NumSections,

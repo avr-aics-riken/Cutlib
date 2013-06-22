@@ -8,6 +8,7 @@
 
 typedef std::vector<Vec3f> VecPos;
 typedef std::vector<int> VecBid;
+typedef std::vector<Vec3f> VecNormal;
 
 namespace {
 
@@ -15,6 +16,7 @@ enum { X, Y, Z};
 
 const char* Header1 = "# vtk DataFile Version 3.0\nCutlib test\nASCII\nDATASET POLYDATA\n";
 const char* Header2 = "SCALARS bid int 1\nLOOKUP_TABLE defalut\n";
+const char* Header3 = "NORMALS normal float\n";
 
 
 void extractData(const Vec3f center, const double range[6],
@@ -51,10 +53,46 @@ void extractData(const Vec3f center, const double range[6],
 }
 
 
-void outputData(const std::string& file, VecPos& vecPos, VecBid& vecBid)
+void extractNormalData(const BidType bid6[6], const Normal normal6[6],
+                 VecNormal& vecNormalM, VecNormal& vecNormalP)
 {
-  std::cout << "output to " << file << std::endl;
-  std::ofstream out(file.c_str());
+  if (bid6[X_M] > 0) {
+    vecNormalM.push_back(Vec3f(normal6[X_M][0],
+                               normal6[X_M][1],
+                               normal6[X_M][2]));
+  }
+  if (bid6[X_P] > 0) {
+    vecNormalP.push_back(Vec3f(normal6[X_P][0],
+                               normal6[X_P][1],
+                               normal6[X_P][2]));
+  }
+
+  if (bid6[Y_M] > 0) {
+    vecNormalM.push_back(Vec3f(normal6[Y_M][0],
+                               normal6[Y_M][1],
+                               normal6[Y_M][2]));
+  }
+  if (bid6[Y_P] > 0) {
+    vecNormalP.push_back(Vec3f(normal6[Y_P][0],
+                               normal6[Y_P][1],
+                               normal6[Y_P][2]));
+  }
+
+  if (bid6[Z_M] > 0) {
+    vecNormalM.push_back(Vec3f(normal6[Z_M][0],
+                               normal6[Z_M][1],
+                               normal6[Z_M][2]));
+  }
+  if (bid6[Z_P] > 0) {
+    vecNormalP.push_back(Vec3f(normal6[Z_P][0],
+                               normal6[Z_P][1],
+                               normal6[Z_P][2]));
+  }
+}
+
+
+void outputData(std::ofstream& out, VecPos& vecPos, VecBid& vecBid)
+{
   out << Header1;
   out << "POINTS " << vecPos.size() << " float" << std::endl;
   for (size_t i = 0; i < vecPos.size(); i++) {
@@ -67,11 +105,22 @@ void outputData(const std::string& file, VecPos& vecPos, VecBid& vecBid)
   }
 }
 
+
+void outputNormalData(std::ofstream& out, VecNormal& vecNormal)
+{
+  out << Header3;
+  for (size_t i = 0; i < vecNormal.size(); i++) {
+    out << vecNormal[i] << std::endl;
+  }
+}
+
 } // namespace ANONYMOUS
 
 
 void outputVtk(const std::string& file, const GridAccessor* grid,
-               const CutPosArray* cp, const CutBidArray* cb)
+               const CutPosArray* cp, const CutBidArray* cb,
+               const CutNormalArray* cn,
+               bool reverseNormal)
 {
   int ista[3] = { 
     cp->getStartX(),
@@ -86,14 +135,17 @@ void outputVtk(const std::string& file, const GridAccessor* grid,
 
   VecPos vecPosM, vecPosP;
   VecBid vecBidM, vecBidP;
+  VecNormal vecNormalM, vecNormalP;
 
   for (int k = ista[2]; k < ista[2]+nlen[2]; k++) {
     for (int j = ista[1]; j < ista[1]+nlen[1]; j++) {
       for (int i = ista[0]; i < ista[0]+nlen[0]; i++) {
         float pos6[6];
         BidType bid6[6];
+        Normal normal6[6];
         cp->getPos(i, j, k, pos6);
         cb->getBid(i, j, k, bid6);
+        if (cn) cn->getNormal(i, j, k, normal6);
 
         double center_d[3];
         double range_d[6];
@@ -101,15 +153,33 @@ void outputVtk(const std::string& file, const GridAccessor* grid,
 
         Vec3f center(center_d[0], center_d[1], center_d[2]);
         extractData(center, range_d, pos6, bid6, vecPosM, vecBidM, vecPosP, vecBidP);
+        if (cn) extractNormalData(bid6, normal6, vecNormalM, vecNormalP);
       }
+    }
+  }
+
+  if (cn && reverseNormal) {
+    for (size_t i = 0; i < vecNormalM.size(); i++) {
+      vecNormalM[i] = - vecNormalM[i];
+    }
+    for (size_t i = 0; i < vecNormalP.size(); i++) {
+      vecNormalP[i] = - vecNormalP[i];
     }
   }
 
   std::string fileM = file + "_m.vtk";
   std::string fileP = file + "_p.vtk";
   std::cout << std::endl;
-  outputData(fileM, vecPosM, vecBidM);
-  outputData(fileP, vecPosP, vecBidP);
+
+  std::cout << "output to " << fileM << std::endl;
+  std::ofstream outM(fileM.c_str());
+  outputData(outM, vecPosM, vecBidM);
+  if (cn) outputNormalData(outM, vecNormalM);
+
+  std::cout << "output to " << fileP << std::endl;
+  std::ofstream outP(fileP.c_str());
+  outputData(outP, vecPosP, vecBidP);
+  if (cn) outputNormalData(outP, vecNormalP);
   
 }
 

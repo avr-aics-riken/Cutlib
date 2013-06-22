@@ -7,7 +7,6 @@ CXX = icpc
 OPTIONS =
 OPTIONS += -O3 -Wall -xHost -openmp
 #OPTIONS += -O3 -Wall -fopenmp
-#OPTIONS += -fvisibility=hidden
 
 
 # ライブラリのインストール場所をフルパスで指定
@@ -19,6 +18,7 @@ TEXTPARSER_DIR = $(HOME)/opt_intel/TextParser
 
 
 DEFINES =
+DEFINES += -DCUTINFO_NORMAL_DOUBLE
 #DEFINES += -DCUTLIB_TIMING
 #DEFINES += -DCUTLIB_OCTREE
 #DEFINES += -DCUTLIB_DEBUG

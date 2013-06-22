@@ -23,6 +23,8 @@ public:
 
   std::string output;
 
+  bool reverseNormal;
+
 private:
 
   void parse() {
@@ -33,7 +35,8 @@ private:
 
     ndim_t = read<Tuple<int,3> >("ndim");
     ista_t = read<Tuple<int,3> >("ista", 0);
-    nlen_t = read<Tuple<int,3> >("nlen", ndim_t);
+  //nlen_t = read<Tuple<int,3> >("nlen", ndim_t);
+    nlen_t = read<Tuple<int,3> >("nlen", ndim_t + 1);
 
     for (int i = 0; i < 3; i++) {
       ndim[i] = ndim_t[i];
@@ -47,6 +50,8 @@ private:
     polylibConf = read<std::string>("polylibConf");
 
     output = read<std::string>("output", "");
+
+    reverseNormal = read<bool>("reverseNormal", false);
 
   }
 
@@ -74,13 +79,14 @@ public:
 
   void print() const {
     std::cout.setf(std::ios::showpoint);
-    std::cout << "  ndim:        " << Tuple<size_t,3>(ndim) << std::endl;
-    std::cout << "  ista:        " << Tuple<int,3>(ista) << std::endl;
-    std::cout << "  nlen:        " << Tuple<size_t,3>(nlen) << std::endl;
-    std::cout << "  cutPos:      " << cutPosType << std::endl;
-    std::cout << "  cutBid:      " << cutBidType << std::endl;
-    std::cout << "  polylibConf: " << polylibConf << std::endl;
-    std::cout << "  output:      " << output << std::endl;
+    std::cout << "  ndim:           " << Tuple<size_t,3>(ndim) << std::endl;
+    std::cout << "  ista:           " << Tuple<int,3>(ista) << std::endl;
+    std::cout << "  nlen:           " << Tuple<size_t,3>(nlen) << std::endl;
+    std::cout << "  cutPos:         " << cutPosType << std::endl;
+    std::cout << "  cutBid:         " << cutBidType << std::endl;
+    std::cout << "  polylibConf:    " << polylibConf << std::endl;
+    std::cout << "  output:         " << output << std::endl;
+    std::cout << "  reverse normal: " << (reverseNormal ? "on" : "off")  << std::endl;
   }
 
 };
