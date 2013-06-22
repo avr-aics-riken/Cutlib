@@ -43,17 +43,7 @@ all: $(CUTLIB)
 
 OBJS = Cutlib.o CutlibCore.o CutUtil.o CutTriangle.o CutBoundary.o
 #OBJS = Cutlib.o CutlibCore.o CutUtil.o CutTriangle.o CutBoundary.o CutTiming.o
- 
-#CXX = g++
-CXX = icpc
 
-AR = ar cr
-#AR = ar cru
-RANLIB = ranlib
-
-POLYLIB_DIR = ../../Polylib_2_0_2
-#POLYLIB_DIR = ../../Polylib_2_0_3
-POLYLIB_FLAGS = -I$(POLYLIB_DIR)/include -I/usr/include/libxml2
 
 # with Octree lib ############################################################
 #OCTREE_DIR = ../../sgi-octree
@@ -66,11 +56,37 @@ OCTREE_FLAGS =
 
 #DEFINES = -DCUTLIB_TIMING
 #DEFINES = -DCUTLIB_DEBUG
-#DEFINES = -DIGNORE_NORMAL_DIRECTION
-DEFINES = -DIGNORE_STL_NORMAL
+
+# ポリゴンの表裏が統一されていることを仮定せずに計算
+DEFINES = -DIGNORE_NORMAL_DIRECTION
+
+# STLファイル中のポリゴン法線データを信用せず，毎回法線計算
+DEFINES += -DIGNORE_STL_NORMAL
+#DEFINES = 
+
+
+
+POLYLIB_FLAGS = -I../$(POLYLIB_DIR)/include -I$(TP_DIR)/include
+
+###########################################################################
+# INTEL
 
 #CFLAGS = -g -Wall -I../include $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
-CFLAGS = -O3 -Wall -I../include  $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
+CFLAGS = -O3 -Wall -I../include $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
+
+###########################################################################
+# FX10/K
+
+#CFLAGS = -Kfast,ocl,preex,simd=2 -I../include  $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
+
+
+###########################################################################
+# BG/P
+
+#CFLAGS = -O3 -qarch=450d -qtune=450 -qsmp=omp -I../include $(POLYLIB_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
+
+###########################################################################
+
 
 $(CUTLIB): $(OBJS)
 	$(AR) $@ $(OBJS)
@@ -82,10 +98,25 @@ $(CUTLIB): $(OBJS)
 clean:
 	rm -rf *.o $(CUTLIB)
 
-depend: $(OBJS:.o=.cpp)
-	@ rm -rf depend.inc
-	@ for i in $^; do\
-		$(CXX) $(CFLAGS) -MM $$i >> depend.inc;\
-	done
+depend:
+	makedepend -I. -I../include $(POLYLIB_FLAGS)  -Y \
+  Cutlib.cpp \
+  CutlibCore.cpp \
+  CutUtil.cpp \
+  CutTriangle.cpp \
+  CutBoundary.cpp
+# DO NOT DELETE
 
--include depend.inc
+Cutlib.o: ../include/Cutlib.h ../include/CutInfo/CutInfoArray.h
+Cutlib.o: ../include/CutInfo/CutInfo.h CutlibCore.h CutBoundary.h
+Cutlib.o: CutTriangle.h CutUtil.h
+CutlibCore.o: CutlibCore.h ../include/Cutlib.h
+CutlibCore.o: ../include/CutInfo/CutInfoArray.h ../include/CutInfo/CutInfo.h
+CutlibCore.o: CutBoundary.h CutTriangle.h CutUtil.h CutTiming.h
+CutUtil.o: CutUtil.h ../include/Cutlib.h ../include/CutInfo/CutInfoArray.h
+CutUtil.o: ../include/CutInfo/CutInfo.h
+CutTriangle.o: CutTriangle.h ../include/Cutlib.h
+CutTriangle.o: ../include/CutInfo/CutInfoArray.h ../include/CutInfo/CutInfo.h
+CutTriangle.o: CutBoundary.h
+CutBoundary.o: CutBoundary.h ../include/Cutlib.h
+CutBoundary.o: ../include/CutInfo/CutInfoArray.h ../include/CutInfo/CutInfo.h
