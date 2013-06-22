@@ -3,6 +3,8 @@
 #  Cutlib インストール方法
 #  -----------------------
 #
+#  利用するPolylibのバージョンにあわせてPOLYLIB_DIRを指定してください．
+#
 #  「環境に依存するマクロ変数」を確認・修正後
 #      make
 #  で，libディレクトリにlibcutlib.aがインストールされます．
@@ -49,7 +51,7 @@ AR = ar cr
 #AR = ar cru
 RANLIB = ranlib
 
-POLYLIB_DIR = ../../Polylib_2_0_1
+POLYLIB_DIR = ../../Polylib_2_0_2
 POLYLIB_FLAGS = -I$(POLYLIB_DIR)/include -I/usr/include/libxml2
 
 # with Octree lib ############################################################

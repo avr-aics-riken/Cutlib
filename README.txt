@@ -1,5 +1,5 @@
 -----
-Cutlib 2.0.1
+Cutlib 2.0.2
 
 Kenji Ono 	keno@riken.jp
 VCAD Research Program, RIKEN
@@ -15,27 +15,26 @@ src/Makefileのコメントを参照ください．
 ファイル・ディレクトリ構成
 --------------------------
 
-ChangeLog      改訂履歴
+ChangeLog       改訂履歴
 
-COPYING        コピーライト
+COPYING         コピーライト
 
-doc/           ドキュメント
-    cutlib_ug.pdf  ユーザ利用マニュアル
-    refman.pdf     リファレンスマニュアル(Doxygen出力)
+doc/            ドキュメント
+  cutlib_ug.pdf ユーザ利用マニュアル
     
 doxygen/
-       Doxyfile   doxygen生成コンフィギュレーション
-       html/         Doxygen出力
+  Doxyfile      doxygen生成コンフィギュレーション
+  html/         Doxygen出力
 
-include/       ヘッダファイル
+include/        ヘッダファイル
 
-lib/           コンパイル済みのアーカイブ格納ディレクトリ
+lib/            コンパイル済みのアーカイブ格納ディレクトリ
 
-README.txt     このファイル
+README.txt      このファイル
 
-src/           ソースコード
+src/            ソースコード
 
-test/          テストプログラム
+test/           テストプログラム
 
 
 
