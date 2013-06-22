@@ -24,7 +24,7 @@ make_setting    単体でビルドする場合のMakefileのマクロ
 Makefile        単体ビルド用のMakefile
 README          このファイル
 src/            ソースコード
-test/           テストプログラム
+examples/       サンプルプログラム
 
 
 

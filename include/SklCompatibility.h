@@ -1,11 +1,11 @@
-/**@file
- * @brief pFTTクラスライブラリとの互換性のためのヘッダ
- *
- * Compatibility.hの内容を「Sph〜」を「Skl〜」に修正して作成
- */
+/// @file
+/// @brief pFTTクラスライブラリとの互換性のためのヘッダ
+///
+/// Compatibility.hの内容を「Sph〜」を「Skl〜」に修正して作成
+///
 
-#ifndef SKLCOMPATIBILITY_H_
-#define SKLCOMPATIBILITY_H_
+#ifndef SKL_COMPATIBILITY_H
+#define SKL_COMPATIBILITY_H
 
 #include "Tree.h"
 #include "Node.h"
@@ -31,4 +31,4 @@ SklGetTime()
     return TD_NAMESPACE::GetTime();
 }
 
-#endif /*SKLCOMPATIBILITY_H_*/
+#endif // SKL_COMPATIBILITY_H

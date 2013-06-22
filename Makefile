@@ -1,31 +1,27 @@
-#####################################################################################
 #
-#  Cutlib （単体ビルド用）
-#  -----------------------
+#  make: 
+#     Cutlibライブラリを作成
 #
-#  環境に合わせて、make_settingマクロを編集後、make
+#  make examples:
+#     サンプルプログラムをコンパイル・リンク
 #
 #
-#####################################################################################
+# src, examplesの各ディレクトリ内でmakeも可能
+#
 
-include make_setting
+.PHONY: cutlib examples
 
-all:
-	( \
-	cd src; \
-	make \
-		CXX='$(CXX)' \
-		AR='$(AR)' \
-		RANLIB='$(RANLIB)' \
-		RM='$(RM)' \
-		TP_DIR='$(TP_DIR)' \
-	)
+cutlib:
+	cd src && make
+
+examples:
+	cd examples && make
 
 clean:
-	(cd src; make clean)
+	cd src && make clean
+	cd examples && make clean
 
-allclean: clean
-	(cd lib; $(RM) $(TARGET) )
+dist_clean:
+	cd src && make dist_clean
+	cd examples && make dist_clean
 
-depend:
-	(cd src; make depend)

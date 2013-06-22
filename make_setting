@@ -1,45 +1,25 @@
-###################################################################
-#
-#  Cutlib コンパイル方法
-#  -----------------------
-#
-#  環境に依存するマクロ変数
-#  ------------------------
-#
-#    - CXX: C++コンパイラ
-#    - AR:  アーカイバコマンド(Mac OS X では"u"を追加)
-#    - CFLAGS: 最適化オプションの変更
-#
-###################################################################
+# C++コンパイラ
+CXX = icpc
+#CXX = g++
 
 
-# depends on the platform
-
-########################
-# INTEL
-#
-AR          = ar cru
-RANLIB      = ranlib
-RM          = \rm -f
-CXX         = icpc
-TP_DIR      = /usr/local/TextParser
+# 「-I」「-D」以外のコンパイラオプションを指定
+OPTIONS =
+OPTIONS += -O3 -Wall -xHost -openmp
+#OPTIONS += -O3 -Wall -fopenmp
+#OPTIONS += -fvisibility=hidden
 
 
-########################
-# FX10, K
-#
-#AR          = ar cr
-#RANLIB      = ranlib
-#RM          = \rm -f
-#CXX         = mpiFCCpx
-#TP_DIR      = 
+# ライブラリのインストール場所をフルパスで指定
+POLYLIB_DIR    = $(HOME)/Polylib-2.2
+TEXTPARSER_DIR = $(HOME)/opt_intel/TextParser
+
+# Octreeライブラリは, MRpFTT_SGI_20080428で動作確認
+#OCTREE_DIR     = $(HOME)/sgi-octree
 
 
-########################
-# BG/P
-#
-#AR          = ar crv
-#RANLIB      = ranlib
-#RM          = \rm -f
-#CXX         = mpixlcxx_r
-#TP_DIR      = 
+DEFINES =
+#DEFINES += -DCUTLIB_TIMING
+#DEFINES += -DCUTLIB_OCTREE
+#DEFINES += -DCUTLIB_DEBUG
+

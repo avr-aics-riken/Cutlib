@@ -1,6 +1,6 @@
-/**@file
- * @brief Polylibポリゴングループ--境界ID 対応付けクラス 実装
- */
+/// @file
+/// @brief Polylibポリゴングループ--境界ID 対応付けクラス 実装
+///
 
 #ifdef CUTLIB_DEBUG
 #include <iostream>
@@ -9,18 +9,18 @@
 
 namespace cutlib {
 
-/// Polylibポリゴングループ--境界ID 対応リスト生成
-/**
- * @param pl Polylibクラスオブジェクト
- * @return Polylibポリゴングループ--境界ID 対応リスト
- */
+/// Polylibポリゴングループ--境界ID 対応リスト生成.
+///
+///  @param[in] pl Polylibクラスオブジェクト
+///  @return Polylibポリゴングループ--境界ID 対応リスト
+///
 CutBoundaries* CutBoundary::createCutBoundaryList(const Polylib* pl)
 {
   CutBoundaries* bList = new CutBoundaries;
   std::vector<PolygonGroup *>* rootGroups = pl->get_root_groups();
   std::vector<PolygonGroup*>::iterator it = rootGroups->begin();;
 
-  for (it = rootGroups->begin(); it != rootGroups->end(); it++) {
+  for (it = rootGroups->begin(); it != rootGroups->end(); ++it) {
     checkPolygonGroup(*it, bList);
   }
 
@@ -30,14 +30,14 @@ CutBoundaries* CutBoundary::createCutBoundaryList(const Polylib* pl)
 }
 
 
-/// ポリゴングループのチェック
-/**
- * ポリゴングループのツリーを再帰的にたどり,
- * リーフノードかつIDが1以上のグループをリストに登録
- *
- * @param[in] pg Polylibポリゴングループ
- * @param[in,out] bList Polylibポリゴングループ--境界ID 対応リスト
- */
+/// ポリゴングループのチェック.
+///
+/// ポリゴングループのツリーを再帰的にたどり,
+/// リーフノードかつIDが1以上のグループをリストに登録
+///
+///  @param[in] pg Polylibポリゴングループ
+///  @param[in,out] bList Polylibポリゴングループ--境界ID 対応リスト
+///
 void CutBoundary::checkPolygonGroup(PolygonGroup *pg, CutBoundaries* bList)
 {
   std::vector<PolygonGroup *>& childGroups = pg->get_children();
@@ -54,10 +54,10 @@ void CutBoundary::checkPolygonGroup(PolygonGroup *pg, CutBoundaries* bList)
   
   // 子グループに対して再帰呼び出し
   std::vector<PolygonGroup*>::iterator it;
-  for (it = childGroups.begin(); it != childGroups.end(); it++) {
+  for (it = childGroups.begin(); it != childGroups.end(); ++it) {
     checkPolygonGroup(*it, bList);
   }
 }
 
 
-} /* namespace cutlib */
+} // namespace cutlib 

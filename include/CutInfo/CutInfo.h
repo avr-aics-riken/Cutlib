@@ -1,30 +1,28 @@
-/**@file
- * @brief 交点情報基本データ型
- */
+/// @file
+/// @brief 交点情報基本データ型
+///
 
 #ifndef CUTINFO_H
 #define CUTINFO_H
 
-#include <cstddef>   /* for size_t */
-#include <stdint.h>  /* for int32_t */
+#include <cstddef>   // for size_t
+#include <stdint.h>  // for int32_t
 
 namespace cutlib {
 
-/// 交点探査方向の順番
-/**
- * X_M(x負方向), X_P(x正方向), ...
- * (2010/10/18 正負の順を変更)
- */
+/// 交点探査方向の順番.
+///
+/// X_M(x負方向), X_P(x正方向), ...
+///
 enum CutInfoOrder { X_M, X_P, Y_M, Y_P, Z_M, Z_P };
 
 
-/// 境界ID型
+/// 境界ID型.
 typedef unsigned char BidType;
 
-/**
- * @defgroup CutInfo 交点情報基本型
- * @{
- */
+/// @defgroup CutInfo 交点情報基本型
+//@{
+
 //-----------------------------------------------------------------------------
 
 /// 交点座標基本型: 交点座標をfloat(32ビット)として格納
@@ -368,8 +366,8 @@ inline void GetCutBid(const CUT_BID* cb, size_t ijk, BidType bid[])
   GetCutBid(cb[ijk], bid);
 }
 
-/** @} */ // end gropu CutInfo
+//@} end gropu CutInfo
 
-} /* namespace cutlib */
+} // namespace cutlib
 
-#endif /* CUTINFOE_H */
+#endif // CUTINFOE_H
