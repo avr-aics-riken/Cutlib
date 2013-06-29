@@ -1,0 +1,33 @@
+##############################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+##############################################################################
+#
+
+.PHONY: cutlib examples
+
+cutlib:
+	cd src && make -f Makefile_hand
+
+examples:
+	cd examples && make -f Makefile_hand
+
+depend:
+	cd src && make -f Makefile_hand depend
+	cd examples && make -f Makefile_hand depend
+
+clean:
+	cd src && make -f Makefile_hand clean
+	cd examples && make -f Makefile_hand clean
+
+dist_clean:
+	cd src && make -f Makefile_hand dist_clean
+	cd examples && make -f Makefile_hand dist_clean
+

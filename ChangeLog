@@ -1,59 +1,73 @@
 /*
  * Cutlib - Cut Information Library
  *
- * Copyright (c) RIKEN, Japan. All right reserved. 2010-2013
+ * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+ * All rights reserved.
+ *
+ * Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+ * All rights reserved.
  *
  */
 
------
 
-2013-06-09  Version 3.0.1-beta
-  * 交点でのポリゴン法線ベクトルを記録する機能を追加
-  * マニュアルの改修
+UPDATE HISTORY
+==============
 
 
-2013-02-25  Version 3.0.0-beta
-  * コンパイルオプション「-DIGNORE_NORMAL_DIRECTION」と「-DIGNORE_STL_NORMAL」の廃止，ポリゴンデータ修復関数RepairPolygonDataの追加
-  * グリッド情報アクセッサクラスの導入，直交格子版関数のインタフェースおよび名称の変更
-  * 配列ラッパクラスの3次元インデックスに負の値も指定可能
-  * 直交格子版関数のOpenMPスレッド並列
-  * 交点計算部分を，格納形式によらず，常に倍精度で計算
-  * マニュアルの改修
-  * Polylib2.2，TextParser1.1対応
+Version 3.1.0  2013-06-29
+ - packaging by autotools
 
 
-2012-10-16  Version 2.0.5
-  * コンパイル方法の修正
+Version 3.0.1-beta  2013-06-09
+ - Add function to record normal vector from a polygon at cut points
+ - Update user's guide
 
 
-2012-09-06  Version 2.0.4
-  * コンパイル方法を単体とFFVディレクトリ内で共通化
+Version 3.0.0-beta  2013-02-25
+ - Eliminate compile option "-DIGNORE_NORMAL_DIRECTION" and "-DIGNORE_STL_NORMAL"
+ - Add RepairPolygonData()
+ - Introduce accessor class for grid information
+ - Change interface and name of Cartesian version
+ - Enable to assign minus values for 3D index of wrapper array class
+ - OpenMP parallelization for Cartesian version
+ - Change to calculate cut info with double precision
+ - Update user's guide
+ - Adjust to Polylib2.2，and TextParser1.1
 
 
-2012-04-21  Version 2.0.3
-  * コンパイルオプションに「-DIGNORE_NORMAL_DIRECTION」を指定すると，
-    ポリゴンの表裏が統一されていることを仮定せずに計算
-  * コンパイルオプションに「-DIGNORE_STL_NORMAL」を指定すると，
-    STLファイル中のポリゴン法線データを信用せず，毎回法線計算
+Version 2.0.5  2012-10-16
+ - Correction of compilation procedure
 
 
-2011-05-12  Version 2.0.2
-  * ユーザ利用マニュアル改訂
-  * Polylib2.0.2コンパイル対応
-  * doxygenのリファレンスはhtmlのみに変更
+Version 2.0.4  2012-09-06
+ - Change compile procedure for FFVC
 
 
-2011-05-09  Version 2.0.1
-  * ユーザ利用マニュアル改訂
+Version 2.0.3  2012-04-21
+ - Compiler option "-DIGNORE_NORMAL_DIRECTION"
+   calculate cut information assuming that the front-back sides of polygon is not unified.
+ - Compiler option "-DIGNORE_STL_NORMAL"
+   calculate normal without using normal vector in STL file.
 
 
-2010-11-10  Version 2.0.0
-  * ユーザ利用マニュアル改訂
-  * インタフェース変更(引数Boundaries* bListの廃止)
-  * 計算対象となるポリゴングループとその境界IDをPolylib初期化ファイルから自動読み取り(Polylib2.0.1の機能)
-  * Makefileで，Octree版関数作成の有無を選択可能に
-  * 交点探査方向順を変更(-x, +x, -y, +y, -z, +z に)
+Version 2.0.2  2011-05-12
+ - Update user's guide
+ - Adjust interface to Polylib2.0.2
+ - Generate a reference of html version only from doxygen
 
 
-2010-04-28  Version 1.0.0
+Version 2.0.1  2011-05-09
+ - Update user's guide
+ - Read polygon group and its ID from Polylib parameter file
+
+
+Version 2.0.0  2010-11-10
+ - Correction of user's guide
+ - Change API (eliminate arguments of Boundaries* bList)
+ - Introduce an option to incorporate octree version or not
+ - Change search order to -x, +x, -y, +y, -z, +z
+
+
+Version 1.0.0  2010-04-28
+ - Initial release
 

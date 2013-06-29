@@ -1,22 +1,67 @@
 /*
  * Cutlib - Cut Information Library
  *
- * Copyright (c) RIKEN, Japan. All right reserved. 2010-2013
+ * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+ * All rights reserved.
+ *
+ * Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+ * All rights reserved.
  *
  */
 
-Cutlibライブラリのビルドおよびインストール方法
 
-1) 以下の手順でライブラリのビルドを行います。
+PREREQUISITE
+============
 
-1-1) 単体でビルドする場合
-   make_settingのマクロを環境に合わせて編集します．
-   
-	> make
-
-1-2) FFVからコンパイルする場合
-   ../FFV/make_settingのマクロを環境に合わせて編集します．
-   FFVディレクトリでmakeします．
+- Text parsing library
+- Polygon management library
 
 
-2) ビルドされたライブラリファイルは lib/に配置されます。
+
+HOW TO INSTALL
+==============
+
+1) with configure
+
+
+$ ./configure [options]
+$ make
+# make install
+
+
+Configure options:
+ 
+ --prefix=INSTALL_DIR
+    Install directory path.  If omitted, default is /usr/local/Cutlib.
+
+ --host=hostname
+    Specify in case of cross-compilation.
+
+
+ CXX=CXX_COMPILER
+    Specify a C++ compiler, e.g., g++, icpc, xlc++ or others.
+
+ CXXFLAGS=CXX_OPTIONS
+    Specify compiler options.
+
+
+Here is examples.
+
+$ ./configure --prefix=/usr/local/Cutlib CXX=icpc CXXFLAGS=-O3
+
+
+$ ./configure --prefix=$1 \
+              --host=sparc64-unknown-linux-gnu \
+              CXX=mpiFCCpx \
+              CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2"
+
+
+If you try to install process again, execute 'make distclean' then configure.
+
+
+
+2) Hand compile
+
+Edit environmental variables in a Makefile_hand file for a target machine. Then, 'make'.   
+A compiled module libCUT.a will be placed in $(CUT_DIR)/lib/ directory.
+

@@ -1,32 +1,48 @@
 /*
  * Cutlib - Cut Information Library
  *
- * Copyright (c) RIKEN, Japan. All right reserved. 2010-2013
+ * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+ * All rights reserved.
+ *
+ * Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+ * All rights reserved.
  *
  */
 
 
-ファイル・ディレクトリ構成
---------------------------
+OUTLINE
+=======
 
-AUTHORS         著者
-ChangeLog       改訂履歴
-COPYING         コピーライト
-doc/            ドキュメント
-  cutlib_ug.pdf ユーザ利用マニュアル
+This Cutlib provides functions to calculate intersection between polygon face and background grid 
+and to manage generated information. Both Cartesian and Octree grid data structure can be utilized 
+for the background grid.
+
+
+INGREDIENTS
+===========
+
+AUTHORS                Contributors
+ChangeLog              History of modification
+COPYING                Copyright
+doc/                   
+  cutlib_ug.pdf        User's manual (in Japanese)
 doxygen/
-  Doxyfile      doxygen生成コンフィギュレーション
-  html/         Doxygen出力
-include/        ヘッダファイル
-INSTALL         ビルド方法
-lib/            コンパイル済みのアーカイブ格納ディレクトリ
-make_setting    単体でビルドする場合のMakefileのマクロ
-Makefile        単体ビルド用のMakefile
-README          このファイル
-src/            ソースコード
-examples/       サンプルプログラム
-
-
-
-
-
+  Doxyfile             Configuration file to generate a doxygen file
+examples/
+  Makefile_hand        For hand compile
+  Cell/                Cartesian cell center
+  Cell_Normal/         Cartesian cell center with normal vector
+  Node/                Cartesian node
+  Node_Normal/         Cartesian node with normal vector
+  Octree/              Octree source
+  STL_data/            sample STL data
+  util/                utility source
+include/               Header files
+INSTALL                Description of how to install
+LICENSE                License to apply
+make_setting           Macro for compilation
+LICENSE                License to apply
+NEWS                   Release note
+Makefile_hand          Building Cutlib by hand compile
+README                 This document
+src/                   Source codes

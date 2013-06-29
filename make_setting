@@ -1,20 +1,35 @@
-# C++コンパイラ
+##############################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+##############################################################################
+#
+
+# Install Dir
+CUT_DIR = /usr/local/Cutlib
+
 CXX = icpc
 #CXX = g++
 
 
-# 「-I」「-D」以外のコンパイラオプションを指定
-OPTIONS =
-OPTIONS += -O3 -Wall -xHost -openmp
-#OPTIONS += -O3 -Wall -fopenmp
+# Specify compiler option
+CXXFLAGS =
+CXXFLAGS += -O3 -Wall -openmp
+#CXXFLAGS += -O3 -Wall -fopenmp
 
 
-# ライブラリのインストール場所をフルパスで指定
-POLYLIB_DIR    = $(HOME)/Polylib-2.2
-TEXTPARSER_DIR = $(HOME)/opt_intel/TextParser
+# Library path
+POLYLIB_DIR = /usr/local/Polylib
+TP_DIR      = /usr/local/TextParser
 
-# Octreeライブラリは, MRpFTT_SGI_20080428で動作確認
-#OCTREE_DIR     = $(HOME)/sgi-octree
+# Octree >> MRpFTT_SGI_20080428
+#OCTREE_DIR  = $(HOME)/sgi-octree
 
 
 DEFINES =
@@ -22,4 +37,8 @@ DEFINES += -DCUTINFO_NORMAL_DOUBLE
 #DEFINES += -DCUTLIB_TIMING
 #DEFINES += -DCUTLIB_OCTREE
 #DEFINES += -DCUTLIB_DEBUG
+
+AR          = ar cru
+RANLIB      = ranlib
+RM          = \rm -f
 

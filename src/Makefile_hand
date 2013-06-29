@@ -1,0 +1,80 @@
+##############################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+##############################################################################
+#
+
+include ../make_setting
+
+CUTLIB = libCUT.a
+
+all: $(CUTLIB)
+
+OBJS = Cutlib.o \
+       CutBoundary.o \
+       CutSearch.o \
+       TargetTriangle.o \
+       RepairPolygonData.o
+
+ifneq (, $(findstring -DCUTLIB_OCTRE, $(DEFINES)))
+	OBJS += CutOctree.o
+endif
+
+ifneq (, $(findstring -DCUTLIB_TIMING, $(DEFINES)))
+	OBJS += CutTiming.o
+endif
+ 
+
+PL_FLAGS = -I$(POLYLIB_DIR)/include
+PL_LIBS  = -L$(POLYLIB_DIR)/lib -lMPIPOLY
+
+TP_FLAGS = -I$(TP_DIR)/include
+TP_LIBS  = -L$(TP_DIR)/lib -lTP
+
+ifneq (, $(findstring -DCUTLIB_OCTRE, $(DEFINES)))
+	OCTREE_FLAGS = -DTD_USE_NAMESPACE -I$(OCTREE_DIR)/include
+	OCTREE_LIBS = -L$(OCTREE_DIR)/lib -loctree
+endif
+
+CXXFLAGS += -I../include $(PL_FLAGS) $(TP_FLAGS) $(OCTREE_FLAGS) $(DEFINES)
+
+$(CUTLIB): $(OBJS)
+	$(AR) $@ $(OBJS)
+	$(RANLIB) $@
+	-mkdir -p $(CUT_DIR)/lib
+	mv $(CUTLIB) $(CUT_DIR)/lib
+	-mkdir -p $(CUT_DIR)/include
+	cp ../include/*.h $(CUT_DIR)/include
+	-mkdir -p $(CUT_DIR)/include/CutInfo
+	cp ../include/CutInfo/*.h $(CUT_DIR)/include/CutInfo
+	-mkdir -p $(CUT_DIR)/include/GridAccessor
+	cp ../include/GridAccessor/*.h $(CUT_DIR)/include/GridAccessor
+	-mkdir -p $(CUT_DIR)/include/RepairPolygonData
+	cp ../include/RepairPolygonData/*.h $(CUT_DIR)/include/RepairPolygonData
+	-mkdir -p $(CUT_DIR)/doc
+	cp ../doc/*.pdf $(CUT_DIR)/doc
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $<
+
+clean:
+	$(RM) *.o
+
+dist_clean: clean
+	$(RM) $(CUTLIB) depend.inc
+
+
+depend: $(OBJS:.o=.cpp)
+	@ rm -rf depend.inc
+	@ for i in $^; do\
+		$(CXX) $(CXXFLAGS) -MM $$i >> depend.inc;\
+	done
+
+-include depend.inc
