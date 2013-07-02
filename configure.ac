@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Cutlib], [3.1.0], [keno@riken.jp], [Cutlib])
+AC_INIT([Cutlib], [3.1.1], [keno@riken.jp], [Cutlib])
 AM_INIT_AUTOMAKE()
 AC_CONFIG_SRCDIR([src/Cutlib.cpp])
 AC_CONFIG_HEADERS([config.h])
@@ -23,7 +23,7 @@ AC_CONFIG_HEADERS([config.h])
 #
 # revision No.
 #
-CT_REVISION="20130702_2340"
+CT_REVISION="20130703_0630"
 AC_SUBST(CT_REVISION)
 
 

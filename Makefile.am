@@ -15,7 +15,7 @@ SUBDIRS = @MAKE_SUB_DIRS@
 
 bin_SCRIPTS = cut-config
 EXTRA_DIST  = cut-config.in Makefile_hand LICENSE doxygen/Doxyfile make_setting \
-              examples
+              examples src/depend.inc
 dist_data_DATA = AUTHORS COPYING ChangeLog README LICENSE NEWS
 
 clean-local:

@@ -11,6 +11,8 @@
 ##############################################################################
 #
 
+EXTRA_DIST= Makefile_hand
+
 lib_LIBRARIES=libCUT.a
 
 libCUT_a_CXXFLAGS = @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@ \
@@ -30,17 +32,18 @@ libCUT_a_SOURCES = \
    RepairPolygonData.cpp \
    Cutlib.cpp
 
+
 if CT_TIMING
   libCUT_a_SOURCES += CutTiming.cpp CutTiming.h
 endif
+
 
 if CT_OCTREE
   libCUT_a_SOURCES += CutOctree.cpp CutOctree.h
 endif
 
 
-CUT_includedir = $(includedir)
-CUT_include_HEADERS = \
+nobase_include_HEADERS = \
    $(top_builddir)/include/CutInfo/CutInfo.h \
    $(top_builddir)/include/CutInfo/CutInfoArray.h \
    $(top_builddir)/include/CutInfo/CutInfoOctree.h \
@@ -51,7 +54,4 @@ CUT_include_HEADERS = \
    $(top_builddir)/include/GridAccessor/Node.h \
    $(top_builddir)/include/RepairPolygonData/RepairPolygonData.h \
    $(top_builddir)/include/SklCompatibility.h
-
-#EXTRA_DIST= CutTiming.cpp CutTiming.h CutOctree.cpp CutOctree.h depend.inc Makefile_hand
-EXTRA_DIST= Makefile_hand
 

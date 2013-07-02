@@ -13,6 +13,9 @@
 UPDATE HISTORY
 ==============
 
+Version 3.1.1  2013-07-03
+ - update configure.ac to place header file with nobase_include_HEADERS
+
 
 Version 3.1.0  2013-07-02
  - packaging by autotools

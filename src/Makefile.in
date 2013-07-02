@@ -65,7 +65,7 @@ POST_UNINSTALL = :
 @CT_TIMING_TRUE@am__append_1 = CutTiming.cpp CutTiming.h
 @CT_OCTREE_TRUE@am__append_2 = CutOctree.cpp CutOctree.h
 subdir = src
-DIST_COMMON = $(CUT_include_HEADERS) $(srcdir)/Makefile.am \
+DIST_COMMON = $(nobase_include_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/depcomp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -102,7 +102,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(CUT_includedir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
 LIBRARIES = $(lib_LIBRARIES)
 AR = ar
 ARFLAGS = cru
@@ -139,7 +139,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-HEADERS = $(CUT_include_HEADERS)
+HEADERS = $(nobase_include_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -248,6 +248,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+EXTRA_DIST = Makefile_hand
 lib_LIBRARIES = libCUT.a
 libCUT_a_CXXFLAGS = @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@ \
                    -I$(top_builddir)/include \
@@ -259,8 +260,7 @@ libCUT_a_SOURCES = CutBoundary.cpp CutBoundary.h CutSearch.cpp \
 	CutSearch.h TargetTriangle.cpp TargetTriangle.h \
 	RepairPolygonData.cpp Cutlib.cpp $(am__append_1) \
 	$(am__append_2)
-CUT_includedir = $(includedir)
-CUT_include_HEADERS = \
+nobase_include_HEADERS = \
    $(top_builddir)/include/CutInfo/CutInfo.h \
    $(top_builddir)/include/CutInfo/CutInfoArray.h \
    $(top_builddir)/include/CutInfo/CutInfoOctree.h \
@@ -272,9 +272,6 @@ CUT_include_HEADERS = \
    $(top_builddir)/include/RepairPolygonData/RepairPolygonData.h \
    $(top_builddir)/include/SklCompatibility.h
 
-
-#EXTRA_DIST= CutTiming.cpp CutTiming.h CutOctree.cpp CutOctree.h depend.inc Makefile_hand
-EXTRA_DIST = Makefile_hand
 all: all-am
 
 .SUFFIXES:
@@ -470,27 +467,30 @@ libCUT_a-CutOctree.obj: CutOctree.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CutOctree.cpp' object='libCUT_a-CutOctree.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -c -o libCUT_a-CutOctree.obj `if test -f 'CutOctree.cpp'; then $(CYGPATH_W) 'CutOctree.cpp'; else $(CYGPATH_W) '$(srcdir)/CutOctree.cpp'; fi`
-install-CUT_includeHEADERS: $(CUT_include_HEADERS)
+install-nobase_includeHEADERS: $(nobase_include_HEADERS)
 	@$(NORMAL_INSTALL)
-	@list='$(CUT_include_HEADERS)'; test -n "$(CUT_includedir)" || list=; \
+	@list='$(nobase_include_HEADERS)'; test -n "$(includedir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(CUT_includedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(CUT_includedir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(includedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(includedir)" || exit 1; \
 	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(CUT_includedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(CUT_includedir)" || exit $$?; \
+	$(am__nobase_list) | while read dir files; do \
+	  xfiles=; for file in $$files; do \
+	    if test -f "$$file"; then xfiles="$$xfiles $$file"; \
+	    else xfiles="$$xfiles $(srcdir)/$$file"; fi; done; \
+	  test -z "$$xfiles" || { \
+	    test "x$$dir" = x. || { \
+	      echo " $(MKDIR_P) '$(DESTDIR)$(includedir)/$$dir'"; \
+	      $(MKDIR_P) "$(DESTDIR)$(includedir)/$$dir"; }; \
+	    echo " $(INSTALL_HEADER) $$xfiles '$(DESTDIR)$(includedir)/$$dir'"; \
+	    $(INSTALL_HEADER) $$xfiles "$(DESTDIR)$(includedir)/$$dir" || exit $$?; }; \
 	done
 
-uninstall-CUT_includeHEADERS:
+uninstall-nobase_includeHEADERS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(CUT_include_HEADERS)'; test -n "$(CUT_includedir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(CUT_includedir)'; $(am__uninstall_files_from_dir)
+	@list='$(nobase_include_HEADERS)'; test -n "$(includedir)" || list=; \
+	$(am__nobase_strip_setup); files=`$(am__nobase_strip)`; \
+	dir='$(DESTDIR)$(includedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -592,7 +592,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LIBRARIES) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(CUT_includedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -647,7 +647,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-CUT_includeHEADERS
+install-data-am: install-nobase_includeHEADERS
 
 install-dvi: install-dvi-am
 
@@ -692,24 +692,24 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-CUT_includeHEADERS uninstall-libLIBRARIES
+uninstall-am: uninstall-libLIBRARIES uninstall-nobase_includeHEADERS
 
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
 	clean-libLIBRARIES cscopelist ctags distclean \
 	distclean-compile distclean-generic distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install \
-	install-CUT_includeHEADERS install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-libLIBRARIES install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-libLIBRARIES install-man \
+	install-nobase_includeHEADERS install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
-	uninstall-CUT_includeHEADERS uninstall-am \
-	uninstall-libLIBRARIES
+	uninstall-am uninstall-libLIBRARIES \
+	uninstall-nobase_includeHEADERS
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
