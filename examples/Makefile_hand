@@ -18,7 +18,7 @@ all:
 	cd Node && make -f Makefile_hand
 	cd Cell_Normal && make -f Makefile_hand
 	cd Node_Normal && make -f Makefile_hand
-ifneq (, $(findstring -DCUTLIB_OCTRE, $(DEFINES)))
+ifneq (, $(findstring -DCUTLIB_OCTREE, $(DEFINES)))
 	cd Octree && make -f Makefile_hand
 endif
 

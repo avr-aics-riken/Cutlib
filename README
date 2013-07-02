@@ -13,9 +13,9 @@
 OUTLINE
 =======
 
-This Cutlib provides functions to calculate intersection between polygon face and background grid 
-and to manage generated information. Both Cartesian and Octree grid data structure can be utilized 
-for the background grid.
+This Cut Information library provides functions to calculate intersection between 
+polygon face and background grid, and to manage generated information. Both Cartesian 
+and Octree grid data structure can be utilized for the background grid.
 
 
 INGREDIENTS

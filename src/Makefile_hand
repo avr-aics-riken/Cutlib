@@ -23,7 +23,7 @@ OBJS = Cutlib.o \
        TargetTriangle.o \
        RepairPolygonData.o
 
-ifneq (, $(findstring -DCUTLIB_OCTRE, $(DEFINES)))
+ifneq (, $(findstring -DCUTLIB_OCTREE, $(DEFINES)))
 	OBJS += CutOctree.o
 endif
 
@@ -38,7 +38,7 @@ PL_LIBS  = -L$(POLYLIB_DIR)/lib -lMPIPOLY
 TP_FLAGS = -I$(TP_DIR)/include
 TP_LIBS  = -L$(TP_DIR)/lib -lTP
 
-ifneq (, $(findstring -DCUTLIB_OCTRE, $(DEFINES)))
+ifneq (, $(findstring -DCUTLIB_OCTREE, $(DEFINES)))
 	OCTREE_FLAGS = -DTD_USE_NAMESPACE -I$(OCTREE_DIR)/include
 	OCTREE_LIBS = -L$(OCTREE_DIR)/lib -loctree
 endif
