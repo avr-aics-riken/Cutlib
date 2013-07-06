@@ -51,8 +51,8 @@ Configure options:
     single precision (float).
 
  --with-octree=(no|yes)
-    Specify yes if an octree data structure is used. Default is no. Currently, this option
-    does not work.
+    Specify yes if an octree data structure is used. Default is no. Currently, this 
+    option does not work.
 
  --with-parser=TEXTPARSER_DIR
     Specify the directory path that TextParser library is installed.
@@ -71,31 +71,32 @@ Configure options:
 
 Here is examples.
 
-## Intel compiler
+# Intel compiler
 
-$ ./configure --with-parser=/usr/local/TextParser \
-              --with-polylib=/usr/local/Polylib \
-              CXX=icpc \
-              CXXFLAGS="-O3 -Wall -openmp"
+  $ ./configure --with-parser=/usr/local/TextParser \
+                --with-polylib=/usr/local/Polylib \
+                CXX=icpc \
+                CXXFLAGS="-O3 -Wall -openmp"
 
 
-## GNU compiler
+# GNU compiler, turn on measuring timing, specify install directory
 
-$ ./configure --prefix=/usr/local/Cutlib \
-              --with-parser=/usr/local/TextParser \
-              --with-polylib=/usr/local/Polylib \
-              --enable-timing=yes \
-              CXX=g++ \
-              CXXFLAGS="-O3 -Wall -fopenmp" 
+  $ ./configure --prefix=/usr/local/Cutlib \
+                --with-parser=/usr/local/TextParser \
+                --with-polylib=/usr/local/Polylib \
+                --enable-timing=yes \
+                CXX=g++ \
+                CXXFLAGS="-O3 -Wall -fopenmp" 
 
-## FX, K
 
-$ ./configure --prefix=$1 \
-              --host=sparc64-unknown-linux-gnu \
-              --with-parser=/usr/local/TextParser \
-              --with-polylib=/usr/local/Polylib \
-              CXX=mpiFCCpx \
-              CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp"
+# FX, K computer (cross compiler)
+
+  $ ./configure --prefix=$1 \
+                --host=sparc64-unknown-linux-gnu \
+                --with-parser=/usr/local/TextParser \
+                --with-polylib=/usr/local/Polylib \
+                CXX=mpiFCCpx \
+                CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp"
 
 
 If you try to install process again, execute 'make distclean' then configure.

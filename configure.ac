@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Cutlib], [3.1.1], [keno@riken.jp], [Cutlib])
+AC_INIT([Cutlib], [3.1.2], [keno@riken.jp], [Cutlib])
 AM_INIT_AUTOMAKE()
 AC_CONFIG_SRCDIR([src/Cutlib.cpp])
 AC_CONFIG_HEADERS([config.h])
@@ -23,7 +23,7 @@ AC_CONFIG_HEADERS([config.h])
 #
 # revision No.
 #
-CT_REVISION="20130703_0630"
+CT_REVISION="20130706_1100"
 AC_SUBST(CT_REVISION)
 
 
@@ -41,7 +41,7 @@ fi
 
 
 #
-# TextParser environment
+# TextParser
 #
 AC_ARG_WITH(parser, [AC_HELP_STRING([--with-parser=dir],[Specify TextParser install directory])], , with_parser=none)
 AC_SUBST(TP_DIR)
@@ -60,7 +60,7 @@ fi
 
 
 #
-# Polylib environment
+# Polylib
 #
 AC_ARG_WITH(polylib, [AC_HELP_STRING([--with-polylib=dir],[Specify Polylib install directory])], , with_polylib=none)
 AC_SUBST(PL_DIR)
@@ -94,7 +94,7 @@ AC_SUBST(CT_CFLAGS)
 #
 # normal
 #
-AC_ARG_WITH(normal, [AC_HELP_STRING([--with-example=(double|float)],[Precision of normal vector [double]])], , with_normal=double)
+AC_ARG_WITH(normal, [AC_HELP_STRING([--with-normal=(double|float)],[Precision of normal vector [double]])], , with_normal=double)
 
 if test "$with_normal" = "double" ; then
  CT_CFLAGS="$CT_CFLAGS"" -DCUTINFO_NORMAL_DOUBLE"

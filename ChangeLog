@@ -10,67 +10,52 @@
  */
 
 
-UPDATE HISTORY
-==============
-
-Version 3.1.1  2013-07-03
- - update configure.ac to place header file with nobase_include_HEADERS
+REVISION HISTORY
+================
 
 
-Version 3.1.0  2013-07-02
- - packaging by autotools
+----------------------------
+2013-07-06
 
+r13 update configure.ac and ChangeLog, NEW
 
-Version 3.0.1-beta  2013-06-09
- - Add function to record normal vector from a polygon at cut points
- - Update user's guide
+  - Update configure.ac, typo normal vector.
+  - Change contents in ChangeLog and NEWS.
+  - Add install examples.
 
+----------------------------
+2013-07-04
 
-Version 3.0.0-beta  2013-02-25
- - Eliminate compile option "-DIGNORE_NORMAL_DIRECTION" and "-DIGNORE_STL_NORMAL"
- - Add RepairPolygonData()
- - Introduce accessor class for grid information
- - Change interface and name of Cartesian version
- - Enable to assign minus values for 3D index of wrapper array class
- - OpenMP parallelization for Cartesian version
- - Change to calculate cut info with double precision
- - Update user's guide
- - Adjust to Polylib2.2，and TextParser1.1
+r12 update INSTALL
 
+----------------------------
+2013-07-03
 
-Version 2.0.5  2012-10-16
- - Correction of compilation procedure
+r11 add depend.inc
 
+----------------------------
+2013-07-02
 
-Version 2.0.4  2012-09-06
- - Change compile procedure for FFVC
+r10 autotools version
 
+----------------------------
+2013-06-29
 
-Version 2.0.3  2012-04-21
- - Compiler option "-DIGNORE_NORMAL_DIRECTION"
-   calculate cut information assuming that the front-back sides of polygon is not unified.
- - Compiler option "-DIGNORE_STL_NORMAL"
-   calculate normal without using normal vector in STL file.
+r9 update ver. 3.1.0
 
+----------------------------
+2013-06-22
 
-Version 2.0.2  2011-05-12
- - Update user's guide
- - Adjust interface to Polylib2.0.2
- - Generate a reference of html version only from doxygen
+r8 update Cutlib-3.0.1-beta
 
+r7 update Cutlib-3.0.0-beta
 
-Version 2.0.1  2011-05-09
- - Update user's guide
- - Read polygon group and its ID from Polylib parameter file
+r6 update Cutlib-2.0.5
 
+r5 update Cutlib-2.0.3
 
-Version 2.0.0  2010-11-10
- - Correction of user's guide
- - Change API (eliminate arguments of Boundaries* bList)
- - Introduce an option to incorporate octree version or not
- - Change search order to -x, +x, -y, +y, -z, +z
+r4 update Cutlib-2.0.2
 
+r3 update Cutlib-2.0.1
 
-Version 1.0.0  2010-04-28
- - Initial release
-
+r2 add Cutlib-2.0.0
