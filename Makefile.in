@@ -280,6 +280,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = @MAKE_SUB_DIRS@
 bin_SCRIPTS = cut-config
+CLEANFILES = $(bin_SCRIPTS)
 EXTRA_DIST = cut-config.in Makefile_hand LICENSE doxygen/Doxyfile make_setting \
               examples src/depend.inc
 
@@ -743,6 +744,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)

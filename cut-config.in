@@ -74,11 +74,11 @@ EOF
       ;;
 
     --cflags)
-      echo @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@
+      echo @CT_CFLAGS@
       ;;
 
     --libs)
-      echo @CT_LDFLAGS@ @CT_LIBS@ @PL_LDFLAGS@ @TP_LDFLAGS@
+      echo @CT_LDFLAGS@ @CT_LIBS@
       ;;
 
     *)

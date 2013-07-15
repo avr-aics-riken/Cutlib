@@ -15,10 +15,14 @@ REVISION HISTORY
 
 
 ----------------------------
+2013-07-15
+
+r14 update configure.ac and Makefile.am
+
+----------------------------
 2013-07-06
 
 r13 update configure.ac and ChangeLog, NEW
-
   - Update configure.ac, typo normal vector.
   - Change contents in ChangeLog and NEWS.
   - Add install examples.
