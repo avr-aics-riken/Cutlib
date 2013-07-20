@@ -1,6 +1,13 @@
-//
-// Cutlib Version 3.0.0-beta,  Feb.25.2013
-//
+/*
+ * Cutlib - Cut Information Library
+ *
+ * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+ * All rights reserved.
+ *
+ * Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+ * All rights reserved.
+ *
+ */
 
 ///
 /// @file
@@ -24,10 +31,12 @@ using namespace PolylibNS;
 #include "CutInfo/CutInfoOctree.h"
 #endif
 
+#include "Version.h"
+
 namespace cutlib {
 
 /// @defgroup CutInfoFunc 交点情報計算関数
-//@{
+
 
 /// 交点情報計算関数リターンコード.
 enum CutlibReturn {
@@ -140,8 +149,14 @@ CutlibReturn CalcCutInfoOctree(SklTree* tree,
 }
 
 #endif //CUTLIB_OCTREE
-
-//@} 
+  /**
+   * @brief バージョン番号の文字列を返す
+   */
+  static std::string cutlib_VersionInfo()
+  {
+    std::string str(CT_VERSION_NO);
+    return str;
+  }
 
 } // namespace cutlib
 

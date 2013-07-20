@@ -14,15 +14,21 @@ REVISION HISTORY
 ================
 
 
+------------------
+2013-07-20
+
+ r15 Introduce getVersionInfo() [ver 3.1.4]
+   - add Version.h.in
+
 ----------------------------
 2013-07-15
 
-r14 update configure.ac and Makefile.am
+ r14 update configure.ac and Makefile.am
 
 ----------------------------
 2013-07-06
 
-r13 update configure.ac and ChangeLog, NEW
+ r13 update configure.ac and ChangeLog, NEW
   - Update configure.ac, typo normal vector.
   - Change contents in ChangeLog and NEWS.
   - Add install examples.
@@ -30,36 +36,36 @@ r13 update configure.ac and ChangeLog, NEW
 ----------------------------
 2013-07-04
 
-r12 update INSTALL
+ r12 update INSTALL
 
 ----------------------------
 2013-07-03
 
-r11 add depend.inc
+ r11 add depend.inc
 
 ----------------------------
 2013-07-02
 
-r10 autotools version
+ r10 autotools version
 
 ----------------------------
 2013-06-29
 
-r9 update ver. 3.1.0
+ r9 update ver. 3.1.0
 
 ----------------------------
 2013-06-22
 
-r8 update Cutlib-3.0.1-beta
+ r8 update Cutlib-3.0.1-beta
 
-r7 update Cutlib-3.0.0-beta
+ r7 update Cutlib-3.0.0-beta
 
-r6 update Cutlib-2.0.5
+ r6 update Cutlib-2.0.5
 
-r5 update Cutlib-2.0.3
+ r5 update Cutlib-2.0.3
 
-r4 update Cutlib-2.0.2
+ r4 update Cutlib-2.0.2
 
-r3 update Cutlib-2.0.1
+ r3 update Cutlib-2.0.1
 
-r2 add Cutlib-2.0.0
+ r2 add Cutlib-2.0.0

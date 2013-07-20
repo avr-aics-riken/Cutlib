@@ -11,11 +11,11 @@
 ##############################################################################
 #
 
-EXTRA_DIST= Makefile_hand
+EXTRA_DIST= Makefile_hand depend.inc
 
 lib_LIBRARIES=libCUT.a
 
-libCUT_a_CXXFLAGS = @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@ \
+libCUT_a_CXXFLAGS = @PL_CFLAGS@ @TP_CFLAGS@ \
                    -I$(top_builddir)/include \
                    -I$(top_builddir)/include/CutInfo \
                    -I$(top_builddir)/include/GridAccessor \
@@ -53,5 +53,6 @@ nobase_include_HEADERS = \
    $(top_builddir)/include/GridAccessor/GridAccessor.h \
    $(top_builddir)/include/GridAccessor/Node.h \
    $(top_builddir)/include/RepairPolygonData/RepairPolygonData.h \
-   $(top_builddir)/include/SklCompatibility.h
+   $(top_builddir)/include/SklCompatibility.h \
+   $(top_builddir)/include/Version.h
 

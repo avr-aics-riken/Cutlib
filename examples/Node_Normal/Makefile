@@ -105,11 +105,11 @@ am__can_run_installinfo = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/missing --run aclocal-1.12
+ACLOCAL = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/missing --run aclocal-1.12
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/missing --run autoconf
-AUTOHEADER = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/missing --run autoheader
-AUTOMAKE = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/missing --run automake-1.12
+AUTOCONF = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/missing --run autoconf
+AUTOHEADER = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/missing --run autoheader
+AUTOMAKE = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/missing --run automake-1.12
 AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -121,7 +121,7 @@ CT_CXX = icpc
 CT_LDFLAGS = -L/usr/local/Cutlib/lib
 CT_LIBS = -lCUT
 CT_OCTREE = 
-CT_REVISION = 20130715_1000
+CT_REVISION = 20130720_1500
 CT_TIMING = 
 CXX = icpc
 CXXDEPMODE = depmode=gcc3
@@ -144,21 +144,21 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/missing --run makeinfo
+MAKEINFO = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/missing --run makeinfo
 MAKE_SUB_DIRS = src doc
 MKDIR_P = /usr/local/bin/gmkdir -p
 OBJEXT = o
 PACKAGE = Cutlib
 PACKAGE_BUGREPORT = keno@riken.jp
 PACKAGE_NAME = Cutlib
-PACKAGE_STRING = Cutlib 3.1.3
+PACKAGE_STRING = Cutlib 3.1.4
 PACKAGE_TARNAME = Cutlib
 PACKAGE_URL = 
-PACKAGE_VERSION = 3.1.3
+PACKAGE_VERSION = 3.1.4
 PATH_SEPARATOR = :
-PL_CFLAGS = -I/usr/local/Polylib/include -I/usr/local/TextParser/include
+PL_CFLAGS = -I/usr/local/Polylib/include
 PL_DIR = /usr/local/Polylib
-PL_LDFLAGS = -L/usr/local/Polylib/lib -lMPIPOLY -L/usr/local/TextParser/lib -lMPITP
+PL_LDFLAGS = -L/usr/local/Polylib/lib -lMPIPOLY
 RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
@@ -166,11 +166,11 @@ STRIP =
 TP_CFLAGS = -I/usr/local/TextParser/include
 TP_DIR = /usr/local/TextParser
 TP_LDFLAGS = -L/usr/local/TextParser/lib -lMPITP
-VERSION = 3.1.3
-abs_builddir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/examples/Node_Normal
-abs_srcdir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/examples/Node_Normal
-abs_top_builddir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2
-abs_top_srcdir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2
+VERSION = 3.1.4
+abs_builddir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/examples/Node_Normal
+abs_srcdir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/examples/Node_Normal
+abs_top_builddir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4
+abs_top_srcdir = /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4
 ac_ct_CC = gcc
 ac_ct_CXX = 
 am__include = include
@@ -190,7 +190,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.2/install-sh
+install_sh = ${SHELL} /Volumes/MRaid/Daily/Development/SphDev/Module/Cutlib/Cutlib-3.1.4/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -228,11 +228,11 @@ a_out_SOURCES = \
 a_out_CXXFLAGS = \
     -I$(top_builddir)/include \
     -I../util/include \
-    -I/usr/local/Cutlib/include -DCUTINFO_NORMAL_DOUBLE -I/usr/local/Polylib/include -I/usr/local/TextParser/include -I/usr/local/TextParser/include
+    -I/usr/local/Cutlib/include -DCUTINFO_NORMAL_DOUBLE -I/usr/local/Polylib/include -I/usr/local/TextParser/include
 
 a_out_LDADD = \
     -L$(top_builddir)/src \
-    -lCUT -L/usr/local/Polylib/lib -lMPIPOLY -L/usr/local/TextParser/lib -lMPITP -L/usr/local/TextParser/lib -lMPITP
+    -lCUT -L/usr/local/Polylib/lib -lMPIPOLY -L/usr/local/TextParser/lib -lMPITP
 
 EXTRA_DIST = small.tpp test.conf Makefile_hand large.tpp
 all: all-am
