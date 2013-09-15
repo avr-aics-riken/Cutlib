@@ -12,4 +12,5 @@
 
 doc_includedir = $(prefix)/doc
 doc_include_HEADERS = \
-    $(top_builddir)/doc/cutlib_ug.pdf
+    $(top_builddir)/doc/cutlib_ug.pdf \
+    $(top_builddir)/doc/Cutlib3intro.pdf

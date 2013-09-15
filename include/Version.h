@@ -17,8 +17,8 @@
 #ifndef _CUTLIB_VERSION_H_
 #define _CUTLIB_VERSION_H_
 
-#define CT_VERSION_NO  "3.1.4"
-#define CT_REVISION    "20130720_1500"
+#define CT_VERSION_NO  "3.1.5"
+#define CT_REVISION    "20130915_1600"
 
 #endif /* _CUTLIB_VERSION_H_ */
 

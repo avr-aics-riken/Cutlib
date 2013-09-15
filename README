@@ -26,6 +26,7 @@ ChangeLog              History of modification
 COPYING                Copyright
 doc/                   
   cutlib_ug.pdf        User's manual (in Japanese)
+  Cutlib3intro.pdf     Outline and introduction (in Japanese)
 doxygen/
   Doxyfile             Configuration file to generate a doxygen file
 examples/
