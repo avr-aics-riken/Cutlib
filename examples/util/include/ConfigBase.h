@@ -6,11 +6,12 @@
 #ifndef CONFIG_BASE_H
 #define CONFIG_BASE_H
 
-#include "ConfigFile.h"
-
 #ifdef USE_MPI
 #include "mpi.h"
 #endif
+
+#include "ConfigFile.h"
+
 
 /// 設定パラメータクラス(基底クラス).
 ///

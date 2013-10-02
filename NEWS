@@ -14,6 +14,12 @@ RELEASE
 =======
 
 -------------------------
+Version 3.1.6  2013-10-02
+
+ - modify for intel mpi
+ 
+ 
+-------------------------
 Version 3.1.5  2013-09-15
 
  - update user guide

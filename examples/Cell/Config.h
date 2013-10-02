@@ -1,9 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include "ConfigBase.h"
 #include <iostream>
 #include <string>
-#include "ConfigBase.h"
 #include "Tuple.h"
 
 
