@@ -30,16 +30,12 @@ public:
   ///  @param[in] t  対象三角形ポリゴン
   ///
   TargetTriangle(const Triangle* t) {
-    Vec3f  n = t->get_normal();
-    Vec3f* v = t->get_vertex();
+    set_vertexes(t);
+    set_normal(t);
 
     dot_normal_vertex0 = 0.0;
     for (int i = 0; i < 3; i++) {
-      normal[i] = n[i];
-      vertex[0][i] = v[0][i];
-      vertex[1][i] = v[1][i];
-      vertex[2][i] = v[2][i];
-      dot_normal_vertex0 += n[i] * v[0][i];
+      dot_normal_vertex0 += normal[i] * vertex[0][i];
     }
   }
 
@@ -76,6 +72,32 @@ public:
 
 
 private:
+
+  /// 頂点座標の設定.
+  ///
+  ///  @param[in] t  対象三角形ポリゴン
+  ///
+  void set_vertexes(const Triangle* t) {
+    Vec3f* v = t->get_vertex();
+    for (int i = 0; i < 3; i++) {
+      vertex[0][i] = v[0][i];
+      vertex[1][i] = v[1][i];
+      vertex[2][i] = v[2][i];
+    }
+  }
+
+
+  /// 法線ベクトルの設定.
+  ///
+  ///  @param[in] t  対象三角形ポリゴン
+  ///
+  void set_normal(const Triangle* t) {
+    Vec3f n = t->get_normal();
+    for (int i = 0; i < 3; i++) {
+      normal[i] = n[i];
+    }
+  }
+
 
   /// 2次元外積計算.
   ///
