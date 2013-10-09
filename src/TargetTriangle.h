@@ -5,6 +5,8 @@
 #ifndef TARGET_TRIANGLE_H
 #define TARGET_TRIANGLE_H
 
+#include <cmath>
+
 #include "Polylib.h"
 using namespace PolylibNS;
 
@@ -89,12 +91,25 @@ private:
 
   /// 法線ベクトルの設定.
   ///
-  ///  @param[in] t  対象三角形ポリゴン
+  ///  @param[in] t  対象三角形ポリゴン(未使用)
   ///
   void set_normal(const Triangle* t) {
-    Vec3f n = t->get_normal();
+    double a[3], b[3];
     for (int i = 0; i < 3; i++) {
-      normal[i] = n[i];
+      a[i] = vertex[1][i] - vertex[0][i];
+      b[i] = vertex[2][i] - vertex[0][i];
+    }
+    normal[0] = a[1] * b[2] - a[2] * b[1];
+    normal[1] = a[2] * b[0] - a[0] * b[2];
+    normal[2] = a[0] * b[1] - a[1] * b[0];
+    double d = sqrt(normal[0] * normal[0]
+                  + normal[1] * normal[1]
+                  + normal[2] * normal[2]);
+    if (d > 0.0) {
+      d = 1.0 / d;
+      normal[0] = normal[0] * d;
+      normal[1] = normal[1] * d;
+      normal[2] = normal[2] * d;
     }
   }
 
