@@ -227,8 +227,14 @@ void outputVtkLeafCell(const std::string& file,
   std::string fileM = file + "_m.vtk";
   std::string fileP = file + "_p.vtk";
   std::cout << std::endl;
-  outputData(fileM, vecPosM, vecBidM);
-  outputData(fileP, vecPosP, vecBidP);
+
+  std::cout << "output to " << fileM << std::endl;
+  std::ofstream outM(fileM.c_str());
+  outputData(outM, vecPosM, vecBidM);
+
+  std::cout << "output to " << fileP << std::endl;
+  std::ofstream outP(fileP.c_str());
+  outputData(outP, vecPosP, vecBidP);
 }
 
 
@@ -293,8 +299,14 @@ void outputVtkAllCell(const std::string& file,
 
     std::string fileM = file + levelStr + "_m.vtk";
     std::string fileP = file + levelStr + "_p.vtk";
-    outputData(fileM, vecPosM[level], vecBidM[level]);
-    outputData(fileP, vecPosP[level], vecBidP[level]);
+
+    std::cout << "output to " << fileM << std::endl;
+    std::ofstream outM(fileM.c_str());
+    outputData(outM, vecPosM[level], vecBidM[level]);
+
+    std::cout << "output to " << fileP << std::endl;
+    std::ofstream outP(fileP.c_str());
+    outputData(outP, vecPosP[level], vecBidP[level]);
   }
 
   delete [] vecPosM;
