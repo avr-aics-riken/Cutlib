@@ -5,7 +5,9 @@
 #ifndef CUTLIB_SEARCH_H
 #define CUTLIB_SEARCH_H
 
-#include "CutBoundary.h"
+#include <string>
+#include <vector>
+
 #include "GridAccessor/GridAccessor.h"
 #include "CutInfo/CutInfoArray.h"
 
@@ -18,7 +20,7 @@ namespace cutlib {
 class CutSearch {
 
   const Polylib* pl;    ///< Polylibクラスオブジェクト
-  const CutBoundaries* bList;  ///< (境界ID,ポリゴングループ名)対応リスト
+  const std::vector<std::string>* pgList;; ///< ポリゴングループ(パス名)リスト
 
   enum { X, Y, Z};
 
@@ -29,8 +31,8 @@ public:
   ///  @param[in] pl Polylibクラスオブジェクト
   ///  @param[in] bList (境界ID,ポリゴングループ名)対応リスト
   ///
-  CutSearch(const Polylib* pl, const CutBoundaries* bList)
-    : pl(pl), bList(bList) {}
+  CutSearch(const Polylib* pl, const std::vector<std::string>* pgList)
+    : pl(pl), pgList(pgList) {}
 
 
   /// デストラクタ.

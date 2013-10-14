@@ -14,7 +14,7 @@ namespace {
 ///  @param[in] doubt_vertex_order 頂点並び順を最適化するフラグ
 ///  @param[in] doubt_normal_quality 法線ベクトルを再計算するフラグ
 ///
-void checkPolygons(PolygonGroup *pg,
+void repairPolygons(PolygonGroup *pg,
                    bool doubt_vertex_order, bool doubt_normal_quality)
 {
   std::vector<PrivateTriangle*>* polygonList = pg->get_triangles();
@@ -41,32 +41,6 @@ void checkPolygons(PolygonGroup *pg,
   }
 }
 
-
-/// ポリゴングループのツリーを再帰的に巡り,
-/// 0でないIDを持つグループに対してcheckPolygons関数を呼び出す.
-///
-///  @param[in,out] pg 現在滞在しているポリゴングループ
-///  @param[in] doubt_vertex_order 頂点並び順を最適化するフラグ
-///  @param[in] doubt_normal_quality 法線ベクトルを再計算するフラグ
-///
-void traverseGroups(PolygonGroup *pg,
-                    bool doubt_vertex_order, bool doubt_normal_quality)
-{
-  std::vector<PolygonGroup *>& childGroups = pg->get_children();
-  if (childGroups.size() == 0) {
-    if (pg->get_id() > 0) {
-      checkPolygons(pg, doubt_vertex_order, doubt_normal_quality);
-    }
-    return;
-  }
-
-  // 子グループに対して再帰呼び出し
-  std::vector<PolygonGroup*>::iterator it;
-  for (it = childGroups.begin(); it != childGroups.end(); it++) {
-    traverseGroups(*it, doubt_vertex_order, doubt_normal_quality);
-  }
-}
-
 } // namespace ANONYMOUS
 
 
@@ -81,12 +55,12 @@ void RepairPolygonData(const Polylib* pl,
 {
   if (!doubt_vertex_order && !doubt_normal_quality) return;
 
-  std::vector<PolygonGroup *>* rootGroups = pl->get_root_groups();
+  std::vector<PolygonGroup *>* leafGroups = pl->get_leaf_groups();
   std::vector<PolygonGroup*>::iterator pg;
-  for (pg = rootGroups->begin(); pg != rootGroups->end(); pg++) {
-    traverseGroups(*pg, doubt_vertex_order, doubt_normal_quality);
+  for (pg = leafGroups->begin(); pg != leafGroups->end(); ++pg) {
+    repairPolygons(*pg, doubt_vertex_order, doubt_normal_quality);
   }
-  delete rootGroups;
+  delete leafGroups;
 }
 
 

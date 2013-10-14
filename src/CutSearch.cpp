@@ -2,8 +2,6 @@
 /// @brief 交点情報計算クラス 実装
 ///
 
-#include <string>
-#include <vector>
 #include "CutSearch.h"
 #include "TargetTriangle.h"
 
@@ -32,14 +30,14 @@ void CutSearch::search(const double center[], const double range[],
 
   clearCutInfo(range, pos6, bid6, tri6);
 
-  CutBoundaries::const_iterator b;
-  for (b = bList->begin(); b != bList->end(); ++b) {
+  std::vector<std::string>::const_iterator pg;
+  for (pg = pgList->begin(); pg != pgList->end(); ++pg) {
 
 #ifdef CUTLIB_TIMING
     Timer::Start(SEARCH_POLYGON);
 #endif
 
-    std::vector<Triangle*>* tList = pl->search_polygons(b->name, min, max, false);
+    std::vector<Triangle*>* tList = pl->search_polygons(*pg, min, max, false);
 
 #ifdef CUTLIB_TIMING
     Timer::Stop(SEARCH_POLYGON);
@@ -47,7 +45,11 @@ void CutSearch::search(const double center[], const double range[],
 
     std::vector<Triangle*>::const_iterator t;
     for (t = tList->begin(); t != tList->end(); ++t) {
-      checkTriangle(*t, b->id, center, range, pos6, bid6, tri6);
+      int exid = (*t)->get_exid();
+      if (0 < exid && exid < 256) {
+        BidType bid = exid;
+        checkTriangle(*t, bid, center, range, pos6, bid6, tri6);
+      }
     } 
 
     delete tList;
