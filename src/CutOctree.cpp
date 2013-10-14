@@ -9,7 +9,6 @@
 #include "CutTiming.h"
 #endif
 
-#include <vector>
 #include <algorithm>   // for min, max
 
 namespace cutlib {
@@ -18,9 +17,8 @@ namespace cutOctree {
 /// コンストラクタ.
 ///
 ///  @param[in] t Polylib三角形ポリゴンクラス
-///  @param[in] bid 境界ID
 ///
-CutTriangle::CutTriangle(Triangle* t, BidType bid) : t(t), bid(bid)
+CutTriangle::CutTriangle(Triangle* t) : t(t)
 {
   Vec3f* v = t->get_vertex();
   bboxMin[X] = std::min(std::min(v[0][X], v[1][X]), v[2][X]);
@@ -50,21 +48,22 @@ bool CutTriangle::intersectBox(const Vec3f& min, const Vec3f& max)
 ///
 ///  @param[in,out] ctList 三角形リスト
 ///  @param[in] pl Polylibクラスオブジェクト
-///  @param[in] bList (境界ID,ポリゴングループ名)対応リスト
+///  @param[in] pgList ポリゴングループ(パス名)リスト
 ///  @param[in] min,max 検索領域
 ///
 void CutTriangle::AppendCutTriangles(CutTriangles& ctList, 
-                                     const Polylib* pl, const CutBoundaries* bList,
+                                     const Polylib* pl,
+                                     const std::vector<std::string>* pgList,
                                      const Vec3f& min, const Vec3f& max)
 {
-  CutBoundaries::const_iterator b;
-  for (b = bList->begin(); b != bList->end(); ++b) {
+  std::vector<std::string>::const_iterator pg;
+  for (pg = pgList->begin(); pg != pgList->end(); ++pg) {
 
 #ifdef CUTLIB_TIMING
     Timer::Start(SEARCH_POLYGON);
 #endif
 
-    std::vector<Triangle*>* tList = pl->search_polygons(b->name, min, max, false);
+    std::vector<Triangle*>* tList = pl->search_polygons(*pg, min, max, false);
 
 #ifdef CUTLIB_TIMING
     Timer::Stop(SEARCH_POLYGON);
@@ -72,8 +71,11 @@ void CutTriangle::AppendCutTriangles(CutTriangles& ctList,
 
     std::vector<Triangle*>::const_iterator t;
     for (t = tList->begin(); t != tList->end(); ++t) {
-      CutTriangle* ct = new CutTriangle(*t, b->id);
-      ctList.push_back(ct);
+      int exid = (*t)->get_exid();
+      if (0 < exid && exid < 256) {
+        CutTriangle* ct = new CutTriangle(*t);
+        ctList.push_back(ct);
+      }
     }
   delete tList;
   }
@@ -149,8 +151,9 @@ void calcCutInfo(SklCell* cell, const Vec3f& org, const Vec3f& d,
 
   CutTriangles::const_iterator ct;
   for (ct = ctList.begin(); ct != ctList.end(); ++ct) {
-    CutSearch::checkTriangle((*ct)->t, (*ct)->bid, center, range,
-                             pos6, bid6, tri6);
+    Triangle* t = (*ct)->t;
+    BidType bid = t->get_exid();
+    CutSearch::checkTriangle(t, bid, center, range, pos6, bid6, tri6);
   }
 
   for (int d = 0; d < 6; d++) pos6_f[d] = (float)(pos6[d]/range[d]);
