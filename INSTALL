@@ -73,8 +73,8 @@ Here is examples.
 
 # Intel compiler
 
-  $ ./configure --with-parser=/usr/local/TextParser \
-                --with-polylib=/usr/local/Polylib \
+  $ ./configure --with-parser=/usr/local/FFV/TextParser \
+                --with-polylib=/usr/local/FFV/Polylib \
                 CXX=icpc \
                 CXXFLAGS="-O3 -Wall -openmp"
 

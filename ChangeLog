@@ -14,6 +14,13 @@ REVISION HISTORY
 ================
 
 ------------------
+2013-11-22
+ 
+ r19 expire changes from r17 to r18 [ver 3.1.7]
+   - replace TargetTriangle.h and ChangeLog(this file)
+   - modify AM_INIT_AUTOMAKE([subdir-objects]) to fix error
+
+------------------
 2013-10-10
  
  r18 merge precision improvement by szks

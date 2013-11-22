@@ -14,8 +14,13 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Cutlib], [3.1.6], [keno@riken.jp], [Cutlib])
-AM_INIT_AUTOMAKE()
+AC_INIT([Cutlib], [3.1.7], [keno@riken.jp], [Cutlib])
+
+#AM_INIT_AUTOMAKE()
+# to remedy error : Makefile.am:20: but option 'subdir-objects' is disabled
+AM_INIT_AUTOMAKE([subdir-objects])
+
+
 AC_CONFIG_SRCDIR([src/Cutlib.cpp])
 AC_CONFIG_HEADERS([config.h])
 
@@ -23,7 +28,7 @@ AC_CONFIG_HEADERS([config.h])
 #
 # revision No.
 #
-CT_REVISION="20131002_1500"
+CT_REVISION="20131122_1530"
 AC_SUBST(CT_REVISION)
 
 

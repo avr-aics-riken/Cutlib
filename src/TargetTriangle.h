@@ -5,8 +5,6 @@
 #ifndef TARGET_TRIANGLE_H
 #define TARGET_TRIANGLE_H
 
-#include <cmath>
-
 #include "Polylib.h"
 using namespace PolylibNS;
 
@@ -32,12 +30,16 @@ public:
   ///  @param[in] t  対象三角形ポリゴン
   ///
   TargetTriangle(const Triangle* t) {
-    set_vertexes(t);
-    set_normal(t);
+    Vec3f  n = t->get_normal();
+    Vec3f* v = t->get_vertex();
 
     dot_normal_vertex0 = 0.0;
     for (int i = 0; i < 3; i++) {
-      dot_normal_vertex0 += normal[i] * vertex[0][i];
+      normal[i] = n[i];
+      vertex[0][i] = v[0][i];
+      vertex[1][i] = v[1][i];
+      vertex[2][i] = v[2][i];
+      dot_normal_vertex0 += n[i] * v[0][i];
     }
   }
 
@@ -74,45 +76,6 @@ public:
 
 
 private:
-
-  /// 頂点座標の設定.
-  ///
-  ///  @param[in] t  対象三角形ポリゴン
-  ///
-  void set_vertexes(const Triangle* t) {
-    Vec3f* v = t->get_vertex();
-    for (int i = 0; i < 3; i++) {
-      vertex[0][i] = v[0][i];
-      vertex[1][i] = v[1][i];
-      vertex[2][i] = v[2][i];
-    }
-  }
-
-
-  /// 法線ベクトルの設定.
-  ///
-  ///  @param[in] t  対象三角形ポリゴン(未使用)
-  ///
-  void set_normal(const Triangle* t) {
-    double a[3], b[3];
-    for (int i = 0; i < 3; i++) {
-      a[i] = vertex[1][i] - vertex[0][i];
-      b[i] = vertex[2][i] - vertex[0][i];
-    }
-    normal[0] = a[1] * b[2] - a[2] * b[1];
-    normal[1] = a[2] * b[0] - a[0] * b[2];
-    normal[2] = a[0] * b[1] - a[1] * b[0];
-    double d = sqrt(normal[0] * normal[0]
-                  + normal[1] * normal[1]
-                  + normal[2] * normal[2]);
-    if (d > 0.0) {
-      d = 1.0 / d;
-      normal[0] = normal[0] * d;
-      normal[1] = normal[1] * d;
-      normal[2] = normal[2] * d;
-    }
-  }
-
 
   /// 2次元外積計算.
   ///
