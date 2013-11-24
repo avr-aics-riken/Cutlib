@@ -2,8 +2,10 @@
 /// @brief 境界情報計算関数 実装
 ///
 
+#include <string>
+#include <vector>
+
 #include "Cutlib.h"
-#include "CutBoundary.h"
 #include "CutSearch.h"
 
 #ifdef CUTLIB_OCTREE
@@ -71,6 +73,20 @@ CutlibReturn checkTree(const char* func_name, SklTree* tree)
 
 #endif //CUTLIB_OCTREE
 
+
+/// 計算対象ポリゴングループのパス名リストを作成.
+std::vector<std::string>* createPolygonGroupPathList(const Polylib* pl)
+{
+  std::vector<std::string>* pgList = new std::vector<std::string>;
+  std::vector<PolygonGroup *>* leafGroups = pl->get_leaf_groups();
+  std::vector<PolygonGroup*>::iterator it = leafGroups->begin();
+  for (it = leafGroups->begin(); it != leafGroups->end(); ++it) {
+    pgList->push_back((*it)->acq_fullpath());
+  }
+  delete leafGroups;
+  return pgList;
+}
+
 } // namespace ANONYMOUS
 
 
@@ -108,9 +124,9 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
   Timer::Start(TOTAL);
 #endif
 
-  CutBoundaries* bList = CutBoundary::createCutBoundaryList(pl);
+  std::vector<std::string>* pgList = createPolygonGroupPathList(pl);
 
-  CutSearch* cutSearch = new CutSearch(pl, bList);
+  CutSearch* cutSearch = new CutSearch(pl, pgList);
 
   cutPos->clear();
   cutBid->clear();
@@ -188,7 +204,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
   }
 
   delete cutSearch;
-  delete bList;
+  delete pgList;
   delete[] cutPolygonList;
 
 #ifdef CUTLIB_TIMING
@@ -231,9 +247,9 @@ CutlibReturn CalcCutInfoOctreeLeafCell(SklTree* tree, const Polylib* pl,
   Timer::Start(TOTAL);
 #endif
 
-  CutBoundaries* bList = CutBoundary::createCutBoundaryList(pl);
+  std::vector<std::string>* pgList = createPolygonGroupPathList(pl);
 
-  CutSearch* cutSearch = new CutSearch(pl, bList);
+  CutSearch* cutSearch = new CutSearch(pl, pgList);
 
 #ifdef CUTLIB_TIMING
   Timer::Start(MAIN_LOOP);
@@ -263,7 +279,7 @@ CutlibReturn CalcCutInfoOctreeLeafCell(SklTree* tree, const Polylib* pl,
 #endif
 
   delete cutSearch;
-  delete bList;
+  delete pgList;
 
 #ifdef CUTLIB_TIMING
   Timer::Stop(TOTAL);
@@ -299,7 +315,7 @@ CutlibReturn CalcCutInfoOctreeAllCell(SklTree* tree, const Polylib* pl,
   Timer::Start(TOTAL);
 #endif
 
-  CutBoundaries* bList = CutBoundary::createCutBoundaryList(pl);
+  std::vector<std::string>* pgList = createPolygonGroupPathList(pl);
 
   size_t nx, ny, nz;
   tree->GetSize(nx, ny, nz);
@@ -318,7 +334,7 @@ CutlibReturn CalcCutInfoOctreeAllCell(SklTree* tree, const Polylib* pl,
         Vec3f max = org + 1.5 * d;
 
         cutOctree::CutTriangles ctList;
-        cutOctree::CutTriangle::AppendCutTriangles(ctList, pl, bList, min, max);
+        cutOctree::CutTriangle::AppendCutTriangles(ctList, pl, pgList, min, max);
 
         cutOctree::calcCutInfo(rootCell, org, d, cutPos, cutBid, ctList);
 
@@ -330,7 +346,7 @@ CutlibReturn CalcCutInfoOctreeAllCell(SklTree* tree, const Polylib* pl,
   Timer::Stop(MAIN_LOOP);
 #endif
 
-  delete bList;
+  delete pgList;
 
 #ifdef CUTLIB_TIMING
   Timer::Stop(TOTAL);
@@ -368,9 +384,9 @@ CutlibReturn CalcCutInfoOctreeAllCell0(SklTree* tree, const Polylib* pl,
   Timer::Start(TOTAL);
 #endif
 
-  CutBoundaries* bList = CutBoundary::createCutBoundaryList(pl);
+  std::vector<std::string>* pgList = createPolygonGroupPathList(pl);
 
-  CutSearch* cutSearch = new CutSearch(pl, bList);
+  CutSearch* cutSearch = new CutSearch(pl, pgList);
 
   size_t nx, ny, nz;
   tree->GetSize(nx, ny, nz);
@@ -391,7 +407,7 @@ CutlibReturn CalcCutInfoOctreeAllCell0(SklTree* tree, const Polylib* pl,
 #endif
 
   delete cutSearch;
-  delete bList;
+  delete pgList;
 
 #ifdef CUTLIB_TIMING
   Timer::Stop(TOTAL);

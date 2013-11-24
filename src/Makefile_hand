@@ -18,7 +18,6 @@ CUTLIB = libCUT.a
 all: $(CUTLIB)
 
 OBJS = Cutlib.o \
-       CutBoundary.o \
        CutSearch.o \
        TargetTriangle.o \
        RepairPolygonData.o

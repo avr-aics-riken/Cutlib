@@ -5,6 +5,9 @@
 #ifndef CUTLIB_OCTREE_H
 #define CUTLIB_OCTREE_H
 
+#include <string>
+#include <vector>
+
 #include "Cutlib.h"
 #include "CutBoundary.h"
 #include "CutSearch.h"
@@ -20,22 +23,20 @@ class CutTriangle;
 typedef std::vector<CutTriangle*> CutTriangles;
 
 
-/// BBox(binding box)情報と境界IDを持つカスタムポリゴンクラス.
+/// BBox(binding box)情報を持つカスタムポリゴンクラス.
 class CutTriangle {
 
 public:
 
   Triangle* t;    ///< Polylib三角形ポリゴンクラス
-  BidType bid;    ///< 境界ID
   Vec3f bboxMin;  ///< BBox最小値
   Vec3f bboxMax;  ///< BBox最大値
 
   /// コンストラクタ.
   ///
   ///  @param[in] t Polylib三角形ポリゴンクラス
-  ///  @param[in] bid 境界ID
   ///
-  CutTriangle(Triangle* t, BidType bid);
+  CutTriangle(Triangle* t);
 
   /// 三角形が直方体領域と交わるかの判定.
   ///
@@ -48,11 +49,12 @@ public:
   ///
   ///  @param[in,out] ctList 三角形リスト
   ///  @param[in] pl Polylibクラスオブジェクト
-  ///  @param[in] bList (境界ID,ポリゴングループ名)対応リスト
+  ///  @param[in] pgList ポリゴングループ(パス名)リスト
   ///  @param[in] min,max 検索領域
   ///
   static void AppendCutTriangles(CutTriangles& ctList, 
-                                 const Polylib* pl, const CutBoundaries* bList,
+                                 const Polylib* pl,
+                                 const std::vector<std::string>* pgList,
                                  const Vec3f& min, const Vec3f& max);
 
   /// 直方体領域と交わる三角形のリストをコピー.
