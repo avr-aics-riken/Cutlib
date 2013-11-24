@@ -197,12 +197,12 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CT_CFLAGS = -I/usr/local/Cutlib/include -DCUTINFO_NORMAL_DOUBLE
+CT_CFLAGS = -I/usr/local/FFV/Cutlib/include -DCUTINFO_NORMAL_DOUBLE
 CT_CXX = icpc
-CT_LDFLAGS = -L/usr/local/Cutlib/lib
+CT_LDFLAGS = -L/usr/local/FFV/Cutlib/lib
 CT_LIBS = -lCUT
 CT_OCTREE = 
-CT_REVISION = 20131122_1530
+CT_REVISION = 20131124_1700
 CT_TIMING = 
 CXX = icpc
 CXXDEPMODE = depmode=gcc3
@@ -248,10 +248,10 @@ TP_CFLAGS = -I/usr/local/FFV/TextParser/include
 TP_DIR = /usr/local/FFV/TextParser
 TP_LDFLAGS = -L/usr/local/FFV/TextParser/lib -lMPITP
 VERSION = 3.1.7
-abs_builddir = /Daily/Development/SphDev/Module/Cutlib/Cutlib-r18/examples/Node_Normal
-abs_srcdir = /Daily/Development/SphDev/Module/Cutlib/Cutlib-r18/examples/Node_Normal
-abs_top_builddir = /Daily/Development/SphDev/Module/Cutlib/Cutlib-r18
-abs_top_srcdir = /Daily/Development/SphDev/Module/Cutlib/Cutlib-r18
+abs_builddir = /Daily/Development/SphDev/Module/Cutlib/test/examples/Node_Normal
+abs_srcdir = /Daily/Development/SphDev/Module/Cutlib/test/examples/Node_Normal
+abs_top_builddir = /Daily/Development/SphDev/Module/Cutlib/test
+abs_top_srcdir = /Daily/Development/SphDev/Module/Cutlib/test
 ac_ct_CC = gcc
 ac_ct_CXX = 
 am__include = include
@@ -271,7 +271,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Daily/Development/SphDev/Module/Cutlib/Cutlib-r18/install-sh
+install_sh = ${SHELL} /Daily/Development/SphDev/Module/Cutlib/test/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -280,7 +280,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local/Cutlib
+prefix = /usr/local/FFV/Cutlib
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -309,7 +309,7 @@ a_out_SOURCES = \
 a_out_CXXFLAGS = \
     -I$(top_builddir)/include \
     -I../util/include \
-    -I/usr/local/Cutlib/include -DCUTINFO_NORMAL_DOUBLE -I/usr/local/FFV/Polylib/include -I/usr/local/FFV/TextParser/include
+    -I/usr/local/FFV/Cutlib/include -DCUTINFO_NORMAL_DOUBLE -I/usr/local/FFV/Polylib/include -I/usr/local/FFV/TextParser/include
 
 a_out_LDADD = \
     -L$(top_builddir)/src \

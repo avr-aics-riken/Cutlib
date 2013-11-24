@@ -25,8 +25,8 @@ CXXFLAGS += -O3 -Wall -openmp
 
 
 # Library path
-POLYLIB_DIR = /usr/local/Polylib
-TP_DIR      = /usr/local/TextParser
+POLYLIB_DIR = /usr/local/FFV/Polylib
+TP_DIR      = /usr/local/FFV/TextParser
 
 # Octree >> MRpFTT_SGI_20080428
 #OCTREE_DIR  = $(HOME)/sgi-octree

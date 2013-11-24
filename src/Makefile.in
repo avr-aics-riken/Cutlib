@@ -140,14 +140,13 @@ am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
 libCUT_a_AR = $(AR) $(ARFLAGS)
 libCUT_a_LIBADD =
-am__libCUT_a_SOURCES_DIST = CutBoundary.cpp CutBoundary.h \
-	CutSearch.cpp CutSearch.h TargetTriangle.cpp TargetTriangle.h \
-	RepairPolygonData.cpp Cutlib.cpp CutTiming.cpp CutTiming.h \
-	CutOctree.cpp CutOctree.h
+am__libCUT_a_SOURCES_DIST = CutSearch.cpp CutSearch.h \
+	TargetTriangle.cpp TargetTriangle.h RepairPolygonData.cpp \
+	Cutlib.cpp CutTiming.cpp CutTiming.h CutOctree.cpp CutOctree.h
 @CT_TIMING_TRUE@am__objects_1 = libCUT_a-CutTiming.$(OBJEXT)
 @CT_OCTREE_TRUE@am__objects_2 = libCUT_a-CutOctree.$(OBJEXT)
-am_libCUT_a_OBJECTS = libCUT_a-CutBoundary.$(OBJEXT) \
-	libCUT_a-CutSearch.$(OBJEXT) libCUT_a-TargetTriangle.$(OBJEXT) \
+am_libCUT_a_OBJECTS = libCUT_a-CutSearch.$(OBJEXT) \
+	libCUT_a-TargetTriangle.$(OBJEXT) \
 	libCUT_a-RepairPolygonData.$(OBJEXT) libCUT_a-Cutlib.$(OBJEXT) \
 	$(am__objects_1) $(am__objects_2)
 libCUT_a_OBJECTS = $(am_libCUT_a_OBJECTS)
@@ -338,10 +337,9 @@ libCUT_a_CXXFLAGS = @PL_CFLAGS@ @TP_CFLAGS@ \
                    -I$(top_builddir)/include/GridAccessor \
                    -I$(top_builddir)/include/RepairPolygonData 
 
-libCUT_a_SOURCES = CutBoundary.cpp CutBoundary.h CutSearch.cpp \
-	CutSearch.h TargetTriangle.cpp TargetTriangle.h \
-	RepairPolygonData.cpp Cutlib.cpp $(am__append_1) \
-	$(am__append_2)
+libCUT_a_SOURCES = CutSearch.cpp CutSearch.h TargetTriangle.cpp \
+	TargetTriangle.h RepairPolygonData.cpp Cutlib.cpp \
+	$(am__append_1) $(am__append_2)
 nobase_include_HEADERS = \
    $(top_builddir)/include/CutInfo/CutInfo.h \
    $(top_builddir)/include/CutInfo/CutInfoArray.h \
@@ -432,7 +430,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libCUT_a-CutBoundary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libCUT_a-CutOctree.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libCUT_a-CutSearch.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libCUT_a-CutTiming.Po@am__quote@
@@ -455,20 +452,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-libCUT_a-CutBoundary.o: CutBoundary.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -MT libCUT_a-CutBoundary.o -MD -MP -MF $(DEPDIR)/libCUT_a-CutBoundary.Tpo -c -o libCUT_a-CutBoundary.o `test -f 'CutBoundary.cpp' || echo '$(srcdir)/'`CutBoundary.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libCUT_a-CutBoundary.Tpo $(DEPDIR)/libCUT_a-CutBoundary.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='CutBoundary.cpp' object='libCUT_a-CutBoundary.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -c -o libCUT_a-CutBoundary.o `test -f 'CutBoundary.cpp' || echo '$(srcdir)/'`CutBoundary.cpp
-
-libCUT_a-CutBoundary.obj: CutBoundary.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -MT libCUT_a-CutBoundary.obj -MD -MP -MF $(DEPDIR)/libCUT_a-CutBoundary.Tpo -c -o libCUT_a-CutBoundary.obj `if test -f 'CutBoundary.cpp'; then $(CYGPATH_W) 'CutBoundary.cpp'; else $(CYGPATH_W) '$(srcdir)/CutBoundary.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libCUT_a-CutBoundary.Tpo $(DEPDIR)/libCUT_a-CutBoundary.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='CutBoundary.cpp' object='libCUT_a-CutBoundary.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -c -o libCUT_a-CutBoundary.obj `if test -f 'CutBoundary.cpp'; then $(CYGPATH_W) 'CutBoundary.cpp'; else $(CYGPATH_W) '$(srcdir)/CutBoundary.cpp'; fi`
 
 libCUT_a-CutSearch.o: CutSearch.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libCUT_a_CXXFLAGS) $(CXXFLAGS) -MT libCUT_a-CutSearch.o -MD -MP -MF $(DEPDIR)/libCUT_a-CutSearch.Tpo -c -o libCUT_a-CutSearch.o `test -f 'CutSearch.cpp' || echo '$(srcdir)/'`CutSearch.cpp

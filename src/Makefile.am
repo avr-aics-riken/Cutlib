@@ -23,8 +23,6 @@ libCUT_a_CXXFLAGS = @PL_CFLAGS@ @TP_CFLAGS@ \
 
 
 libCUT_a_SOURCES = \
-   CutBoundary.cpp \
-   CutBoundary.h \
    CutSearch.cpp \
    CutSearch.h \
    TargetTriangle.cpp \

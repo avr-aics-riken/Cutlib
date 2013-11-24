@@ -14,6 +14,25 @@ REVISION HISTORY
 ================
 
 ------------------
+2013-11-24
+ on branch check_on_K
+
+ modify configure.ac
+  - CutBoundary.cpp/h were expired
+  - INSTALL example is modified
+
+ merge pull request from Use exid to branch check_on_K
+  - fix examples/util/src/outputVtk.cpp for octree examples
+  - Change the polygon selection policy and the definition of boundary ID as follows:
+   1. All polygon groups are searched by Polylib::search_polygons method.
+   2. The polygons whose exid between 1 and 255 are used for intersection calculations.
+   3. Each polygon's exid is adopted as a boundary ID.
+
+  changed files are;
+  > outputVtk.cpp, CutOctree.cpp, CutOctree.h, CutSearch.cpp, CutSearch.h, Cutlib.cpp,
+    RepairPolygonData.cpp
+
+------------------
 2013-11-22
  
  r19 expire changes from r17 to r18 [ver 3.1.7]
