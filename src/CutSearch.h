@@ -20,7 +20,7 @@ namespace cutlib {
 class CutSearch {
 
   const Polylib* pl;    ///< Polylibクラスオブジェクト
-  const std::vector<std::string>* pgList;; ///< ポリゴングループ(パス名)リスト
+  const std::vector<std::string>* pgList; ///< ポリゴングループ(パス名)リスト
 
   enum { X, Y, Z};
 

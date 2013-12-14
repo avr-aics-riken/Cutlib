@@ -39,7 +39,7 @@ public:
       vertex[0][i] = v[0][i];
       vertex[1][i] = v[1][i];
       vertex[2][i] = v[2][i];
-      dot_normal_vertex0 += n[i] * v[0][i];
+      dot_normal_vertex0 += normal[i] * vertex[0][i];
     }
   }
 
