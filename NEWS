@@ -14,6 +14,11 @@ RELEASE
 =======
 
 -------------------------
+Version 3.1.8  2013-12-15
+
+ - fix exid and polylib related issues on branch check_on_K
+
+-------------------------
 Version 3.1.7  2013-11-22
 
  - back to r17

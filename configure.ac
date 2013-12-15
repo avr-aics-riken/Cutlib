@@ -14,10 +14,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Cutlib], [3.1.7], [keno@riken.jp], [Cutlib])
+AC_INIT([Cutlib], [3.1.8], [keno@riken.jp], [Cutlib])
 
 #AM_INIT_AUTOMAKE()
-# to remedy error : Makefile.am:20: but option 'subdir-objects' is disabled
+# to remedy error : "Makefile.am:20: but option 'subdir-objects' is disabled"
 AM_INIT_AUTOMAKE([subdir-objects])
 
 
@@ -28,7 +28,7 @@ AC_CONFIG_HEADERS([config.h])
 #
 # revision No.
 #
-CT_REVISION="20131124_1700"
+CT_REVISION="20131215_1200"
 AC_SUBST(CT_REVISION)
 
 

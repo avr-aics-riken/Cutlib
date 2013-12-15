@@ -11,7 +11,7 @@
 ##############################################################################
 #
 
-EXTRA_DIST= Makefile_hand depend.inc
+EXTRA_DIST= Makefile_hand
 
 lib_LIBRARIES=libCUT.a
 

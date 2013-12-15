@@ -41,9 +41,8 @@ examples/
 include/               Header files
 INSTALL                Description of how to install
 LICENSE                License to apply
-make_setting           Macro for compilation
-LICENSE                License to apply
-NEWS                   Release note
+make_setting           Macro for hand compile
 Makefile_hand          Building Cutlib by hand compile
+NEWS                   Release note
 README                 This document
 src/                   Source codes
