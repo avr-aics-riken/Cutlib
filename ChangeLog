@@ -14,6 +14,15 @@ REVISION HISTORY
 ================
 
 ------------------
+2013-12-15
+ on branch check_on_K merge from szks fix
+
+ fix file permissions and delete unnecessary files
+ remove an extra ";" in CutSearch.h
+ calculate TargetTriangle::dot_normal_vertex0 in double precision
+ delete include/Version.h
+
+------------------
 2013-11-24
  on branch check_on_K
 
