@@ -5,7 +5,7 @@
 # Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
 # All rights reserved.
 #
-# Copyright (c) 2012-2013 Advanced Institute for Computational Science, RIKEN.
+# Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
 ##############################################################################
@@ -14,7 +14,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Cutlib], [3.1.8], [keno@riken.jp], [Cutlib])
+AC_INIT([Cutlib], [3.2.0], [keno@riken.jp], [Cutlib])
 
 #AM_INIT_AUTOMAKE()
 # to remedy error : "Makefile.am:20: but option 'subdir-objects' is disabled"
@@ -28,7 +28,7 @@ AC_CONFIG_HEADERS([config.h])
 #
 # revision No.
 #
-CT_REVISION="20131215_1200"
+CT_REVISION="20140119_1700"
 AC_SUBST(CT_REVISION)
 
 
