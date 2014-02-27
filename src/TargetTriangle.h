@@ -30,15 +30,15 @@ public:
   ///  @param[in] t  対象三角形ポリゴン
   ///
   TargetTriangle(const Triangle* t) {
-    Vec3f  n = t->get_normal();
-    Vec3f* v = t->get_vertex();
+    Vertex  n = t->get_normal();
+    Vertex** v = t->get_vertex();
 
     dot_normal_vertex0 = 0.0;
     for (int i = 0; i < 3; i++) {
       normal[i] = n[i];
-      vertex[0][i] = v[0][i];
-      vertex[1][i] = v[1][i];
-      vertex[2][i] = v[2][i];
+      vertex[0][i] = (*v[0])[i];
+      vertex[1][i] = (*v[1])[i];
+      vertex[2][i] = (*v[2])[i];
       dot_normal_vertex0 += normal[i] * vertex[0][i];
     }
   }

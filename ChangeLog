@@ -14,14 +14,18 @@ REVISION HISTORY
 ================
 
 ------------------
-2014-01-19
+2014-02-27
+ r23 update related to Polylib [ver 3.2.1]
+  - TargetTriangle.h, RepairPolygonData.cpp
+  - change specification of floating point type in configure
 
+------------------
+2014-01-19
  r22 update year 2014 for copyright [ver 3.2.0]
   - merge check_on_K to main trunk
 
 ------------------
 2013-12-15
-
  r21 check packaging on branch check_on_K [ver 3.1.8]
   - add include/Version.h again for hand compile
 
@@ -52,42 +56,35 @@ REVISION HISTORY
 
 ------------------
 2013-11-22
- 
  r19 expire changes from r17 to r18 [ver 3.1.7]
    - replace TargetTriangle.h and ChangeLog(this file)
    - modify AM_INIT_AUTOMAKE([subdir-objects]) to fix error
 
 ------------------
 2013-10-10
- 
  r18 merge precision improvement by szks
 
 ------------------
 2013-10-02
-
  r17 modify for intel mpi [ver 3.1.6]
    - include mpi.h before stdio.h to suppress error message #error "SEEK_SET is #defined but must not be for the C++ binding of MPI"
    
 ------------------
 2013-09-15
-
  r16 update user guide [ver 3.1.5]
    - add cutlib_ug.pdf and Cutlib3intro.pdf
 
 ------------------
 2013-07-20
-
  r15 Introduce getVersionInfo() [ver 3.1.4]
    - add Version.h.in
 
 ----------------------------
 2013-07-15
-
  r14 update configure.ac and Makefile.am
 
 ----------------------------
 2013-07-06
-
  r13 update configure.ac and ChangeLog, NEW
   - Update configure.ac, typo normal vector.
   - Change contents in ChangeLog and NEWS.
@@ -95,22 +92,18 @@ REVISION HISTORY
 
 ----------------------------
 2013-07-04
-
  r12 update INSTALL
 
 ----------------------------
 2013-07-03
-
  r11 add depend.inc
 
 ----------------------------
 2013-07-02
-
  r10 autotools version
 
 ----------------------------
 2013-06-29
-
  r9 update ver. 3.1.0
 
 ----------------------------

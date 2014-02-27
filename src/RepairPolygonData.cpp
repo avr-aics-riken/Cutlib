@@ -21,14 +21,14 @@ void repairPolygons(PolygonGroup *pg,
   std::vector<PrivateTriangle*>::iterator p;
   for (p = polygonList->begin(); p != polygonList->end(); p++) {
     bool reset = false;
-    const Vec3f* vertex0 = (*p)->get_vertex();
-    Vec3f vertex[3] = { vertex0[0], vertex0[1], vertex0[2] };
+    Vertex** vertex0 = (*p)->get_vertex();
+    Vertex *vertex[3] = { vertex0[0], vertex0[1], vertex0[2] }; 
 
     if (doubt_normal_quality) reset = true;
 
     if (doubt_vertex_order) {
       Vec3f normal0 = (*p)->get_normal();
-      Vec3f normal = cross(vertex0[1]-vertex0[0], vertex0[2]-vertex0[0]);
+      Vec3f normal = cross(*vertex0[1]-*vertex0[0], *vertex0[2]-*vertex0[0]); 
       if (dot(normal, normal0) < 0.0) {
         // 節点1と節点2を入れ替え
         vertex[1] = vertex0[2];  
