@@ -14,6 +14,11 @@ REVISION HISTORY
 ================
 
 ------------------
+2014-03-04
+ r24 version format [ver 3.2.2]
+  - change output format for cut-config --version
+  
+------------------
 2014-02-27
  r23 update related to Polylib [ver 3.2.1]
   - TargetTriangle.h, RepairPolygonData.cpp

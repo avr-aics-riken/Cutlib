@@ -13,6 +13,10 @@
 RELEASE
 =======
 
+-------------
+Version 3.2.2   2014-03-04
+ - change output format for cut-config --version
+ 
 -------------------------
 Version 3.2.1  2014-02-27
  - update files related to Polylib upgrade

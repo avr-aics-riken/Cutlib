@@ -53,7 +53,7 @@ while test $# -gt 0; do
     --version)
 cat <<EOF
 
-Cutlib - Cut Information Library  Ver. @VERSION@  (@CT_REVISION@)
+Cutlib : Cut Information Library  Version : @VERSION@ : @CT_REVISION@
 
 Copyright (c) 2010-2011 VCAD System Research Program, RIKEN. 
 All rights reserved.
