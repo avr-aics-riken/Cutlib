@@ -19,6 +19,7 @@
 
 #include "Polylib.h"
 using namespace PolylibNS;
+using namespace Vec3class;
 
 #include "RepairPolygonData/RepairPolygonData.h"
 
@@ -32,6 +33,7 @@ using namespace PolylibNS;
 #endif
 
 #include "Version.h"
+
 
 namespace cutlib {
 
