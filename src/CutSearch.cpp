@@ -25,8 +25,8 @@ void CutSearch::search(const double center[], const double range[],
                        double pos6[], BidType bid6[],
                        Triangle* tri6[]) const
 {
-  Vec3f min(center[X]-range[X_M], center[Y]-range[Y_M], center[Z]-range[Z_M]);
-  Vec3f max(center[X]+range[X_P], center[Y]+range[Y_P], center[Z]+range[Z_P]);
+  Vec3r min(center[X]-range[X_M], center[Y]-range[Y_M], center[Z]-range[Z_M]);
+  Vec3r max(center[X]+range[X_P], center[Y]+range[Y_P], center[Z]+range[Z_P]);
 
   clearCutInfo(range, pos6, bid6, tri6);
 
