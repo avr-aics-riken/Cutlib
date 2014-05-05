@@ -327,11 +327,11 @@ CutlibReturn CalcCutInfoOctreeAllCell(SklTree* tree, const Polylib* pl,
     for (size_t j = 0; j < ny; j++) {
       for (size_t i = 0; i < nx; i++) {
         SklCell* rootCell = tree->GetRootCell(i, j, k);
-        Vec3f org, d;
+        Vec3r org, d;
         rootCell->GetOrigin(org[0], org[1], org[2]);
         rootCell->GetPitch(d[0], d[1], d[2]);
-        Vec3f min = org - 0.5 * d;
-        Vec3f max = org + 1.5 * d;
+        Vec3r min = org - 0.5 * d;
+        Vec3r max = org + 1.5 * d;
 
         cutOctree::CutTriangles ctList;
         cutOctree::CutTriangle::AppendCutTriangles(ctList, pl, pgList, min, max);
