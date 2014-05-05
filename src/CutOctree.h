@@ -9,7 +9,6 @@
 #include <vector>
 
 #include "Cutlib.h"
-#include "CutBoundary.h"
 #include "CutSearch.h"
 
 namespace cutlib {
@@ -29,8 +28,8 @@ class CutTriangle {
 public:
 
   Triangle* t;    ///< Polylib三角形ポリゴンクラス
-  Vec3f bboxMin;  ///< BBox最小値
-  Vec3f bboxMax;  ///< BBox最大値
+  Vec3r bboxMin;  ///< BBox最小値
+  Vec3r bboxMax;  ///< BBox最大値
 
   /// コンストラクタ.
   ///
@@ -43,7 +42,7 @@ public:
   ///  @param[in] min,max 直方体頂点座標
   ///  @return true:交わる/false:交わらない
   ///
-  bool intersectBox(const Vec3f& min, const Vec3f& max);
+  bool intersectBox(const Vec3r& min, const Vec3r& max);
 
   /// Polylib検索メソッドの結果をカスタムリストに追加.
   ///
@@ -55,7 +54,7 @@ public:
   static void AppendCutTriangles(CutTriangles& ctList, 
                                  const Polylib* pl,
                                  const std::vector<std::string>* pgList,
-                                 const Vec3f& min, const Vec3f& max);
+                                 const Vec3r& min, const Vec3r& max);
 
   /// 直方体領域と交わる三角形のリストをコピー.
   ///
@@ -65,7 +64,7 @@ public:
   ///
   static void CopyCutTriangles(const CutTriangles& ctListFrom, 
                                CutTriangles& ctListTo,
-                               const Vec3f& min, const Vec3f& max);
+                               const Vec3r& min, const Vec3r& max);
 
   /// リスト内の三角形オブジェクトを消去.
   ///
@@ -104,7 +103,7 @@ void getSearchRange(SklCell* cell, double center[], double range[]) {
 ///  @param cutBid 境界IDデータアクセッサ
 ///  @param[in] ctList ポリゴンリスト
 ///
-void calcCutInfo(SklCell* cell, const Vec3f& org, const Vec3f& d,
+void calcCutInfo(SklCell* cell, const float* org, const float* d,
                  CutPosOctree* cutPos, CutBidOctree* cutBid,
                  const CutTriangles& ctList);
 
