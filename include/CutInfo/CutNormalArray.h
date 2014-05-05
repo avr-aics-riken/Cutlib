@@ -160,7 +160,7 @@ public:
 #endif
     normalData = new Normal[nNormal];
     for (int i = 0; i < nNormal; i++) {
-      Vec3f n = tList[i]->get_normal();
+      Vec3r n = tList[i]->get_normal();
       normalData[i][0] = n[0];
       normalData[i][1] = n[1];
       normalData[i][2] = n[2];
