@@ -27,8 +27,8 @@ void repairPolygons(PolygonGroup *pg,
     if (doubt_normal_quality) reset = true;
 
     if (doubt_vertex_order) {
-      Vec3f normal0 = (*p)->get_normal();
-      Vec3f normal = cross(*vertex0[1]-*vertex0[0], *vertex0[2]-*vertex0[0]); 
+      Vec3r normal0 = (*p)->get_normal();
+      Vec3r normal = cross(*vertex0[1]-*vertex0[0], *vertex0[2]-*vertex0[0]); 
       if (dot(normal, normal0) < 0.0) {
         // 節点1と節点2を入れ替え
         vertex[1] = vertex0[2];  

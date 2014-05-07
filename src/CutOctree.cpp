@@ -20,13 +20,13 @@ namespace cutOctree {
 ///
 CutTriangle::CutTriangle(Triangle* t) : t(t)
 {
-  Vec3f* v = t->get_vertex();
-  bboxMin[X] = std::min(std::min(v[0][X], v[1][X]), v[2][X]);
-  bboxMin[Y] = std::min(std::min(v[0][Y], v[1][Y]), v[2][Y]);
-  bboxMin[Z] = std::min(std::min(v[0][Z], v[1][Z]), v[2][Z]);
-  bboxMax[X] = std::max(std::max(v[0][X], v[1][X]), v[2][X]);
-  bboxMax[Y] = std::max(std::max(v[0][Y], v[1][Y]), v[2][Y]);
-  bboxMax[Z] = std::max(std::max(v[0][Z], v[1][Z]), v[2][Z]);
+  Vertex** v = t->get_vertex();
+  bboxMin[X] = std::min(std::min((*v[0])[X], (*v[1])[X]), (*v[2])[X]);
+  bboxMin[Y] = std::min(std::min((*v[0])[Y], (*v[1])[Y]), (*v[2])[Y]);
+  bboxMin[Z] = std::min(std::min((*v[0])[Z], (*v[1])[Z]), (*v[2])[Z]);
+  bboxMax[X] = std::max(std::max((*v[0])[X], (*v[1])[X]), (*v[2])[X]);
+  bboxMax[Y] = std::max(std::max((*v[0])[Y], (*v[1])[Y]), (*v[2])[Y]);
+  bboxMax[Z] = std::max(std::max((*v[0])[Z], (*v[1])[Z]), (*v[2])[Z]);
 }
 
 
@@ -35,7 +35,7 @@ CutTriangle::CutTriangle(Triangle* t) : t(t)
 ///  @param[in] min,max 直方体頂点座標
 ///  @return true:交わる/false:交わらない
 ///
-bool CutTriangle::intersectBox(const Vec3f& min, const Vec3f& max)
+bool CutTriangle::intersectBox(const Vec3r& min, const Vec3r& max)
 {
   if (bboxMin[X] > max[X] || bboxMax[X] < min[X]) return false;
   if (bboxMin[Y] > max[Y] || bboxMax[Y] < min[Y]) return false;
@@ -54,7 +54,7 @@ bool CutTriangle::intersectBox(const Vec3f& min, const Vec3f& max)
 void CutTriangle::AppendCutTriangles(CutTriangles& ctList, 
                                      const Polylib* pl,
                                      const std::vector<std::string>* pgList,
-                                     const Vec3f& min, const Vec3f& max)
+                                     const Vec3r& min, const Vec3r& max)
 {
   std::vector<std::string>::const_iterator pg;
   for (pg = pgList->begin(); pg != pgList->end(); ++pg) {
@@ -90,7 +90,7 @@ void CutTriangle::AppendCutTriangles(CutTriangles& ctList,
 ///
 void CutTriangle::CopyCutTriangles(const CutTriangles& ctListFrom, 
                                    CutTriangles& ctListTo,
-                                   const Vec3f& min, const Vec3f& max)
+                                   const Vec3r& min, const Vec3r& max)
 {
   ctListTo.clear();
   CutTriangles::const_iterator ct;
@@ -124,7 +124,7 @@ void CutTriangle::DeleteCutTriangles(CutTriangles& ctList)
 ///  @param cutBid 境界IDデータアクセッサ
 ///  @param[in] ctList ポリゴンリスト
 ///
-void calcCutInfo(SklCell* cell, const Vec3f& org, const Vec3f& d,
+void calcCutInfo(SklCell* cell, const float* org, const float* d,
                  CutPosOctree* cutPos, CutBidOctree* cutBid,
                  const CutTriangles& ctList)
 {
@@ -164,11 +164,11 @@ void calcCutInfo(SklCell* cell, const Vec3f& org, const Vec3f& d,
   if (cell->hasChild()) {
     for (TdPos p = 0; p < 8; p++) {
       SklCell* cellChild = cell->GetChildCell(p);
-      Vec3f orgChild, dChild;
+      float orgChild[3], dChild[3];
       cellChild->GetOrigin(orgChild[0], orgChild[1], orgChild[2]);
       cellChild->GetPitch(dChild[0], dChild[1], dChild[2]);
-      Vec3f min = orgChild - 0.5 * dChild;
-      Vec3f max = orgChild + 1.5 * dChild;
+      Vec3r min = Vec3r(orgChild[0]-0.5*dChild[0], orgChild[1]-0.5*dChild[1], orgChild[2]-0.5*dChild[2]);
+      Vec3r max = Vec3r(orgChild[0]+1.5*dChild[0], orgChild[1]+1.5*dChild[1], orgChild[2]+1.5*dChild[2]);
 
       CutTriangles ctListChild;
       CutTriangle::CopyCutTriangles(ctList, ctListChild, min, max);
