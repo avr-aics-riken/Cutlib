@@ -14,6 +14,10 @@ RELEASE
 =======
 
 -------------
+Version 3.2.4   2014-05-16
+ - add CT_CFLAGS in src/Makefile.am
+
+-------------
 Version 3.2.3   2014-03-17
  - introduce common namespace Vec3class
 

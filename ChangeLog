@@ -14,6 +14,11 @@ REVISION HISTORY
 ================
 
 ------------------
+2014-05-16
+ r26 update src/Makefile.am [ver 3.2.4]
+  - include CT_CFLAGS to reflect -DCUTINFO_NORMAL_DOUBLE
+
+------------------
 2014-03-17
  r25 introduce common namespace Vec3class [ver 3.2.3]
 
