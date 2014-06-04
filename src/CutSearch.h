@@ -70,6 +70,11 @@ public:
                             double pos6[], BidType bid6[],
                             Triangle* tri6[]);
 
+  static void checkTriangle2(Triangle* t, BidType bid,
+                            const double center[], const double range[],
+                            double pos6[], BidType bid6[],
+                            Triangle* tri6[]);
+
 
   /// 交点情報配列の初期化.
   ///
