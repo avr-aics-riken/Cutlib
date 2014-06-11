@@ -234,7 +234,7 @@ private:
     normalIndexData = new NormalIndex[n];
     for (int ijk = 0; ijk < n; ijk++) {
       for (int d = 0; d < 6; d++) {
-        normalIndexData[ijk][d] = 0;
+        normalIndexData[ijk][d] = -1;
       }
     }
     nNormal = 0;
