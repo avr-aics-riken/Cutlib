@@ -136,7 +136,217 @@ void CutSearch::checkTriangle(Triangle* t, BidType bid,
 
 }
 
-double SignedVolume(double a[], double b[], double c[], double d[]) {
+void Split(double &ah, double &al, double a)
+{
+	double c = (1 + 1 << 27) * a;
+	double d = c - a;
+	ah = c - d;
+	al = a - ah;
+}
+
+void TwoSum(double &x, double &y, double a, double b)
+{
+	x = a + b;
+	double c = x - a;
+	y = (a - (x - c)) + (b - c);
+}
+
+void TwoSum2(double &x, double &y, double a, double b)
+{
+	x = a + b;
+
+	if ( fabs(a) >= fabs(b) )
+	{
+		y = b - (x - a);
+	}
+	else
+	{
+		y = a - (x - b);
+	}
+}
+
+void TwoDiff(double &x, double &y, double a, double b)
+{
+	x = a - b;
+	double c = x - a;
+	y = (a - (x - c)) - (b + c);
+}
+
+void TwoProduct(double &x, double &y, double a, double b)
+{
+	x = a * b;
+	double ah = 0.0;
+	double al = 0.0;
+	double bh = 0.0;
+	double bl = 0.0;
+	Split(ah, al, a);
+	Split(bh, bl, b);
+	double e1 = x - ah * bh;
+	double e2 = e1 - al * bh;
+	double e3 = e2 - ah * bl;
+	y = al * bl - e3;
+}
+
+void TwoProductFMA(double &x, double &y, double a, double b)
+{
+	x = a * b;
+	y = a * b - x;
+}
+
+void VecSum(double *q, double *p, int N)
+{
+	double pi = p[0];
+	double pi_ = 0.0;
+
+	for (int n = 1; n < N; n++)
+	{
+		TwoSum(pi_, q[n - 1], pi, p[n]);
+		pi = pi_;
+	}
+
+	q[N - 1] = pi;
+}
+
+double SumK(double *p, int N, int K)
+{
+	if ( K < 0 )
+	{
+		return 0.0;
+	}
+
+	double *q = new double [N];
+
+	for (int n = 0; n < N; n++)
+	{
+		q[n] = 0.0;
+	}
+
+	for (int k = 0; k < K; k++)
+	{
+		VecSum(q, p, N);
+
+		for (int n = 0; n < N; n++)
+		{
+			p[n] = q[n];
+			q[n] = 0.0;
+		}
+	}
+
+	double sum = 0.0;
+
+	for (int n = 0; n < N; n++)
+	{
+		sum += p[n];
+	}
+
+	delete [] q;
+
+	return sum;
+}
+
+double Det1(double ax, double ay, double bx, double by, double cx, double cy)
+{
+	double det1 = (ax - cx) * (by - cy) - (ay - cy) * (bx - cx);
+	return det1;
+}
+
+double Det2(double ax, double ay, double bx, double by, double cx, double cy)
+{
+	double t1 = 0.0;
+	double e1 = 0.0;
+	TwoDiff(t1, e1, ax, cx);
+
+	double t2 = 0.0;
+	double e2 = 0.0;
+	TwoDiff(t2, e2, by, cy);
+
+	double t3 = 0.0;
+	double e3 = 0.0;
+	TwoDiff(t3, e3, ay, cy);
+
+	double t4 = 0.0;
+	double e4 = 0.0;
+	TwoDiff(t4, e4, bx, cx);
+
+	double p1 = 0.0;
+	double p3 = 0.0;
+	TwoProduct(p1, p3, t1, t2);
+
+	double p2 = 0.0;
+	double p4 = 0.0;
+	TwoProduct(p2, p4, -t3, t4);
+
+	double p5 = 0.0;
+	double p9 = 0.0;
+	TwoProduct(p5, p9, t1, e2);
+
+	double p6 = 0.0;
+	double p10 = 0.0;
+	TwoProduct(p6, p10, t2, e1);
+
+	double p7 = 0.0;
+	double p11 = 0.0;
+	TwoProduct(p7, p11, -t3, e4);
+
+	double p8 = 0.0;
+	double p12 = 0.0;
+	TwoProduct(p8, p12, -t4, e3);
+
+	double p13 = 0.0;
+	double p15 = 0.0;
+	TwoProduct(p13, p15, e1, e2);
+
+	double p14 = 0.0;
+	double p16 = 0.0;
+	TwoProduct(p14, p16, -e3, e4);
+
+	const int N = 16;
+/*
+	double p[N] =
+	{
+		p1, p2, p3, p4,
+		p5, p6, p7, p8,
+		p9, p10, p11, p12,
+		p13, p14, p15, p16,
+	};
+*/
+	double p[N] =
+	{
+		p16, p15, p14, p13,
+		p12, p11, p10, p9,
+		p8, p7, p6, p5,
+		p4, p3, p2, p1,
+	};
+
+	double det = SumK(p, N, 2);
+
+	return det;
+}
+
+double Det(double ax, double ay, double bx, double by, double cx, double cy)
+{
+	double det = Det1(ax, ay, bx, by, cx, cy);
+	double e = pow(2.0, -53.0);
+	double e1 = fabs( (ax - cx) * (by - cy) ) + fabs( (ay - cy) * (bx - cx) );
+	double err_max = (3.0*e + 16.0*e*e) * e1;
+	if( fabs(det) < err_max )
+	{
+		double det2 = Det2(ax, ay, bx, by, cx, cy);
+
+/*
+		std::cout.setf(std::ios::scientific);
+		std::cout.precision(20);
+
+		std::cout << det2 << " " << det << std::endl;
+*/
+
+		return det2;
+	}
+
+	return det;
+}
+
+double Det(double a[], double b[], double c[], double d[]) {
 	double t11 = a[0] - d[0];
 	double t12 = a[1] - d[1];
 	double t13 = a[2] - d[2];
@@ -147,7 +357,48 @@ double SignedVolume(double a[], double b[], double c[], double d[]) {
 	double t32 = c[1] - d[1];
 	double t33 = c[2] - d[2];
 
-	double det = t11*(t22*t33 - t23*t32) - t21*(t12*t33 - t13*t32) + t31*(t12*t23 - t13*t22);
+	double det = t13*(t21*t32 - t31*t22) - t23*(t11*t32 - t31*t12) + t33*(t11*t22 - t21*t12);
+	double aa = fabs(t13)*(fabs(t21*t32) + fabs(t31*t22));
+	double ab = fabs(t23)*(fabs(t11*t32) + fabs(t31*t12));
+	double ac = fabs(t33)*(fabs(t11*t22) + fabs(t21*t12));
+	double e = pow(2.0, -53.0);
+	double err_max = (7.0*e + 76.0*e*e)*(aa + ab + ac);
+	if( fabs(det) < err_max )
+	{
+		double det2d_0 = Det(a[1], a[2], b[1], b[2], c[1], c[2]);
+		double det2d_1 = Det(a[2], a[0], b[2], b[0], c[2], c[0]);
+		double det2d_2 = Det(a[0], a[1], b[0], b[1], c[0], c[1]);
+		double det1 = (b[0] - d[0])*det2d_0 + (b[1] - d[1])*det2d_1 + (b[2] - d[2])*det2d_2;
+
+/*
+		std::cout.setf(std::ios::scientific);
+		std::cout.precision(20);
+
+		std::cout << det;
+		std::cout << " ";
+		std::cout << err_max;
+		std::cout << " ";
+		std::cout << aa;
+		std::cout << " ";
+		std::cout << ab;
+		std::cout << " ";
+		std::cout << ac;
+		std::cout << std::endl;
+
+		std::cout << det2d_0;
+		std::cout << " ";
+		std::cout << det2d_1;
+		std::cout << " ";
+		std::cout << det2d_2;
+		std::cout << " ";
+		std::cout << det1;
+		std::cout << " ";
+		std::cout << det;
+		std::cout << std::endl;
+*/
+
+		return det1;
+	}
 
 	return det;
 }
@@ -236,22 +487,22 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	pb[1] = center[Y];
 	pb[2] = center[Z] - range[Z_M];
 
-	double sv0 = SignedVolume(t0, t1, t2, p0);
-	double sve = SignedVolume(t0, t1, t2, pe);
-	double svw = SignedVolume(t0, t1, t2, pw);
-	double svn = SignedVolume(t0, t1, t2, pn);
-	double svs = SignedVolume(t0, t1, t2, ps);
-	double svt = SignedVolume(t0, t1, t2, pt);
-	double svb = SignedVolume(t0, t1, t2, pb);
+	double sv0 = Det(t0, t1, t2, p0);
+	double sve = Det(t0, t1, t2, pe);
+	double svw = Det(t0, t1, t2, pw);
+	double svn = Det(t0, t1, t2, pn);
+	double svs = Det(t0, t1, t2, ps);
+	double svt = Det(t0, t1, t2, pt);
+	double svb = Det(t0, t1, t2, pb);
 
 	double A[3];
 	double B = 0.0;
 	CalcAB(A, B, t0, t1, t2);
 
 	if( sv0*sve < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, pe);
-		double sv_01 = SignedVolume(p0, t0, t1, pe);
-		double sv_20 = SignedVolume(p0, t2, t0, pe);
+		double sv_12 = Det(p0, t1, t2, pe);
+		double sv_01 = Det(p0, t0, t1, pe);
+		double sv_20 = Det(p0, t2, t0, pe);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double y = p0[Y];
@@ -267,9 +518,9 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	}
 
 	if( sv0*svw < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, pw);
-		double sv_01 = SignedVolume(p0, t0, t1, pw);
-		double sv_20 = SignedVolume(p0, t2, t0, pw);
+		double sv_12 = Det(p0, t1, t2, pw);
+		double sv_01 = Det(p0, t0, t1, pw);
+		double sv_20 = Det(p0, t2, t0, pw);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double y = p0[Y];
@@ -285,9 +536,9 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	}
 
 	if( sv0*svn < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, pn);
-		double sv_01 = SignedVolume(p0, t0, t1, pn);
-		double sv_20 = SignedVolume(p0, t2, t0, pn);
+		double sv_12 = Det(p0, t1, t2, pn);
+		double sv_01 = Det(p0, t0, t1, pn);
+		double sv_20 = Det(p0, t2, t0, pn);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double x = p0[X];
@@ -303,9 +554,9 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	}
 
 	if( sv0*svs < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, ps);
-		double sv_01 = SignedVolume(p0, t0, t1, ps);
-		double sv_20 = SignedVolume(p0, t2, t0, ps);
+		double sv_12 = Det(p0, t1, t2, ps);
+		double sv_01 = Det(p0, t0, t1, ps);
+		double sv_20 = Det(p0, t2, t0, ps);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double x = p0[X];
@@ -321,9 +572,9 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	}
 
 	if( sv0*svt < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, pt);
-		double sv_01 = SignedVolume(p0, t0, t1, pt);
-		double sv_20 = SignedVolume(p0, t2, t0, pt);
+		double sv_12 = Det(p0, t1, t2, pt);
+		double sv_01 = Det(p0, t0, t1, pt);
+		double sv_20 = Det(p0, t2, t0, pt);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double x = p0[X];
@@ -339,9 +590,9 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	}
 
 	if( sv0*svb < 0 ) {
-		double sv_12 = SignedVolume(p0, t1, t2, pb);
-		double sv_01 = SignedVolume(p0, t0, t1, pb);
-		double sv_20 = SignedVolume(p0, t2, t0, pb);
+		double sv_12 = Det(p0, t1, t2, pb);
+		double sv_01 = Det(p0, t0, t1, pb);
+		double sv_20 = Det(p0, t2, t0, pb);
 		if( (sv_12 <= 0 && sv_01 <= 0 && sv_20 <= 0) || 
 				(sv_12 >= 0 && sv_01 >= 0 && sv_20 >= 0) ) {
 				double x = p0[X];
