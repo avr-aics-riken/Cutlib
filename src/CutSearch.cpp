@@ -336,6 +336,14 @@ double Det(double ax, double ay, double bx, double by, double cx, double cy)
 /*
 		std::cout.setf(std::ios::scientific);
 		std::cout.precision(20);
+		std::cout << "2D: ";
+		std::cout << " ";
+		std::cout << det;
+		std::cout << " ";
+		std::cout << err_max;
+		std::cout << " ";
+		std::cout << det2;
+		std::cout << std::endl;
 
 		std::cout << det2 << " " << det << std::endl;
 */
@@ -358,10 +366,10 @@ double Det(double a[], double b[], double c[], double d[]) {
 	double t33 = c[2] - d[2];
 
 	double det = t13*(t21*t32 - t31*t22) - t23*(t11*t32 - t31*t12) + t33*(t11*t22 - t21*t12);
+	double e = pow(2.0, -53.0);
 	double aa = fabs(t13)*(fabs(t21*t32) + fabs(t31*t22));
 	double ab = fabs(t23)*(fabs(t11*t32) + fabs(t31*t12));
 	double ac = fabs(t33)*(fabs(t11*t22) + fabs(t21*t12));
-	double e = pow(2.0, -53.0);
 	double err_max = (7.0*e + 76.0*e*e)*(aa + ab + ac);
 	if( fabs(det) < err_max )
 	{
@@ -373,10 +381,20 @@ double Det(double a[], double b[], double c[], double d[]) {
 /*
 		std::cout.setf(std::ios::scientific);
 		std::cout.precision(20);
-
+		std::cout << "3D: ";
+		std::cout << " ";
 		std::cout << det;
 		std::cout << " ";
 		std::cout << err_max;
+		std::cout << " ";
+		std::cout << det1;
+		std::cout << std::endl;
+
+		std::cout << "a: " << a[0] << " " << a[1] << " " << a[2] << std::endl;
+		std::cout << "b: " << b[0] << " " << b[1] << " " << b[2] << std::endl;
+		std::cout << "c: " << c[0] << " " << c[1] << " " << c[2] << std::endl;
+		std::cout << "d: " << d[0] << " " << d[1] << " " << d[2] << std::endl;
+
 		std::cout << " ";
 		std::cout << aa;
 		std::cout << " ";
@@ -390,8 +408,6 @@ double Det(double a[], double b[], double c[], double d[]) {
 		std::cout << det2d_1;
 		std::cout << " ";
 		std::cout << det2d_2;
-		std::cout << " ";
-		std::cout << det1;
 		std::cout << " ";
 		std::cout << det;
 		std::cout << std::endl;
@@ -495,11 +511,11 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	double svt = Det(t0, t1, t2, pt);
 	double svb = Det(t0, t1, t2, pb);
 
-	double A[3];
+	double A[3] = {0.0, 0.0, 0.0};
 	double B = 0.0;
 	CalcAB(A, B, t0, t1, t2);
 
-	if( sv0*sve < 0 ) {
+	if( sv0*sve <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, pe);
 		double sv_01 = Det(p0, t0, t1, pe);
 		double sv_20 = Det(p0, t2, t0, pe);
@@ -517,7 +533,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svw < 0 ) {
+	if( sv0*svw <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, pw);
 		double sv_01 = Det(p0, t0, t1, pw);
 		double sv_20 = Det(p0, t2, t0, pw);
@@ -535,7 +551,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svn < 0 ) {
+	if( sv0*svn <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, pn);
 		double sv_01 = Det(p0, t0, t1, pn);
 		double sv_20 = Det(p0, t2, t0, pn);
@@ -553,7 +569,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svs < 0 ) {
+	if( sv0*svs <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, ps);
 		double sv_01 = Det(p0, t0, t1, ps);
 		double sv_20 = Det(p0, t2, t0, ps);
@@ -571,7 +587,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svt < 0 ) {
+	if( sv0*svt <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, pt);
 		double sv_01 = Det(p0, t0, t1, pt);
 		double sv_20 = Det(p0, t2, t0, pt);
@@ -589,7 +605,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svb < 0 ) {
+	if( sv0*svb <= 0 ) {
 		double sv_12 = Det(p0, t1, t2, pb);
 		double sv_01 = Det(p0, t0, t1, pb);
 		double sv_20 = Det(p0, t2, t0, pb);
@@ -607,64 +623,28 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-
 /*
-  if (triangle.intersectX(center[Y], center[Z], p)) {
-    if (p >= center[X]) {
-      pos = p - center[X];
-      if (pos < pos6[X_P]) {
-        pos6[X_P] = pos;
-        bid6[X_P] = bid;
-        tri6[X_P] = t;
-      }
-    }
-    if (p <= center[X]) {
-      pos = center[X] - p;
-      if (pos < pos6[X_M]) {
-        pos6[X_M] = pos;
-        bid6[X_M] = bid;
-        tri6[X_M] = t;
-      }
-    }
-  }
-
-  if (triangle.intersectY(center[Z], center[X], p)) {
-    if (p >= center[Y]) {
-      pos = p - center[Y];
-      if (pos < pos6[Y_P]) {
-        pos6[Y_P] = pos;
-        bid6[Y_P] = bid;
-        tri6[Y_P] = t;
-      }
-    }
-    if (p <= center[Y]) {
-      pos = center[Y]- p;
-      if (pos < pos6[Y_M]) {
-        pos6[Y_M] = pos;
-        bid6[Y_M] = bid;
-        tri6[Y_M] = t;
-      }
-    }
-  }
-
-  if (triangle.intersectZ(center[X], center[Y], p)) {
-    if (p >= center[Z]) {
-      pos = p - center[Z];
-      if (pos < pos6[Z_P]) {
-        pos6[Z_P] = pos;
-        bid6[Z_P] = bid;
-        tri6[Z_P] = t;
-      }
-    }
-    if (p <= center[Z]) {
-      pos = center[Z] - p;
-      if (pos < pos6[Z_M]) {
-        pos6[Z_M] = pos;
-        bid6[Z_M] = bid;
-        tri6[Z_M] = t;
-      }
-    }
-  }
+	if( sv0 == 0 ) {
+		pos6[X_P] = 0.0;
+		bid6[X_P] = bid;
+		tri6[X_P] = t;
+		pos6[X_M] = 0.0;
+		bid6[X_M] = bid;
+		tri6[X_M] = t;
+		pos6[Y_P] = 0.0;
+		bid6[Y_P] = bid;
+		tri6[Y_P] = t;
+		pos6[Y_M] = 0.0;
+		bid6[Y_M] = bid;
+		tri6[Y_M] = t;
+		pos6[Z_P] = 0.0;
+		bid6[Z_P] = bid;
+		tri6[Z_P] = t;
+		pos6[Z_M] = 0.0;
+		bid6[Z_M] = bid;
+		tri6[Z_M] = t;
+		std::cout << "sv0=0" << std::endl;
+	}
 */
 
 }
