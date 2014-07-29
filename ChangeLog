@@ -14,6 +14,11 @@ REVISION HISTORY
 ================
 
 ------------------
+2014-07-29
+ r27 bug fix [ver 3.2.5]
+  - include/CutInfo/CutNormalArray.h
+
+------------------
 2014-05-16
  r26 update src/Makefile.am [ver 3.2.4]
   - include CT_CFLAGS to reflect -DCUTINFO_NORMAL_DOUBLE
