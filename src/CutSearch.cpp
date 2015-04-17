@@ -332,7 +332,6 @@ double Det(double ax, double ay, double bx, double by, double cx, double cy)
 	if( fabs(det) < err_max )
 	{
 		double det2 = Det2(ax, ay, bx, by, cx, cy);
-
 /*
 		std::cout.setf(std::ios::scientific);
 		std::cout.precision(20);
@@ -344,13 +343,10 @@ double Det(double ax, double ay, double bx, double by, double cx, double cy)
 		std::cout << " ";
 		std::cout << det2;
 		std::cout << std::endl;
-
 		std::cout << det2 << " " << det << std::endl;
 */
-
 		return det2;
 	}
-
 	return det;
 }
 
@@ -466,9 +462,16 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 
   Vertex   n = t->get_normal();
   Vertex** v = t->get_vertex();
+
 	double t0[3];
 	double t1[3];
 	double t2[3];
+	for(int i=0; i<3; i++) {
+		t0[i] = (*v[0])[i];
+		t1[i] = (*v[1])[i];
+		t2[i] = (*v[2])[i];
+	}
+
 	double p0[3];
 	double pe[3];
 	double pw[3];
@@ -476,11 +479,6 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	double ps[3];
 	double pb[3];
 	double pt[3];
-	for(int i=0; i<3; i++) {
-		t0[i] = (*v[0])[i];
-		t1[i] = (*v[1])[i];
-		t2[i] = (*v[2])[i];
-	}
 	p0[0] = center[X];
 	p0[1] = center[Y];
 	p0[2] = center[Z];
@@ -515,7 +513,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 	double B = 0.0;
 	CalcAB(A, B, t0, t1, t2);
 
-	if( sv0*sve <= 0 ) {
+	if( sv0*sve <= 0 && A[X] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, pe);
 		double sv_01 = Det(p0, t0, t1, pe);
 		double sv_20 = Det(p0, t2, t0, pe);
@@ -525,7 +523,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double z = p0[Z];
 				double x = (B - A[Y]*y - A[Z]*z) / A[X];
 	      pos = x - center[X];
-				if (pos < pos6[X_P] && pos > 0) {
+				if (pos < pos6[X_P] && pos >= 0) {
 					pos6[X_P] = pos;
 					bid6[X_P] = bid;
 					tri6[X_P] = t;
@@ -533,7 +531,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svw <= 0 ) {
+	if( sv0*svw <= 0 && A[X] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, pw);
 		double sv_01 = Det(p0, t0, t1, pw);
 		double sv_20 = Det(p0, t2, t0, pw);
@@ -543,7 +541,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double z = p0[Z];
 				double x = (B - A[Y]*y - A[Z]*z) / A[X];
 				pos = center[X] - x;
-				if (pos < pos6[X_M] && pos > 0) {
+				if (pos < pos6[X_M] && pos >= 0) {
 					pos6[X_M] = pos;
 					bid6[X_M] = bid;
 					tri6[X_M] = t;
@@ -551,7 +549,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svn <= 0 ) {
+	if( sv0*svn <= 0 && A[Y] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, pn);
 		double sv_01 = Det(p0, t0, t1, pn);
 		double sv_20 = Det(p0, t2, t0, pn);
@@ -561,7 +559,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double z = p0[Z];
 				double y = (B - A[Z]*z - A[X]*x) / A[Y];
 				pos = y - center[Y];
-				if (pos < pos6[Y_P] && pos > 0) {
+				if (pos < pos6[Y_P] && pos >= 0) {
 					pos6[Y_P] = pos;
 					bid6[Y_P] = bid;
 					tri6[Y_P] = t;
@@ -569,7 +567,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svs <= 0 ) {
+	if( sv0*svs <= 0 && A[Y] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, ps);
 		double sv_01 = Det(p0, t0, t1, ps);
 		double sv_20 = Det(p0, t2, t0, ps);
@@ -579,7 +577,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double z = p0[Z];
 				double y = (B - A[Z]*z - A[X]*x) / A[Y];
 				pos = center[Y]- y;
-				if (pos < pos6[Y_M] && pos > 0) {
+				if (pos < pos6[Y_M] && pos >= 0) {
 					pos6[Y_M] = pos;
 					bid6[Y_M] = bid;
 					tri6[Y_M] = t;
@@ -587,7 +585,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svt <= 0 ) {
+	if( sv0*svt <= 0 && A[Z] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, pt);
 		double sv_01 = Det(p0, t0, t1, pt);
 		double sv_20 = Det(p0, t2, t0, pt);
@@ -597,7 +595,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double y = p0[Y];
 				double z = (B - A[X]*x - A[Y]*y) / A[Z];
 				pos = z - center[Z];
-				if (pos < pos6[Z_P] && pos > 0) {
+				if (pos < pos6[Z_P] && pos >= 0) {
 					pos6[Z_P] = pos;
 					bid6[Z_P] = bid;
 					tri6[Z_P] = t;
@@ -605,7 +603,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 		}
 	}
 
-	if( sv0*svb <= 0 ) {
+	if( sv0*svb <= 0 && A[Z] != 0 ) {
 		double sv_12 = Det(p0, t1, t2, pb);
 		double sv_01 = Det(p0, t0, t1, pb);
 		double sv_20 = Det(p0, t2, t0, pb);
@@ -615,7 +613,7 @@ void CutSearch::checkTriangle2(Triangle* t, BidType bid,
 				double y = p0[Y];
 				double z = (B - A[X]*x - A[Y]*y) / A[Z];
 				pos = center[Z] - z;
-				if (pos < pos6[Z_M] && pos > 0) {
+				if (pos < pos6[Z_M] && pos >= 0) {
 					pos6[Z_M] = pos;
 					bid6[Z_M] = bid;
 					tri6[Z_M] = t;
