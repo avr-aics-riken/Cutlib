@@ -92,6 +92,33 @@ CutlibReturn CalcCutInfo(const GridAccessor* grid, const Polylib* pl,
   return CalcCutInfo(ista, nlen, grid, pl, cutPos, cutBid, cutNormal);
 }
 
+/// 交点情報計算: 全領域.
+///
+///  @param[in] grid GridAccessorクラスオブジェクト
+///  @param[in] pl Polylibクラスオブジェクト
+///  @param[in] pgList 計算対象ポリゴングループのパス名リスト
+///  @param[in,out] cutPos 交点座標配列ラッパ
+///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
+///
+inline 
+CutlibReturn CalcCutInfo(const GridAccessor* grid,
+												 const Polylib* pl, std::vector<std::string>* pgList,
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal = 0) {
+  int ista[3] = { 
+    cutPos->getStartX(),
+    cutPos->getStartY(),
+    cutPos->getStartZ(),
+  };
+  size_t nlen[3] = { 
+    cutPos->getSizeX(),
+    cutPos->getSizeY(),
+    cutPos->getSizeZ()
+  };
+  return CalcCutInfo(ista, nlen, grid, pl, pgList, cutPos, cutBid, cutNormal);
+}
+
 
 #ifdef CUTLIB_OCTREE
 

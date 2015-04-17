@@ -222,6 +222,140 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 }
 
 
+/// 交点情報計算: 計算領域指定.
+///
+///  @param[in] ista 計算基準点開始位置3次元インデクス
+///  @param[in] nlen 計算基準点3次元サイズ
+///  @param[in] grid GridAccessorクラスオブジェクト
+///  @param[in] pl Polylibクラスオブジェクト
+///  @param[in] pgList 計算対象ポリゴングループのパス名リスト
+///  @param[in,out] cutPos 交点座標配列ラッパ
+///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
+///
+CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
+                         const GridAccessor* grid,
+												 const Polylib* pl, std::vector<std::string>* pgList,
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal)
+{
+  { 
+    // check input parameters
+    CutlibReturn ret;
+    ret = checkSize("CalcCutInfo", "cutPos", ista, nlen, cutPos);
+    if (ret != CL_SUCCESS) return ret;
+    ret = checkSize("CalcCutInfo", "cutBid", ista, nlen, cutBid);
+    if (ret != CL_SUCCESS) return ret;
+    if (cutNormal) {
+      ret = checkSize("CalcCutInfo", "cutNormal", ista, nlen, cutNormal);
+      if (ret != CL_SUCCESS) return ret;
+    }
+    ret = checkPolylib("CalcCutInfo", pl);
+    if (ret != CL_SUCCESS) return ret;
+  }
+
+#ifdef CUTLIB_TIMING
+  Timer::Start(TOTAL);
+#endif
+
+//  std::vector<std::string>* pgList = createPolygonGroupPathList(pl);
+
+  CutSearch* cutSearch = new CutSearch(pl, pgList);
+
+  cutPos->clear();
+  cutBid->clear();
+
+  CutPolygonList* cutPolygonList = 0;
+  int nThread;
+#ifdef _OPENMP
+  nThread = omp_get_max_threads();
+#else
+  nThread = 1;
+#endif
+  if (cutNormal) cutPolygonList = new CutPolygonList[nThread];
+
+#ifdef CUTLIB_TIMING
+  Timer::Start(MAIN_LOOP);
+#endif
+#pragma omp parallel
+  {
+  int iThread;
+#ifdef _OPENMP
+  iThread = omp_get_thread_num();
+#else
+  iThread = 0;
+#endif
+#pragma omp for schedule(dynamic), collapse(3)
+  for (int k = ista[2]; k < ista[2]+nlen[2]; k++) {
+    for (int j = ista[1]; j < ista[1]+nlen[1]; j++) {
+      for (int i = ista[0]; i < ista[0]+nlen[0]; i++) {
+        double pos6[6];
+        float pos6_f[6];
+        BidType bid6[6];
+        Triangle* tri6[6];
+        double center[3];
+        double range[6];
+
+#ifdef CUTLIB_TIMING
+        Timer::Start(THREAD_TOTAL);
+#endif
+        grid->getSearchRange(i, j, k, center, range);
+        cutSearch->search(center, range, pos6, bid6, tri6);
+
+        for (int d = 0; d < 6; d++) pos6_f[d] = (float)(pos6[d]/range[d]);
+
+        cutPos->setPos(i, j, k, pos6_f);
+        cutBid->setBid(i, j, k, bid6);
+
+        if (cutNormal) {
+          for (int d = 0; d < 6; d++) {
+            if (bid6[d] > 0) {
+              CutPolygon* p = new CutPolygon(cutNormal->getIndex(i, j, k), d, tri6[d]);
+              cutPolygonList[iThread].push_back(p);
+            }
+          }
+        }
+
+#ifdef CUTLIB_TIMING
+        Timer::Stop(THREAD_TOTAL);
+#endif
+      }
+    }
+  }
+  } // parallel reagion
+#ifdef CUTLIB_TIMING
+  Timer::Stop(MAIN_LOOP);
+#endif
+
+  if (cutNormal) {
+#ifdef CUTLIB_TIMING
+    Timer::Start(PACK_NORMAL);
+#endif
+    cutNormal->setNormalInfo(cutPolygonList, nThread);
+#ifdef CUTLIB_TIMING
+    Timer::Stop(PACK_NORMAL);
+#endif
+  }
+
+  delete cutSearch;
+  delete pgList;
+  delete[] cutPolygonList;
+
+#ifdef CUTLIB_TIMING
+  Timer::Stop(TOTAL);
+  Timer::Print(TOTAL, "Total");
+  Timer::Print(MAIN_LOOP, "Main Loop");
+  if (cutNormal) {
+    Timer::Print(PACK_NORMAL, "Pack Normal");
+  }
+  Timer::PrintFull(THREAD_TOTAL, "Theread Total");
+  Timer::PrintFull(SEARCH_POLYGON, "Polylib::search_polygons");
+#endif
+
+  return CL_SUCCESS;
+}
+
+
 #ifdef CUTLIB_OCTREE
 
 /// 交点情報計算: Octree, リーフセルのみ.
