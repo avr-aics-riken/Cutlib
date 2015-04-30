@@ -15,7 +15,7 @@ EXTRA_DIST= Makefile_hand
 
 lib_LIBRARIES=libCUT.a
 
-libCUT_a_CXXFLAGS = @PL_CFLAGS@ @TP_CFLAGS@ \
+libCUT_a_CXXFLAGS = @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@ \
                    -I$(top_builddir)/include \
                    -I$(top_builddir)/include/CutInfo \
                    -I$(top_builddir)/include/GridAccessor \
