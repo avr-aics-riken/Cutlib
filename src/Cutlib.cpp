@@ -338,7 +338,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
   }
 
   delete cutSearch;
-  delete pgList;
+//  delete pgList;
   delete[] cutPolygonList;
 
 #ifdef CUTLIB_TIMING
