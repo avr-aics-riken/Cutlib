@@ -92,6 +92,25 @@ CutlibReturn CalcCutInfo(const GridAccessor* grid, const Polylib* pl,
   return CalcCutInfo(ista, nlen, grid, pl, cutPos, cutBid, cutNormal);
 }
 
+
+/// 交点情報計算: 計算領域指定.
+///
+///  @param[in] ista 計算基準点開始位置3次元インデクス
+///  @param[in] nlen 計算基準点3次元サイズ
+///  @param[in] grid GridAccessorクラスオブジェクト
+///  @param[in] pl Polylibクラスオブジェクト
+///  @param[in] pgList 計算対象ポリゴングループのパス名リスト
+///  @param[in,out] cutPos 交点座標配列ラッパ
+///  @param[in,out] cutBid 境界ID配列ラッパ
+///  @param[in,out] cutNormal 法線ベクトル格納クラス
+///
+CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
+                         const GridAccessor* grid,
+												 const Polylib* pl, std::vector<std::string>* pgList,
+                         CutPosArray* cutPos, CutBidArray* cutBid,
+                         CutNormalArray* cutNormal = 0);
+
+
 /// 交点情報計算: 全領域.
 ///
 ///  @param[in] grid GridAccessorクラスオブジェクト
