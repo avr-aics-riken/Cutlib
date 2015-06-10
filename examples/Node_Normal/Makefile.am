@@ -6,7 +6,7 @@
 # Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
 # All rights reserved.
 #
-# Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN.
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
 ##############################################################################
@@ -31,7 +31,7 @@ a_out_SOURCES = \
     ../util/include/Tuple.h
 
 a_out_CXXFLAGS = \
-    -I$(top_builddir)/include \
+    -I$(top_srcdir)/include \
     -I../util/include \
     @CT_CFLAGS@ @PL_CFLAGS@ @TP_CFLAGS@
 

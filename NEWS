@@ -4,7 +4,7 @@
  * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
  * All rights reserved.
  *
- * Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN.
+ * Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
  * All rights reserved.
  *
  */
@@ -13,148 +13,32 @@
 RELEASE
 =======
 
--------------
+Version 3.3.0   2015-06-10
+
 Version 3.2.5   2014-07-29
-
--------------
 Version 3.2.4   2014-05-16
- - add CT_CFLAGS in src/Makefile.am
-
--------------
 Version 3.2.3   2014-03-17
- - introduce common namespace Vec3class
-
--------------
 Version 3.2.2   2014-03-04
- - change output format for cut-config --version
- 
--------------------------
-Version 3.2.1  2014-02-27
- - update files related to Polylib upgrade
- 
- ...
+Version 3.2.1   2014-02-27
 
--------------------------
-Version 3.1.8  2013-12-15
+Version 3.1.8   2013-12-15
+Version 3.1.7   2013-11-22
+Version 3.1.6   2013-10-02
+Version 3.1.5   2013-09-15
+Version 3.1.4   2013-07-20
+Version 3.1.3   2013-07-15
+Version 3.1.2   2013-07-06
+Version 3.1.1   2013-07-03
+Version 3.1.0   2013-07-02
+Version 3.0.1   2013-06-09
+Version 3.0.0   2013-02-25
 
- - fix exid and polylib related issues on branch check_on_K
+Version 2.0.5   2012-10-16
+Version 2.0.4   2012-09-06
+Version 2.0.3   2012-04-21
 
--------------------------
-Version 3.1.7  2013-11-22
+Version 2.0.2   2011-05-12
+Version 2.0.1   2011-05-09
 
- - back to r17
- 
-
--------------------------
-Version 3.1.6  2013-10-02
-
- - modify for intel mpi
- 
- 
--------------------------
-Version 3.1.5  2013-09-15
-
- - update user guide
-
-
--------------------------
-Version 3.1.4  2013-07-20
-
- - Introduce Version.h and getVersionInfo()
-
-
--------------------------
-Version 3.1.3  2013-07-15
-
- - Minor adjustment of configure.ac
-
-
--------------------------
-Version 3.1.2  2013-07-06
-
- - update configure.ac, typo normal vector
- - change contents in ChangeLog and NEWS
-
-
--------------------------
-Version 3.1.1  2013-07-03
-
- - update configure.ac to place header file with nobase_include_HEADERS
-
-
--------------------------
-Version 3.1.0  2013-07-02
-
- - packaging by autotools
-
-
--------------------------
-Version 3.0.1-beta  2013-06-09
-
- - Add function to record normal vector from a polygon at cut points
- - Update user's guide
-
-
--------------------------
-Version 3.0.0-beta  2013-02-25
-
- - Eliminate compile option "-DIGNORE_NORMAL_DIRECTION" and "-DIGNORE_STL_NORMAL"
- - Add RepairPolygonData()
- - Introduce accessor class for grid information
- - Change interface and name of Cartesian version
- - Enable to assign minus values for 3D index of wrapper array class
- - OpenMP parallelization for Cartesian version
- - Change to calculate cut info with double precision
- - Update user's guide
- - Adjust to Polylib-2.2，and TextParser-1.1
-
-
--------------------------
-Version 2.0.5  2012-10-16
-
- - Correction of compilation procedure
-
-
--------------------------
-Version 2.0.4  2012-09-06
-
- - Change compile procedure for FFVC
-
-
--------------------------
-Version 2.0.3  2012-04-21
-
- - Compiler option "-DIGNORE_NORMAL_DIRECTION"
-   calculate cut information assuming that the front-back sides of polygon is not unified.
- - Compiler option "-DIGNORE_STL_NORMAL"
-   calculate normal without using normal vector in STL file.
-
-
--------------------------
-Version 2.0.2  2011-05-12
-
- - Update user's guide
- - Adjust interface to Polylib2.0.2
- - Generate a reference of html version only from doxygen
-
-
--------------------------
-Version 2.0.1  2011-05-09
-
- - Update user's guide
- - Read polygon group and its ID from Polylib parameter file
-
-
--------------------------
-Version 2.0.0  2010-11-10
-
- - Correction of user's guide
- - Change API (eliminate arguments of Boundaries* bList)
- - Introduce an option to incorporate octree version or not
- - Change search order to -x, +x, -y, +y, -z, +z
-
-
--------------------------
-Version 1.0.0  2010-04-28
-
- - Initial release
+Version 2.0.0   2010-11-10
+Version 1.0.0   2010-04-28

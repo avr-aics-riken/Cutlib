@@ -4,7 +4,7 @@
  * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
  * All rights reserved.
  *
- * Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN.
+ * Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
  * All rights reserved.
  *
  */
@@ -23,10 +23,12 @@ HOW TO INSTALL
 
 1) with configure
 
-
-$ ./configure [options]
+$ export FFV_HOME=hogehoge
+$ cd BUILD_DIR
+$ ../configure [options]
 $ make
-# make install
+$ make install
+
 
 
 Configure options:
@@ -73,7 +75,7 @@ Here is examples.
 
 # Intel compiler
 
-  $ ./configure --prefix=/usr/local/FFV/Cutlib \
+ $ ../configure --prefix=/usr/local/FFV/Cutlib \
                 --with-parser=/usr/local/FFV/TextParser \
                 --with-polylib=/usr/local/FFV/Polylib \
                 CXX=icpc \
@@ -82,7 +84,7 @@ Here is examples.
 
 # GNU compiler, turn on measuring timing, specify install directory
 
-  $ ./configure --prefix=/usr/local/Cutlib \
+ $ ../configure --prefix=/usr/local/Cutlib \
                 --with-parser=/usr/local/TextParser \
                 --with-polylib=/usr/local/Polylib \
                 --enable-timing=yes \
@@ -92,7 +94,7 @@ Here is examples.
 
 # FX, K computer (cross compiler)
 
-  $ ./configure --prefix=$1 \
+ $ ../configure --prefix=$1 \
                 --host=sparc64-unknown-linux-gnu \
                 --with-parser=/usr/local/TextParser \
                 --with-polylib=/usr/local/Polylib \

@@ -5,7 +5,7 @@
 # Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
 # All rights reserved.
 #
-# Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN.
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
 ##############################################################################
@@ -13,16 +13,53 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.57])
-AC_INIT([Cutlib], [3.2.5], [keno@riken.jp], [Cutlib])
 
-#AM_INIT_AUTOMAKE()
-# to remedy error : "Makefile.am:20: but option 'subdir-objects' is disabled"
-AM_INIT_AUTOMAKE([subdir-objects])
+AC_PREREQ([2.57])
+
+AC_INIT([Cutlib], [3.3.0], [keno@riken.jp], [Cutlib])
+
+echo "----------------------------------------"
+echo "Running CUTlib Configure Script"
+echo "----------------------------------------"
 
 
 AC_CONFIG_SRCDIR([src/Cutlib.cpp])
+
+
+#
+# Specify directory for auxillary build tools (e.g., install-sh, config.sub, config.guess) and M4 files.
+#
+
+AC_CONFIG_AUX_DIR(config)
+
+
+#
+# To prevent the source codes from breaking, we suppress to do configure in the source directory.
+#
+
+if test -e configure.ac ; then
+echo "Please run configure from a separate build directory. It is not allowd to run configure in the source directory."
+echo "Pleaes try ..."
+echo " "
+echo "$ cd BUILD_DIR"
+echo "$ ../configure [options]"
+exit
+fi
+
+
+#
+# Configure should create config.h from config.h.in
+#
+
 AC_CONFIG_HEADERS([config.h])
+
+
+#
+# Use automake
+#
+
+# to remedy error : "Makefile.am:20: but option 'subdir-objects' is disabled"
+AM_INIT_AUTOMAKE([subdir-objects])
 
 
 m4_pattern_allow([AM_PROG_AR])
@@ -32,7 +69,7 @@ AM_PROG_AR
 #
 # revision No.
 #
-CT_REVISION="20140729_1200"
+CT_REVISION="20150610_2200"
 AC_SUBST(CT_REVISION)
 
 
@@ -245,3 +282,6 @@ AC_OUTPUT
 
 chmod +x ./cut-config
 
+echo "---------------------------------------------"
+echo "Finished Running Cutlib Configure Script"
+echo "---------------------------------------------"
