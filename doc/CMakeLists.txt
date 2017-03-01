@@ -1,4 +1,3 @@
-/*
 ###################################################################################
 #
 # Cutlib - Cut Information Library
@@ -13,17 +12,9 @@
 # All rights reserved.
 #
 ###################################################################################
-*/
 
-/// @file
-/// @brief 時間測定用クラス 実装
-///
+# Install files
 
-#include "CutTiming.h"
-
-namespace cutlib {
-
-/// 時間測定ストップウオッチリスト.
-Timer Timer::Timers[NumSections];
-
-} // namespace cutlib
+install(FILES  cutlib_ug.pdf
+               Cutlib3intro.pdf
+        DESTINATION doc)

@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief 境界情報計算関数 実装
 ///
@@ -105,7 +122,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
                          CutPosArray* cutPos, CutBidArray* cutBid,
                          CutNormalArray* cutNormal)
 {
-  { 
+  {
     // check input parameters
     CutlibReturn ret;
     ret = checkSize("CalcCutInfo", "cutPos", ista, nlen, cutPos);
@@ -151,7 +168,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 #else
   iThread = 0;
 #endif
-#pragma omp for schedule(dynamic), collapse(3)
+#pragma omp for schedule(dynamic), collapse(2)
   for (int k = ista[2]; k < ista[2]+nlen[2]; k++) {
     for (int j = ista[1]; j < ista[1]+nlen[1]; j++) {
       for (int i = ista[0]; i < ista[0]+nlen[0]; i++) {
@@ -239,7 +256,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
                          CutPosArray* cutPos, CutBidArray* cutBid,
                          CutNormalArray* cutNormal)
 {
-  { 
+  {
     // check input parameters
     CutlibReturn ret;
     ret = checkSize("CalcCutInfo", "cutPos", ista, nlen, cutPos);
@@ -285,7 +302,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 #else
   iThread = 0;
 #endif
-#pragma omp for schedule(dynamic), collapse(3)
+#pragma omp for schedule(dynamic), collapse(2)
   for (int k = ista[2]; k < ista[2]+nlen[2]; k++) {
     for (int j = ista[1]; j < ista[1]+nlen[1]; j++) {
       for (int i = ista[0]; i < ista[0]+nlen[0]; i++) {
@@ -368,7 +385,7 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 CutlibReturn CalcCutInfoOctreeLeafCell(SklTree* tree, const Polylib* pl,
                               CutPosOctree* cutPos, CutBidOctree* cutBid)
 {
-  { 
+  {
     // check input parameters
     CutlibReturn ret;
     ret = checkPolylib("CalcCutInfoOctreeLeafCell", pl);
@@ -436,7 +453,7 @@ CutlibReturn CalcCutInfoOctreeLeafCell(SklTree* tree, const Polylib* pl,
 CutlibReturn CalcCutInfoOctreeAllCell(SklTree* tree, const Polylib* pl,
                               CutPosOctree* cutPos, CutBidOctree* cutBid)
 {
-  { 
+  {
     // check input parameters
     CutlibReturn ret;
     ret = checkPolylib("CalcCutInfoOctreeAllCell", pl);

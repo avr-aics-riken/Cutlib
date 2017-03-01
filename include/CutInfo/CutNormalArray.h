@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief 交点ポリゴン法線格納クラス
 ///
@@ -38,7 +55,7 @@ public:
   /// コンストラクタ.
   ///
   ///  @param[in] ijk  計算基準点インデクス
-  ///  @param[in] d  計算基準線分番号(0〜5)  
+  ///  @param[in] d  計算基準線分番号(0〜5)
   ///  @param[in] t  ポリゴンデータへのポインタ
   ///
   CutPolygon(size_t ijk, int d, Triangle* t) : ijk(ijk), d(d), t(t) {
@@ -173,7 +190,7 @@ public:
         assert(0 <= d && d < 6);
         int id = (*it)->t->get_exid();
         assert(0 <= id && id < nNormal);
-    //  std::cout << ijk << ":" << d << " -> " << id << " (" 
+    //  std::cout << ijk << ":" << d << " -> " << id << " ("
     //            << normalData[id][0] << ", "
     //            << normalData[id][1] << ", "
     //            << normalData[id][2] << ")" << std::endl;

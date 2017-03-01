@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief Octreeセルデータへのアクセッサクラス
 ///
@@ -36,7 +53,7 @@ public:
 
   /// 交点座標値を設定(d方向).
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @param[in] pos 交点座標値
   ///
   virtual void setPos(int d, float pos) = 0;
@@ -49,7 +66,7 @@ public:
 
   /// 交点座標値(d方向)を得る.
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @return 交点座標値
   ///
   virtual float getPos(int d) const = 0;
@@ -91,7 +108,7 @@ public:
 
   /// 境界IDを設定(d方向).
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @param[in] bid 境界ID
   ///
   virtual void setBid(int d, BidType bid) = 0;
@@ -104,7 +121,7 @@ public:
 
   /// 境界ID(d方向)を得る.
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @return 境界ID
   ///
   virtual BidType getBid(int d) const = 0;
@@ -157,7 +174,7 @@ public:
 
   /// 交点座標値を設定(d方向).
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @param[in] pos 交点座標値
   ///
   void setPos(int d, float pos) { SetCutPos(*data_, d, pos); }
@@ -170,7 +187,7 @@ public:
 
   /// 交点座標値(d方向)を得る.
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @return 交点座標値
   ///
   float getPos(int d) const { return GetCutPos(*data_, d); }
@@ -220,7 +237,7 @@ public:
 
   /// 境界IDを設定(d方向).
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @param[in] bid 境界ID
   ///
   void setBid(int d, BidType bid) { SetCutBid(*data_, d, bid); }
@@ -233,7 +250,7 @@ public:
 
   /// 境界ID(d方向)を得る.
   ///
-  ///  @param[in] d 交点探査方向(0〜5) 
+  ///  @param[in] d 交点探査方向(0〜5)
   ///  @return 境界ID
   ///
   BidType getBid(int d) const { return GetCutBid(*data_, d); }

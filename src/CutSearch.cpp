@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief 交点情報計算クラス 実装
 ///
@@ -50,7 +67,7 @@ void CutSearch::search(const double center[], const double range[],
         BidType bid = exid;
         checkTriangle(*t, bid, center, range, pos6, bid6, tri6);
       }
-    } 
+    }
 
     delete tList;
   }

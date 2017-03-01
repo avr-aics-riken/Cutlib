@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief 時間測定用クラス 宣言
 ///
@@ -69,7 +86,7 @@ class Timer {
   }
 
   /// 時間測定スタート.
-  void start() { 
+  void start() {
 #ifdef _OPENMP
     int iThread = omp_get_thread_num();
 #else
@@ -120,7 +137,7 @@ public:
   ///  @param[in] sec ストップウオッチキーワード
   ///
   static void Start(Section sec) { Timers[sec].start(); }
- 
+
   /// ストップウオッチsecをストップ.
   ///
   ///  @param[in] sec ストップウオッチキーワード

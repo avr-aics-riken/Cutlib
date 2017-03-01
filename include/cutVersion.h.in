@@ -13,17 +13,16 @@
 # All rights reserved.
 #
 ###################################################################################
-*/
+ */
 
-/// @file
-/// @brief 時間測定用クラス 実装
-///
+/**
+ * @file   Version.h
+ * Cutlibバージョン情報のヘッダーファイル
+ */
 
-#include "CutTiming.h"
+#ifndef _CUTLIB_VERSION_H_
+#define _CUTLIB_VERSION_H_
 
-namespace cutlib {
+#define CT_VERSION  "@PROJECT_VERSION@"
 
-/// 時間測定ストップウオッチリスト.
-Timer Timer::Timers[NumSections];
-
-} // namespace cutlib
+#endif /* _CUTLIB_VERSION_H_ */

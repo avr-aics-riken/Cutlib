@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief Octree用クラス, 関数 実装
 ///
@@ -51,7 +68,7 @@ bool CutTriangle::intersectBox(const Vec3r& min, const Vec3r& max)
 ///  @param[in] pgList ポリゴングループ(パス名)リスト
 ///  @param[in] min,max 検索領域
 ///
-void CutTriangle::AppendCutTriangles(CutTriangles& ctList, 
+void CutTriangle::AppendCutTriangles(CutTriangles& ctList,
                                      const Polylib* pl,
                                      const std::vector<std::string>* pgList,
                                      const Vec3r& min, const Vec3r& max)
@@ -88,7 +105,7 @@ void CutTriangle::AppendCutTriangles(CutTriangles& ctList,
 ///  @param[out] ctListTo 三角形リスト コピー先
 ///  @param[in] min,max 直方体領域
 ///
-void CutTriangle::CopyCutTriangles(const CutTriangles& ctListFrom, 
+void CutTriangle::CopyCutTriangles(const CutTriangles& ctListFrom,
                                    CutTriangles& ctListTo,
                                    const Vec3r& min, const Vec3r& max)
 {
@@ -98,7 +115,7 @@ void CutTriangle::CopyCutTriangles(const CutTriangles& ctListFrom,
     if ((*ct)->intersectBox(min, max)) ctListTo.push_back(*ct);
   }
 }
-                                          
+
 
 /// リスト内の三角形オブジェクトを消去.
 ///
