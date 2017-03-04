@@ -97,7 +97,7 @@ public:
 ///  @param[out] center 検索基準点位置
 ///  @param[out] range  各6方向の検索基準線分長
 ///
-inline
+
 void getSearchRange(SklCell* cell, double center[], double range[]) {
   float o[3], d[3];
   cell->GetOrigin(o[0], o[1], o[2]);
@@ -106,7 +106,7 @@ void getSearchRange(SklCell* cell, double center[], double range[]) {
   range[X_M] = range[X_P] = d[0];
   range[Y_M] = range[Y_P] = d[1];
   range[Z_M] = range[Z_P] = d[2];
-}
+};
 
 
 /// Octree上のセルでの交点情報を計算.

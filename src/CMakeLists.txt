@@ -21,9 +21,6 @@ include_directories(
 )
 
 
-#link_directories( ${TP_LIB} ${PL_LIB} )
-
-
 set(cut_files
     Cutlib.cpp
     CutSearch.cpp
@@ -39,11 +36,11 @@ if(enable_timing)
 endif()
 
 
-if(with_octree)
-  set(cut_files ${cut_files}  CutOctree.cpp)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DTD_USE_NAMESPACE")
-  target_link_libraries(CUT -loctree)
-endif()
+#if(with_octree)
+#  set(cut_files ${cut_files}  CutOctree.cpp)
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DTD_USE_NAMESPACE")
+#  target_link_libraries(CUT -loctree)
+#endif()
 
 
 

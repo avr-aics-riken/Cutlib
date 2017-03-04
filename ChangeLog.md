@@ -3,16 +3,23 @@
 ## REVISION HISTORY
 
 ---
-- 2017-03-02  Version 3.4.0
-  - cmake Version
+- 2017-03-04  Version 3.4.1
+  - remove octree option
+  - compile examples
   - Tested.
 
-|Compiler|OpenMP|timing|debug|normal|octree|Example|
+|Compiler|OpenMP|timing|debug|normal|Example|
 |:--|:--:|:--:|:--:|:--:|:--:|:--:|
-|Intel 17.0.1 |ok|ok|ok|float/double|||
-|GNU 6.2.0    ||||||||
-|fx10         ||||||||
-|K            ||||||||
+|Intel 17.0.1 |ok|ok|ok|float/double|100%|
+|GNU 6.2.0    |ok|||float|100%|
+|fx10         |||||||
+|K            |||||||
+
+
+---
+- 2017-03-02  Version 3.4.0
+  - cmake Version
+
 
 ---
 - 2015-06-10  Version 3.3.0

@@ -77,11 +77,6 @@ $ sudo make install
 
 >  Specify floating type to compute normal vector. Default is float precision, otherwise double precision.
 
-`-D with_octree=` {no | yes}
-
->  Specify yes if an octree data structure is used. Default is no. Currently, this
-option does not work.
-
 `-D with_TP=` *Installed_directory*
 
 > Specify the directory path that TextParser is installed.
@@ -103,21 +98,21 @@ In following exsmples, assuming that TextParser and Polylib are installed under 
 ### INTEL/GNU compiler
 
 ~~~
-$ make -DINSTALL_DIR=${CT_HOME}/Cutlib -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_octree=no -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ make -DINSTALL_DIR=${CT_HOME}/Cutlib -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 
 ### FUJITSU compiler / FX10 on login nodes (Cross compilation)
 
 ~~~
-$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx10.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_octree=no -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx10.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 
 ### FUJITSU compiler / K computer on login nodes (Cross compilation)
 
 ~~~
-$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_K.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_octree=no -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_K.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 

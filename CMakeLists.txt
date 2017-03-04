@@ -32,8 +32,6 @@
 #
 # -D with_normal={float|double}
 #
-# -D with_octree={no|yes}
-#
 # -D with_TP=Installed_directory
 #
 # -D with_PL=Installed_directory
@@ -49,7 +47,6 @@ cmake_minimum_required(VERSION 2.6)
 option (enable_OPENMP "Enable OpenMP" "ON")
 option (enable_timing "Enable Timing" "OFF")
 option (enable_debug "Enable Debug" "OFF")
-option (real_type "Type of floating point" "float")
 option (with_example "Compiling examples" "OFF")
 option (with_normal "Precision of normal" "float")
 option (with_octree "Use Octree" "OFF")
@@ -74,8 +71,8 @@ set (CMAKE_INSTALL_PREFIX "${INSTALL_DIR}")
 
 
 #######
-set(PROJECT_VERSION "3.4.0")
-set(LIB_REVISION "20170302_0100")
+set(PROJECT_VERSION "3.4.1")
+set(LIB_REVISION "20170304_2100")
 #######
 
 
@@ -128,7 +125,7 @@ message( STATUS "Timing support: "                 ${enable_timing})
 message( STATUS "Debugging: "                      ${enable_debug})
 message( STATUS "Example: "                        ${with_example})
 message( STATUS "Normal precision: "               ${with_normal})
-message( STATUS "Use Octree: "                     ${with_octree})
+#message( STATUS "Use Octree: "                     ${with_octree})
 message(" ")
 
 if(CMAKE_CXX_COMPILER MATCHES ".*FCCpx$")
