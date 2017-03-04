@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief 交点情報基本データ型
 ///
@@ -26,7 +43,7 @@ typedef unsigned char BidType;
 //-----------------------------------------------------------------------------
 
 /// 交点座標基本型: 交点座標をfloat(32ビット)として格納
-typedef float   CutPos32[6]; 
+typedef float   CutPos32[6];
 
 /// 交点座標基本型: 交点座標を8ビット量子化して，3つずつ，2つの32ビット整数に格納
 typedef int32_t CutPos8[2];

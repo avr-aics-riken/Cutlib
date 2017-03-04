@@ -1,4 +1,3 @@
-/*
 ###################################################################################
 #
 # Cutlib - Cut Information Library
@@ -13,17 +12,16 @@
 # All rights reserved.
 #
 ###################################################################################
-*/
 
-/// @file
-/// @brief 時間測定用クラス 実装
-///
+set(util_srcs
+        src/ConfigBase.cpp
+        src/ConfigFile.cpp
+        src/CutTest.cpp
+        src/outputVtk.cpp
+)
 
-#include "CutTiming.h"
+include_directories(${PROJECT_SOURCE_DIR}/examples/util/include)
 
-namespace cutlib {
+add_library(Util STATIC ${util_srcs})
 
-/// 時間測定ストップウオッチリスト.
-Timer Timer::Timers[NumSections];
-
-} // namespace cutlib
+target_link_libraries(Util -lCUT)

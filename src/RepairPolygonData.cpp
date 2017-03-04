@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief ポリゴンデータ最適化関数 実装
 ///
@@ -22,17 +39,17 @@ void repairPolygons(PolygonGroup *pg,
   for (p = polygonList->begin(); p != polygonList->end(); p++) {
     bool reset = false;
     Vertex** vertex0 = (*p)->get_vertex();
-    Vertex *vertex[3] = { vertex0[0], vertex0[1], vertex0[2] }; 
+    Vertex *vertex[3] = { vertex0[0], vertex0[1], vertex0[2] };
 
     if (doubt_normal_quality) reset = true;
 
     if (doubt_vertex_order) {
       Vec3r normal0 = (*p)->get_normal();
-      Vec3r normal = cross(*vertex0[1]-*vertex0[0], *vertex0[2]-*vertex0[0]); 
+      Vec3r normal = cross(*vertex0[1]-*vertex0[0], *vertex0[2]-*vertex0[0]);
       if (dot(normal, normal0) < 0.0) {
         // 節点1と節点2を入れ替え
-        vertex[1] = vertex0[2];  
-        vertex[2] = vertex0[1];  
+        vertex[1] = vertex0[2];
+        vertex[2] = vertex0[1];
         reset = true;
       }
     }

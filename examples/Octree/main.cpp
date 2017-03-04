@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 
   std::cout << std::endl << "Polylib setting: " << conf.polylibConf << std::endl;
   Polylib* pl = Polylib::get_instance();
-  pl->load(conf.polylibConf);
+  if (pl->load(conf.polylibConf)) return 1;
   pl->show_group_hierarchy();
   RepairPolygonData(pl);
 

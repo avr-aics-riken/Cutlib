@@ -1,12 +1,18 @@
 /*
- * Cutlib - Cut Information Library
- *
- * Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
- * All rights reserved.
- *
- * Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
- * All rights reserved.
- *
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
  */
 
 ///
@@ -32,7 +38,7 @@ using namespace Vec3class;
 #include "CutInfo/CutInfoOctree.h"
 #endif
 
-#include "Version.h"
+#include "cutVersion.h"
 
 
 namespace cutlib {
@@ -75,16 +81,16 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 ///  @param[in,out] cutBid 境界ID配列ラッパ
 ///  @param[in,out] cutNormal 法線ベクトル格納クラス
 ///
-inline 
+inline
 CutlibReturn CalcCutInfo(const GridAccessor* grid, const Polylib* pl,
                          CutPosArray* cutPos, CutBidArray* cutBid,
                          CutNormalArray* cutNormal = 0) {
-  int ista[3] = { 
+  int ista[3] = {
     cutPos->getStartX(),
     cutPos->getStartY(),
     cutPos->getStartZ(),
   };
-  size_t nlen[3] = { 
+  size_t nlen[3] = {
     cutPos->getSizeX(),
     cutPos->getSizeY(),
     cutPos->getSizeZ()
@@ -120,17 +126,17 @@ CutlibReturn CalcCutInfo(const int ista[], const size_t nlen[],
 ///  @param[in,out] cutBid 境界ID配列ラッパ
 ///  @param[in,out] cutNormal 法線ベクトル格納クラス
 ///
-inline 
+inline
 CutlibReturn CalcCutInfo(const GridAccessor* grid,
 												 const Polylib* pl, std::vector<std::string>* pgList,
                          CutPosArray* cutPos, CutBidArray* cutBid,
                          CutNormalArray* cutNormal = 0) {
-  int ista[3] = { 
+  int ista[3] = {
     cutPos->getStartX(),
     cutPos->getStartY(),
     cutPos->getStartZ(),
   };
-  size_t nlen[3] = { 
+  size_t nlen[3] = {
     cutPos->getSizeX(),
     cutPos->getSizeY(),
     cutPos->getSizeZ()
@@ -202,7 +208,7 @@ CutlibReturn CalcCutInfoOctree(SklTree* tree,
    */
   static std::string cutlib_VersionInfo()
   {
-    std::string str(CT_VERSION_NO);
+    std::string str(CT_VERSION);
     return str;
   }
 

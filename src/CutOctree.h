@@ -1,3 +1,20 @@
+/*
+###################################################################################
+#
+# Cutlib - Cut Information Library
+#
+# Copyright (c) 2010-2011 VCAD System Research Program, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2012-2015 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
+# Copyright (c) 2016-2017 Research Institute for Information Technology (RIIT), Kyushu University.
+# All rights reserved.
+#
+###################################################################################
+*/
+
 /// @file
 /// @brief Octree用クラス, 関数 宣言
 ///
@@ -51,7 +68,7 @@ public:
   ///  @param[in] pgList ポリゴングループ(パス名)リスト
   ///  @param[in] min,max 検索領域
   ///
-  static void AppendCutTriangles(CutTriangles& ctList, 
+  static void AppendCutTriangles(CutTriangles& ctList,
                                  const Polylib* pl,
                                  const std::vector<std::string>* pgList,
                                  const Vec3r& min, const Vec3r& max);
@@ -62,7 +79,7 @@ public:
   ///  @param[out] ctListTo 三角形リスト コピー先
   ///  @param[in] min,max 直方体領域
   ///
-  static void CopyCutTriangles(const CutTriangles& ctListFrom, 
+  static void CopyCutTriangles(const CutTriangles& ctListFrom,
                                CutTriangles& ctListTo,
                                const Vec3r& min, const Vec3r& max);
 
@@ -80,7 +97,7 @@ public:
 ///  @param[out] center 検索基準点位置
 ///  @param[out] range  各6方向の検索基準線分長
 ///
-inline
+
 void getSearchRange(SklCell* cell, double center[], double range[]) {
   float o[3], d[3];
   cell->GetOrigin(o[0], o[1], o[2]);
@@ -89,7 +106,7 @@ void getSearchRange(SklCell* cell, double center[], double range[]) {
   range[X_M] = range[X_P] = d[0];
   range[Y_M] = range[Y_P] = d[1];
   range[Z_M] = range[Z_P] = d[2];
-}
+};
 
 
 /// Octree上のセルでの交点情報を計算.

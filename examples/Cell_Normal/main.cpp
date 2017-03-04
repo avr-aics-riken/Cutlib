@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 
   std::cout << std::endl << "Polylib setting: " << conf.polylibConf << std::endl;
   Polylib* pl = Polylib::get_instance();
-  pl->load(conf.polylibConf);
+  if (pl->load(conf.polylibConf)) return 1;
   pl->show_group_hierarchy();
   RepairPolygonData(pl);
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
   CutPosArray* cutPosArray;
   if (conf.cutPosType == "CutPos32") cutPosArray = new CutPos32Array(conf.ndim);
   if (conf.cutPosType == "CutPos8")  cutPosArray = new CutPos8Array(conf.ndim);
-            
+
   CutBidArray* cutBidArray;
   if (conf.cutBidType == "CutBid8") cutBidArray = new CutBid8Array(conf.ndim);
   if (conf.cutBidType == "CutBid5") cutBidArray = new CutBid5Array(conf.ndim);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
   CutNormalArray* cutNormalArray = new CutNormalArray(conf.ndim);
 
   std::cout << std::endl << "CalcCutInfo: " << std::endl;
-  int ret = CalcCutInfo(conf.ista, conf.nlen, 
+  int ret = CalcCutInfo(conf.ista, conf.nlen,
                         grid, pl, cutPosArray, cutBidArray, cutNormalArray);
   std::cout << "return code = " << ret <<  std::endl;
 
