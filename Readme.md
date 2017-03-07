@@ -101,22 +101,24 @@ In following exsmples, assuming that TextParser and Polylib are installed under 
 $ make -DINSTALL_DIR=${CT_HOME}/Cutlib -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
+#### Note
+In case of some Intel compiler environment, please specify environemnt variables
+`export CC=icc CXX=icpc F90=ifort FC=ifort` before compiling.
 
-### FUJITSU compiler / FX10 on login nodes (Cross compilation)
+
+### FUJITSU compiler / FX10, FX100, K on login nodes (Cross compilation)
 
 ~~~
 $ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx10.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
-~~~
 
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx100.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 
-### FUJITSU compiler / K computer on login nodes (Cross compilation)
-
-~~~
 $ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_K.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 
 ##### Note
+- On Fujitsu machines(fx10, K, fx100), confirm appropriate directrory path for compiler environment.
 - Before building, execute following command for clean. `$ make distclean`
 
 

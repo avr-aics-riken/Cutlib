@@ -3,6 +3,11 @@
 ## REVISION HISTORY
 
 ---
+- 2017-03-07  Version 3.4.2
+  - fx100 entry
+
+
+---
 - 2017-03-04  Version 3.4.1
   - remove octree option
   - compile examples
