@@ -42,6 +42,7 @@ src/                   Source codes
 ### Build
 
 ~~~
+$ export CC=c_compiler CXX=c++_compiler F90=fortran_compiler FC=fortran_compiler
 $ export CT_HOME=/hogehoge
 $ mkdir BUILD
 $ cd BUILD
@@ -55,7 +56,7 @@ $ sudo make install
 
 `-D INSTALL_DIR=install_directory`
 
->  Specify the directory that this library will be installed. Built library is installed at `install_directory/lib` and the header files are placed at `install_directory/include`. The default install directory is `/usr/local/PMlib`.
+>  Specify the directory that this library will be installed. Built library is installed at `install_directory/lib` and the header files are placed at `install_directory/include`. The default install directory is `/usr/local/Cutlib`.
 
 `-D enable_OPENMP=` {yes | no}
 

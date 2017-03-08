@@ -48,7 +48,7 @@ option (enable_OPENMP "Enable OpenMP" "ON")
 option (enable_timing "Enable Timing" "OFF")
 option (enable_debug "Enable Debug" "OFF")
 option (with_example "Compiling examples" "OFF")
-option (with_normal "Precision of normal" "float")
+option (with_normal "Precision of normal" "OFF")
 option (with_octree "Use Octree" "OFF")
 
 
@@ -71,8 +71,8 @@ set (CMAKE_INSTALL_PREFIX "${INSTALL_DIR}")
 
 
 #######
-set(PROJECT_VERSION "3.4.2")
-set(LIB_REVISION "20170307_2100")
+set(PROJECT_VERSION "3.4.3")
+set(LIB_REVISION "20170308_2100")
 #######
 
 
@@ -95,13 +95,27 @@ AddOptimizeOption()
 
 checkOpenMP()
 
-if(with_normal STREQUAL "double")
+
+if(with_normal STREQUAL "OFF")
+  set(with_normal "float")
+
+elseif(with_normal STREQUAL "float")
+  # nothing to do
+
+elseif(with_normal STREQUAL "double")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCUTINFO_NORMAL_DOUBLE")
+
+else() # neither 'float' nor 'double'
+  message("@@@@@@@@@@@")
+  message("FATAL ERROR : Invalid floating type : ${with_normal}")
+  message("@@@@@@@@@@@")
 endif()
+
 
 if(enable_timing)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCUTLIB_TIMING")
 endif()
+
 
 if(enable_debug)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCUTLIB_DEBUG")
@@ -120,12 +134,12 @@ message( STATUS "CMAKE_CXX_COMPILER: "             ${CMAKE_CXX_COMPILER})
 message( STATUS "CMAKE_CXX_FLAGS: "                ${CMAKE_CXX_FLAGS})
 
 message(" ")
-message( STATUS "OpenMP support: "                 ${enable_OPENMP})
-message( STATUS "Timing support: "                 ${enable_timing})
-message( STATUS "Debugging: "                      ${enable_debug})
-message( STATUS "Example: "                        ${with_example})
-message( STATUS "Normal precision: "               ${with_normal})
-#message( STATUS "Use Octree: "                     ${with_octree})
+message( STATUS "OpenMP support   : "      ${enable_OPENMP})
+message( STATUS "Timing support   : "      ${enable_timing})
+message( STATUS "Debugging        : "      ${enable_debug})
+message( STATUS "Example          : "      ${with_example})
+message( STATUS "Normal precision : "      ${with_normal})
+#message( STATUS "Use Octree: "             ${with_octree})
 message(" ")
 
 if(CMAKE_CXX_COMPILER MATCHES ".*FCCpx$")

@@ -3,6 +3,11 @@
 ## REVISION HISTORY
 
 ---
+- 2017-03-08  Version 3.4.3
+  - modify implementation of 'with_normal'
+
+  
+---
 - 2017-03-07  Version 3.4.2
   - fx100 entry
 
