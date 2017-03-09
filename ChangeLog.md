@@ -3,10 +3,24 @@
 ## REVISION HISTORY
 
 ---
+- 2017-03-09  Version 3.4.4
+  - change 'with_normal' to 'real_type' to maintain compatibility with Polylib 'real_type'
+  - judge PL_LIB_NAME, TP_LIB_NAME
+  - Tested.
+
+|Compiler|OpenMP|timing|debug|real_type|Example|
+|:--|:--:|:--:|:--:|:--:|:--:|:--:|
+|Intel 17.0.1 |ok|ok|ok|float/double|100%|
+|GNU 6.2.0    |ok|||float|100%|
+|fx10         |||||||
+|K            |||||||
+
+
+---
 - 2017-03-08  Version 3.4.3
   - modify implementation of 'with_normal'
 
-  
+
 ---
 - 2017-03-07  Version 3.4.2
   - fx100 entry
@@ -16,14 +30,6 @@
 - 2017-03-04  Version 3.4.1
   - remove octree option
   - compile examples
-  - Tested.
-
-|Compiler|OpenMP|timing|debug|normal|Example|
-|:--|:--:|:--:|:--:|:--:|:--:|:--:|
-|Intel 17.0.1 |ok|ok|ok|float/double|100%|
-|GNU 6.2.0    |ok|||float|100%|
-|fx10         |||||||
-|K            |||||||
 
 
 ---

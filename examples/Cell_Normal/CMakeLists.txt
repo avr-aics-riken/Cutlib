@@ -15,7 +15,7 @@
 
 add_executable(cell2 main.cpp)
 
-target_link_libraries(cell2 -lUtil -lCUT -lPOLY -lTP)
+target_link_libraries(cell2 -lUtil -lCUT -l${PL_LIB_NAME} -l${TP_LIB_NAME})
 
 
 set (test_parameter3 "${PROJECT_SOURCE_DIR}/examples/Cell_Normal/test.conf")

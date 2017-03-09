@@ -74,7 +74,7 @@ $ sudo make install
 
 >  This option turns on compiling sample codes. The default is no.
 
-`-D with_normal=` {float | double}
+`-D real_type=` {float | double}
 
 >  Specify floating type to compute normal vector. Default is float precision, otherwise double precision.
 
@@ -99,7 +99,7 @@ In following exsmples, assuming that TextParser and Polylib are installed under 
 ### INTEL/GNU compiler
 
 ~~~
-$ make -DINSTALL_DIR=${CT_HOME}/Cutlib -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ make -DINSTALL_DIR=${CT_HOME}/Cutlib -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dreal_type=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 #### Note
@@ -110,11 +110,11 @@ In case of some Intel compiler environment, please specify environemnt variables
 ### FUJITSU compiler / FX10, FX100, K on login nodes (Cross compilation)
 
 ~~~
-$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx10.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx10.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dreal_type=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 
-$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx100.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_fx100.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dreal_type=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 
-$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_K.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dwith_normal=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
+$ cmake -DINSTALL_DIR=${CT_HOME}/Cutlib -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain_K.cmake -Denable_OPENMP=yes -Denable_timing=no -Denable_debug=no -Dreal_type=float -Dwith_example=no -Dwith_TP=${HOME}/TextParser -Dwith_PL=${HOME}/Polylib ..
 ~~~
 
 

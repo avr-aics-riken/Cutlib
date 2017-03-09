@@ -30,7 +30,7 @@
 #
 # -D with_example={no|yes}
 #
-# -D with_normal={float|double}
+# -D real_type={float|double}
 #
 # -D with_TP=Installed_directory
 #
@@ -48,7 +48,7 @@ option (enable_OPENMP "Enable OpenMP" "ON")
 option (enable_timing "Enable Timing" "OFF")
 option (enable_debug "Enable Debug" "OFF")
 option (with_example "Compiling examples" "OFF")
-option (with_normal "Precision of normal" "OFF")
+option (real_type "Precision of float" "OFF")
 option (with_octree "Use Octree" "OFF")
 
 
@@ -71,8 +71,8 @@ set (CMAKE_INSTALL_PREFIX "${INSTALL_DIR}")
 
 
 #######
-set(PROJECT_VERSION "3.4.3")
-set(LIB_REVISION "20170308_2100")
+set(PROJECT_VERSION "3.4.4")
+set(LIB_REVISION "20170309_1300")
 #######
 
 
@@ -96,20 +96,7 @@ AddOptimizeOption()
 checkOpenMP()
 
 
-if(with_normal STREQUAL "OFF")
-  set(with_normal "float")
-
-elseif(with_normal STREQUAL "float")
-  # nothing to do
-
-elseif(with_normal STREQUAL "double")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCUTINFO_NORMAL_DOUBLE")
-
-else() # neither 'float' nor 'double'
-  message("@@@@@@@@@@@")
-  message("FATAL ERROR : Invalid floating type : ${with_normal}")
-  message("@@@@@@@@@@@")
-endif()
+precision()
 
 
 if(enable_timing)
@@ -127,18 +114,18 @@ endif()
 #######
 
 message(" ")
-message( STATUS "Destination PATH: "               ${CMAKE_INSTALL_PREFIX})
-message( STATUS "CMAKE_C_COMPILER: "               ${CMAKE_C_COMPILER})
-message( STATUS "CMAKE_C_FLAGS: "                  ${CMAKE_C_FLAGS})
-message( STATUS "CMAKE_CXX_COMPILER: "             ${CMAKE_CXX_COMPILER})
-message( STATUS "CMAKE_CXX_FLAGS: "                ${CMAKE_CXX_FLAGS})
+message( STATUS "Destination PATH   : "      ${CMAKE_INSTALL_PREFIX})
+message( STATUS "CMAKE_C_COMPILER   : "      ${CMAKE_C_COMPILER})
+message( STATUS "CMAKE_C_FLAGS      : "      ${CMAKE_C_FLAGS})
+message( STATUS "CMAKE_CXX_COMPILER : "      ${CMAKE_CXX_COMPILER})
+message( STATUS "CMAKE_CXX_FLAGS    : "      ${CMAKE_CXX_FLAGS})
 
 message(" ")
 message( STATUS "OpenMP support   : "      ${enable_OPENMP})
 message( STATUS "Timing support   : "      ${enable_timing})
 message( STATUS "Debugging        : "      ${enable_debug})
 message( STATUS "Example          : "      ${with_example})
-message( STATUS "Normal precision : "      ${with_normal})
+message( STATUS "Floating point   : "      ${real_type})
 #message( STATUS "Use Octree: "             ${with_octree})
 message(" ")
 
@@ -187,6 +174,12 @@ ELSE()
   MESSAGE("Error: can not find TPlib.")
 ENDIF()
 
+if(EXISTS ${TP_DIR}/lib/libTPmpi.a)
+  set(TP_LIB_NAME "TPmpi")
+else()
+  set(TP_LIB_NAME "TP")
+endif()
+
 
 # Polylib
 IF(with_PL)
@@ -196,6 +189,12 @@ IF(with_PL)
 ELSE()
   MESSAGE("Error: can not find Polylib.")
 ENDIF()
+
+if(EXISTS ${PL_DIR}/lib/libPOLYmpi.a)
+  set(PL_LIB_NAME "POLYmpi")
+else()
+  set(PL_LIB_NAME "POLY")
+endif()
 
 
 add_definitions(-DHAVE_CONFIG_H)

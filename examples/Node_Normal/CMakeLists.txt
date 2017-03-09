@@ -15,7 +15,7 @@
 
 add_executable(node2 main.cpp)
 
-target_link_libraries(node2 -lUtil -lCUT -lPOLY -lTP)
+target_link_libraries(node2 -lUtil -lCUT -l${PL_LIB_NAME} -l${TP_LIB_NAME})
 
 
 set (test_parameter7 "${PROJECT_SOURCE_DIR}/examples/Node_Normal/test.conf")
