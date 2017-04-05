@@ -1,4 +1,4 @@
-# CPMlib - Computational space Partitioning Management library
+# Cutlib - Cut information library
 
 * Copyright (c) 2012-2014 Institute of Industrial Science (IIS), The University of Tokyo. All rights reserved.
 * Copyright (c) 2014-2016 Advanced Institute for Computational Science (AICS), RIKEN. All rights reserved.

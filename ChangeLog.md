@@ -3,6 +3,11 @@
 ## REVISION HISTORY
 
 ---
+- 2017-04-05  Version 3.4.5
+  - fix typo : Readme.md
+
+
+---
 - 2017-03-09  Version 3.4.4
   - change 'with_normal' to 'real_type' to maintain compatibility with Polylib 'real_type'
   - judge PL_LIB_NAME, TP_LIB_NAME
