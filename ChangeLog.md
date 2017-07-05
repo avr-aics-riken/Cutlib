@@ -2,6 +2,12 @@
 
 ## REVISION HISTORY
 
+
+---
+- 2017-07-06  Version 3.4.6
+  - set(CMAKE_FIND_ROOT_PATH   /opt/FJSVtclang/1.2.0) in Toolchain_K.CMAKE_FIND_ROOT_PATH
+
+
 ---
 - 2017-04-05  Version 3.4.5
   - fix typo : Readme.md
